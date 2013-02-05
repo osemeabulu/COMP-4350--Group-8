@@ -1,5 +1,5 @@
 CRIS - Course Review Information System
-======================
+=======================================
 
 A Flask application that works on Amazon Elastic Beanstalk.
 This is the basic code so far for running an app on AWS EB.
@@ -28,5 +28,10 @@ For more detailed information, and a step by step walkthrough of each command, e
 
 To Do:
 --------
-Get sqlite working for storing reviews (username, course, instructor, time, review)
-Setup bootstrap and web page to get user input.
+- Get sqlite working for storing reviews (username, course, instructor, time, review)
+- Setup bootstrap and web page to get user input.
+
+Reminder:
+----------
+- Remember to always 'git add --all' and 'git commit' after any changes.
+- Before pushing your code to the server with 'git push' ensure that it works with the latest changes by using 'git pull'.

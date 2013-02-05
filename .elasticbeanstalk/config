@@ -1,0 +1,10 @@
+[global]
+ApplicationName=flaskapp
+DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
+EnvironmentName=flaskapp-env
+OptionSettingFile=/home/rory/Documents/School_Work/Comp4350/elastic-flask-baseline/.elasticbeanstalk/optionsettings.flaskapp-env
+RdsEnabled=No
+Region=us-east-1
+ServiceEndpoint=https://elasticbeanstalk.us-east-1.amazonaws.com
+SolutionStack=32bit Amazon Linux running Python
+

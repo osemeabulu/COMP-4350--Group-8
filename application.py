@@ -1,30 +1,35 @@
 #!/usr/bin/env python
 
 from flask import *
-from flask.ext.sqlalchemy import SQLAlchemy
+#from flask.ext.sqlalchemy import SQLAlchemy
 
 # The WSGI configuration on Elastic Beanstalk requires 
 # the callable be named 'application' by default.
 application = Flask(__name__)
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(application)
+#application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+application.config['SECRET_KEY'] = 'development key';
+#db = SQLAlchemy(application)
 
-class Course(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    cid = db.Column(db.String(10), unique=True)
-    cname = db.Column(db.String(20), unique=True)
-
-    def __init__(self, cid, cname):
-        self.cid = cid
-        self.cname = cname
-
-    def __repr__(self):
-        return '<Course %r>' % self.cname
         
 @application.route("/")
 def index():
     return render_template('index.html');
 
+@application.route("/courses", methods=['GET', 'POST'])
+def courses():
+    if request.method == 'POST':
+        flash('We would process your search but we are not beefed up yet');
+    return render_template('courses.html');
+
+@application.route("/top_rated")
+def top_rated():
+    return render_template('top_rated.html');
+
+@application.route("/program_planner")
+def program_planner():
+    return render_template('program_planner.html');
+
 if __name__ == '__main__':
     application.debug = True
     application.run(host='0.0.0.0')
+

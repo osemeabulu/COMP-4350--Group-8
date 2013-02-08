@@ -47,11 +47,11 @@
 				<div class="sidebar-nav">
 					<ul class="nav nav-list">
 						<li class="nav-header">Content</li>
-						<li><a href="#">Courses</a></li>
+						<li><a href="{{ url_for('courses') }}">Courses</a></li>
 						<li><a href="#">Reviews</a></li>
 						<li><a href="#">Instructors</a></li>
-						<li><a href="#">Program Planner</a></li>
-						<li><a href="#">Top Rated Courses</a></li>
+						<li><a href="{{ url_for('program_planner') }}">Program Planner</a></li>
+						<li><a href="{{ url_for('top_rated') }}">Top Rated Courses</a></li>
               			<li><a href="#">Current Semester</a></li>
 					</ul>
 				</div>

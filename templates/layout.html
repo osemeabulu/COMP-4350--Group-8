@@ -65,5 +65,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
+	<script type=text/javascript>
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
 </body>
 </html>

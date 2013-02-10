@@ -32,6 +32,18 @@ def top_rated():
 def program_planner():
     return render_template('program_planner.html')
 
+@application.route("/instructors")
+def instructors():
+    return render_template('instructors.html')
+
+@application.route("/about")
+def about():
+    return render_template('about.html')
+
+@application.route("/contact")
+def contact():
+    return render_template('contact.html')
+
 if __name__ == '__main__':
 	cris.utils.init(application)
 	application.register_blueprint(course)

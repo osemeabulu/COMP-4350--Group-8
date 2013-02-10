@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 from flask import *
-from cris.course import course
+from cris.course import course, Course
 import cris.utils
 
-#from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 
 # The WSGI configuration on Elastic Beanstalk requires 
 # the callable be named 'application' by default.
@@ -32,6 +32,11 @@ def top_rated():
 def program_planner():
     return render_template('program_planner.html')
 
+@application.route("/_query")
+def query():
+	c = Course('Comp4350', 'Software Engineering 2')
+	return jsonify(cid=c.cid, cname=c.cname)
+	
 if __name__ == '__main__':
 	cris.utils.init(application)
 	application.register_blueprint(course)

@@ -12,4 +12,11 @@ class Course(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.cname
+        
+    @property
+    def serialize(self):
+		return {
+			'cid'	: self.cid,
+			'cname'	: self.cname
+		}
        

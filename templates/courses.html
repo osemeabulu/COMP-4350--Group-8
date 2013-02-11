@@ -6,33 +6,31 @@
         <input type="text" class="input-large search-query" id="search_key">
         <button type="submit" class="btn">Search</button>
     </form>
-    <div id="results">
-		<h3>Results</h3>
-    <div>
+    <div id="results"></div>
     
     <script>
-		(function($) {
-			$(function() {
-				$("#target").submit(function() {
-					alert('Sending query');
+		//(function($) {
+		//	$(function() {
+				$('#target').submit(function() {
+					//alert('Sending query');
 					$.getJSON($SCRIPT_ROOT + '/_query',
 					{
 						key: $('input[id="search_key"]').val()
 					},
-					//alert('processing data...');
 					function(data)
 					{
-						alert('processing results...');
-						document.getElementById("results").innerHTML = content;
-						
-						//$.each(data, function(i, item)
-						//{
-						//	content = content + "<h5>" + item.cid + "</h5>\n" +
-						//				"<p>" + item.cname + "</p>\n";
-						//}
+						var content = '';
+						$.each(data.courses, function(i, item)
+						{
+							content = content + "<h5>" + item.cid + "</h5>\n" +
+										"<p>" + item.cname + "</p>\n";
+						});
+						$('#results').empty().append(content);
 					});
+					
+					return false;
 				});
-			});
-		})(jQuery);
+		//	});
+		//})(jQuery);
 	</script>
 {% endblock content %}

@@ -34,8 +34,9 @@ def program_planner():
 
 @application.route("/_query")
 def query():
-	c = Course('Comp4350', 'Software Engineering 2')
-	return jsonify(cid=c.cid, cname=c.cname)
+	c1 = Course('Comp4350', 'Software Engineering 2')
+	c2 = Course('Comp4430', 'Operating Systems 2')
+	return jsonify(courses = [c1.serialize, c2.serialize])
 	
 if __name__ == '__main__':
 	cris.utils.init(application)

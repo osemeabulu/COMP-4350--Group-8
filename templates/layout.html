@@ -18,6 +18,11 @@
 </head>
 
 <body>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
+	<script type=text/javascript>
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -62,11 +67,5 @@
 			</div><!-- content -->
 		</div> <!-- sidebar and content as a row -->
 	</div> <!-- container -->
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
-	<script type=text/javascript>
-		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-	</script>
 </body>
 </html>

@@ -11,10 +11,10 @@ def courses():
 
 @course.route('/courses/_query')
 def search():
-	query = request.args.get('seach_key', '')
+	query = request.args.get('key', '')
 	
 	result = None
-
+	print query
 	if cmp(query, '') == 0:
 		result = Course.query.all()
 
@@ -23,6 +23,4 @@ def search():
 		
 		if (result is None):
 			result = Course.query.filter(Course.cname.startswith(query)).all()
-
-
 	return jsonify(result)

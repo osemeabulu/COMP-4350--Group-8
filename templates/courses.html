@@ -6,8 +6,7 @@
         <input type="text" class="input-large search-query" id="search_key">
         <button type="submit" class="btn">Search</button>
     </form>
-    <div id="results"></div>
-    
+    <div class="accordion" id="results"></div>
     <script>
 		//(function($) {
 		//	$(function() {
@@ -22,8 +21,12 @@
 						var content = '';
 						$.each(data.courses, function(i, item)
 						{
-							content = content + "<h5>" + item.cid + "</h5>\n" +
-										"<p>" + item.cname + "</p>\n";
+                     content += '<div class = "accordion-group">'
+							content += '<div class="accordion-heading">'
+   						content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+							content += item.cid
+                     content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
+                     content += '<div class = "accordion-inner">' + item.cname + '</div></div></div>'
 						});
 						$('#results').empty().append(content);
 					});
@@ -33,4 +36,5 @@
 		//	});
 		//})(jQuery);
 	</script>
+   </div>
 {% endblock content %}

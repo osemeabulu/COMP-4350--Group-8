@@ -21,12 +21,12 @@
 						var content = '';
 						$.each(data.courses, function(i, item)
 						{
-                     content += '<div class = "accordion-group">'
+                     		content += '<div class = "accordion-group">'
 							content += '<div class="accordion-heading">'
-   						content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+   							content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
 							content += item.cid
-                     content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
-                     content += '<div class = "accordion-inner">' + item.cname + '</div></div></div>'
+                     		content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
+                     		content += '<div class = "accordion-inner">' + item.cname + '</div></div></div>'
 						});
 						$('#results').empty().append(content);
 					});

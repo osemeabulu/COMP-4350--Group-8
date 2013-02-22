@@ -6,10 +6,9 @@
         <input type="text" class="input-large search-query" id="search_key">
         <button type="submit" class="btn">Search</button>
     </form>
-    <div class="accordion" id="results"></div>
+    <div class="accordion" id="results">
     <script>
-		//(function($) {
-		//	$(function() {
+		
 				$('#target').submit(function() {
 					//alert('Sending query');
 					$.getJSON($SCRIPT_ROOT + "{{ url_for('courses.query')}}",
@@ -19,22 +18,48 @@
 					function(data)
 					{
 						var content = '';
+						//var i = 1;
+						//var mcontent = '';
 						$.each(data.courses, function(i, item)
 						{
-                     		content += '<div class = "accordion-group">'
-							content += '<div class="accordion-heading">'
-   							content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
-							content += item.cid
-                     		content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
-                     		content += '<div class = "accordion-inner">' + item.cname + '</div></div></div>'
-						});
+                content += '<div class = "accordion-group">'
+					content += '<div class="accordion-heading">'
+   					content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+							content += item.cid + '</a></div>'
+							//content += data.courses[0].cid + '</a></div>'
+                    content += '<div id="info_' + i + '" class="accordion-body collapse">'
+                    	content += '<div class = "accordion-inner"><a href= "#crsModal" data-toggle="modal" data-show="true">' + item.cname + '</a>'
+                     		content += '</div></div></div>'
+                     	});
+						//<!-- Modal -->
+						//mcontent += '<div id="crsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+						//mcontent += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+						//mcontent +=	'<h3 id="myModalLabel">Modal header</h3></div>'
+						//mcontent += '<div class="modal-body"><p>One fine body… </p></div>'
+						//mcontent += '<div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>'
+						//mcontent +=	'<button class="btn btn-primary">Save changes</button></div></div>'
+						
 						$('#results').empty().append(content);
+						//$('#crsModal').empty().append(mcontent);
 					});
 					
 					return false;
 				});
-		//	});
-		//})(jQuery);
+
 	</script>
    </div>
+   <div id="crsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+   			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+			<h3 id="myModalLabel">Modal header</h3>
+		</div>
+		<div class="modal-body">
+			<p>One fine body… </p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button class="btn btn-primary">Save changes</button>
+		</div>
+	</div>
+   
 {% endblock content %}

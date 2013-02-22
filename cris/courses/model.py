@@ -6,10 +6,12 @@ class Course(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	cid = db.Column(db.String(10), unique=True)
 	cname = db.Column(db.String(20), unique=True)
+	cdesc = db.Column(db.Text)
 
-	def __init__(self, cid, cname):
+	def __init__(self, cid, cname, cdesc):
 		self.cid = cid
 		self.cname = cname
+		self.cdesc = cdesc
 
 	def __repr__(self):
 		return '<Course %r>' % self.cname
@@ -18,6 +20,7 @@ class Course(db.Model):
 	def serialize(self):
 		return {
 			'cid'	: self.cid,
-			'cname'	: self.cname
+			'cname'	: self.cname,
+			'cdesc' : self.cdesc
 		}
        

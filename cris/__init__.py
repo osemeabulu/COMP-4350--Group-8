@@ -47,7 +47,13 @@ db.create_all()
 oo = Course('Comp2150', 'Object Orientation', 'Calendar Description: Design and development of object-oriented software. Topics will ' +
 'include inheritance, polymorphism, data abstraction and encapsulation.  Examples will be drawn from several programming languages (Lab required).' + 
 'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290' )
-#aut = Course('Comp3030', 'Automata Theory and Formal Languages')
+
+aut = Course('Comp3030', 'Automata Theory and Formal Languages', 'Calendar Description: An introduction to automata theory, grammars, formal languages' +
+'and their applications. Topics: finite automata, regular expressions and their properties;' +
+'context-free grammars, pushdown automata and properties of context-free languages;' +
+'turing machines. Applications: lexical analysis, text editing, machine design, syntax' +
+'analysis, parser generation.' + 
+'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310')
 #aa = Course('Comp3170', 'Analysis of Algorithms and Data Structures')
 #ai = Course('Comp3190', 'Artificial Intelligence')
 #se1 = Course('Comp3350', 'Software Engineering 1')
@@ -55,7 +61,7 @@ oo = Course('Comp2150', 'Object Orientation', 'Calendar Description: Design and 
 #se2 = Course('Comp4350', 'Software Engineering 2')
 
 db.session.add(oo)
-#db.session.add(aut)
+db.session.add(aut)
 #db.session.add(aa)
 #db.session.add(ai)
 #db.session.add(se1)

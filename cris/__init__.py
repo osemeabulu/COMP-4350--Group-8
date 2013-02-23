@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
-application = Flask(__name__)
+application = Flask(__name__, static_folder='../static')
 application.config.from_object('config')
 
 db = SQLAlchemy(application)

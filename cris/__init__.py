@@ -37,6 +37,8 @@ def about():
 def contact():
     return render_template('contact.html')
 	
+from cris.reviews.model import Review
+
 from cris.courses.controller import mod as coursesModule
 from cris.courses.model import Course
 application.register_blueprint(coursesModule)

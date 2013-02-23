@@ -1,4 +1,5 @@
 from cris import db
+from cris import Review
 
 class Course(db.Model):
 	
@@ -7,6 +8,7 @@ class Course(db.Model):
 	cid = db.Column(db.String(10), unique=True)
 	cname = db.Column(db.String(20), unique=True)
 	cdesc = db.Column(db.Text)
+	reviews = db.relationship('Review', backref = 'course', lazy = 'dynamic')
 
 	def __init__(self, cid, cname, cdesc):
 		self.cid = cid

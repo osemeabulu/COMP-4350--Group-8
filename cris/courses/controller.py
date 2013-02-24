@@ -17,6 +17,6 @@ def query():
 		results = Course.query.all()
 		return jsonify(courses = [i.serialize for i in results])
 	else:
-		results = Course.query.filter_by(cid=key).all()
+		results = Course.query.filter("cid like :value or cname like :value").params(value = '%' + key + '%').all()
 		return jsonify(courses = [i.serialize for i in results])
 	

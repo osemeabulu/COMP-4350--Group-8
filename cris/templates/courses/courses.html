@@ -10,6 +10,9 @@
 	<script>
         //(function($) {
         //    $(function() {
+								function link_to(cid) {
+									window.location.href = $SCRIPT_ROOT + cid;
+								}
                 $('#target').submit(function() {
                     //alert('Sending query');
                     $.getJSON($SCRIPT_ROOT + "{{ url_for('courses.query')}}",
@@ -27,8 +30,7 @@
                            content += item.cid +' - '+item.cname
                      		content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
                      		content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
-									content += '<div class="btn-group"><button class="btn" type="button">See Reviews</button>'
-									content += '<button class="btn" type="button">Add Review</button></div></div></div></div>'
+									content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>Add Review</button></div></div></div>'
                         });
                         $('#results').empty().append(content);
                     });

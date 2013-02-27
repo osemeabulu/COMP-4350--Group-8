@@ -1,5 +1,5 @@
-from cris import db
-from cris import Review
+from cris.extensions import db
+from cris.reviews.model import Review
 
 class Course(db.Model):
 	
@@ -25,4 +25,3 @@ class Course(db.Model):
 			'cname'	: self.cname,
 			'cdesc' : self.cdesc
 		}
-       

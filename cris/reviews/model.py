@@ -1,4 +1,4 @@
-from cris import db
+from cris.extensions import db
 
 class Review(db.Model):
 	__tablename__ = 'reviews_review'
@@ -26,3 +26,4 @@ class Review(db.Model):
 			'rvote'	: self.rvote
 		}
 
+from cris import db

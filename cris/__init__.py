@@ -19,22 +19,23 @@ def create_app(blueprints = None, config = None):
 
 	application = Flask(__name__, static_folder='../static')
 
-	configure_app(application, DevConfig)	
-	configure_extensions(application)	
+	configure_app(application, config)	
+	configure_extensions(application, config)	
 	configure_blueprints(application, blueprints)
 	configure_routes(application)
 
 	return application
 
 def configure_app(application, config):
-	application.config.from_object(DevConfig)
+	application.config.from_object(config)
 	if config is not None:
 		application.config.from_object(config)
 
-def configure_extensions(application):
+def configure_extensions(application, config):
 	db.app = application
 	db.init_app(application)
-	reload_db() #recreates the database, so that we have our baseline data - change to import db from repo later
+	if config is DevConfig:
+		reload_db() #recreates the database, so that we have our baseline data - change to import db from repo later
 
 def configure_blueprints(application, blueprints):
 	for blueprint in blueprints:

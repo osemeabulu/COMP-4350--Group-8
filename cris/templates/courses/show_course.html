@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="hero-unit">
+        <h2>{{ course.cid }} - {{ course.cname }}</h2>
+        <br />
+        <p>{{ course.cdesc }}</p>
+        <br />
+        <p>
+            <a class="btn btn-primary btn-large" href="">
+                Write a review
+            </a>
+        </p>
+    </div>
+{% endblock content %}

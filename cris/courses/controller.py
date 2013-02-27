@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, abort
 from model import Course
 
 
@@ -9,6 +9,14 @@ def index():
 	print "Courses route worked"
 	return render_template('courses/courses.html')
 
+@mod.route('/<string:course>')
+def show_course(course):
+  print course
+  results = Course.query.filter_by(cid=course).first()
+  if results:
+    return results.cdesc
+  else:
+    abort(404)
 @mod.route('/_query')
 def query():
 	key = request.args.get('key', '')

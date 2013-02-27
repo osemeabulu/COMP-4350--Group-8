@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for, abort
-from model import Course
+from model import Course, Review
 
 
 mod = Blueprint('courses', __name__, url_prefix='/courses')
@@ -12,9 +12,10 @@ def index():
 @mod.route('/<string:course>')
 def show_course(course):
   print course
-  results = Course.query.filter_by(cid=course).first()
-  if results:
-    return render_template('courses/show_course.html', course=results)
+  result = Course.query.filter_by(cid=course).first()
+  
+  if result:
+    return render_template('courses/show_course.html', course=result)
   else:
     abort(404)
 

@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for, abort
 from model import Course, Review
 
-
 mod = Blueprint('courses', __name__, url_prefix='/courses')
 
 @mod.route("/")

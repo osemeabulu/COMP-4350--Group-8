@@ -40,8 +40,12 @@ def contact():
 from cris.reviews.model import Review
 
 from cris.courses.controller import mod as coursesModule
+from cris.reviews.controller import mod as reviewsModule
 from cris.courses.model import Course
+from cris.reviews.model import Review
+
 application.register_blueprint(coursesModule)
+application.register_blueprint(reviewsModule)
 
 db.drop_all()
 db.create_all()
@@ -78,6 +82,8 @@ se2 = Course('Comp4350', 'Software Engineering 2', 'Calendar Description:  Advan
 'will be selected from requirements gathering, design methodologies, prototyping,' + 
 'software verification and validation.  Prerequisite: COMP 3350.' )
 
+review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4) 
+
 db.session.add(oo)
 db.session.add(aut)
 db.session.add(aa)
@@ -85,6 +91,8 @@ db.session.add(ai)
 db.session.add(se1)
 db.session.add(os1)
 db.session.add(se2)
+
+db.session.add(review1)
 
 db.session.commit()
 

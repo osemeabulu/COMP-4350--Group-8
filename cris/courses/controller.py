@@ -14,9 +14,10 @@ def show_course(course):
   print course
   results = Course.query.filter_by(cid=course).first()
   if results:
-    return results.cdesc
+    return render_template('courses/show_course.html', course=results)
   else:
     abort(404)
+
 @mod.route('/_query')
 def query():
 	key = request.args.get('key', '')

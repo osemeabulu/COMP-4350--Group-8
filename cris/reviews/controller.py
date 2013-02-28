@@ -20,7 +20,7 @@ def submit_review():
 		db.session.add(review)
 		db.session.commit()
 
-		return ''
+		return jsonify(rdesc = rdesc, rscr = rscr)
 
 @mod.route('/_query_by_course')
 def query_by_course():

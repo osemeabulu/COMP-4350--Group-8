@@ -72,15 +72,21 @@
 			formObject.rdesc = $('textarea[id="description"]').val()
 			formObject.rvote = 0
 			
+			var result;
 			$.ajax({
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
 				url: "{{ url_for('reviews.submit_review') }}",
 				data: JSON.stringify(formObject),
+				success: function (data) {
+					result = '<p>' + data.rdesc  + ' [ ' + data.rscr + ' ]</p>  <button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>\n' +
+								'<button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></button>\n';
+					$('#results').append(result);
+				},
 				dataType:"json"
 			});
 			
-			//return false;
+			return false;
 		});
 	</script>
 {% endblock content %}

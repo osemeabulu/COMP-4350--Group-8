@@ -8,11 +8,85 @@
         <p>{{ course.cdesc }}</p>
         <br />
         <p>
-            <a class="btn btn-primary btn-large" href="">
-                Write a review
-            </a>
+			<form id="review">
+				<fieldset>
+					<div>
+						<label class="control-label" for="cid">Course ID</label>
+						<input type="text" data-jsonify-name="cid" class="input-small" id="cid" value={{ course.cid }}></input>
+					</div>
+					<div>
+						<label class="control-label" for="score">Score out of 5</label>
+						<input type="text" data-jsonify-name="rscr" class="input-small" id="score"></input>
+					</div>
+					<div>
+						<label class="control-label" for="description">Description</label>
+						<textarea class="input-xlarge" data-jsonify-name="rdesc" id="description" rows="3"></textarea>
+					</div>
+					<div>
+						<button type="submit" class="btn">submit</button>
+					</div>
+				</fieldset>
+			</form>
+			
+			<!--
+			<a class="btn btn-primary btn-small" href="" id="submit">
+				submit
+			</a>
+			-->
+			
+			<!--
             <button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>
             <button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></button>
+            -->
         </p>
     </div>
+    
+    <div id="results">
+    </div>
+    
+	<script>
+		$(window).load(function() {
+			$.getJSON($SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
+			{
+				key: "{{ course.cid }}"
+			},
+			function(data)
+			{
+				var content = '';
+				$.each(data.reviews, function(i, item)
+				{
+					content += '<p>' + item.rdesc  + ' [ ' + item.rscr + ' ]</p>  <button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>\n' +
+								'<button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></button>\n';
+				});
+				$('#results').empty().append(content);
+			});
+			
+			return false;
+		});
+    
+		$('#review').submit(function() {
+			var formObject = new Object();
+			
+			formObject.cid = $('input[id="cid"]').val()
+			formObject.rscr = $('input[id="score"]').val()
+			formObject.rdesc = $('textarea[id="description"]').val()
+			formObject.rvote = 0
+			
+			var result;
+			$.ajax({
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				url: "{{ url_for('reviews.submit_review') }}",
+				data: JSON.stringify(formObject),
+				success: function (data) {
+					result = '<p>' + data.rdesc  + ' [ ' + data.rscr + ' ]</p>  <button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>\n' +
+								'<button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></button>\n';
+					$('#results').append(result);
+				},
+				dataType:"json"
+			});
+			
+			return false;
+		});
+	</script>
 {% endblock content %}

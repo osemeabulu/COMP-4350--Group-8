@@ -1,14 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template, session, url_for, redirect, render_template, flash
 from .config import DevConfig
 from .extensions import db
 from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
+from cris.users.controller import mod as userModule
+from cris.users.model import User
+from cris.instructors.controller import mod as instructorsModule
 
 __all__ = ['create_app']
 
 DEFAULT_BLUEPRINTS = (
 	coursesModule,
 	reviewsModule,
+	userModule,
+	instructorsModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -46,6 +51,27 @@ def configure_routes(application):
 	def index():
 		return render_template('index.html')
 
+	@application.route("/login", methods=['GET', 'POST'])
+	def login():
+		error = None
+		if request.method == 'POST':
+			username = request.form['username']
+			password = request.form['password']
+			result = User.query.filter_by(username=username).first()
+			if result and result.password == password:
+				session['username'] = username
+				flash('You were logged in')
+				return redirect(url_for('index'))
+			else:
+				error = 'Unable to validate user'
+		return render_template('login.html', error=error)
+
+	@application.route('/logout')
+	def logout():
+		session.pop('username', None)
+		flash('You were logged out')
+		return redirect(url_for('index'))
+	
 	@application.route("/courses", methods=['GET', 'POST'])
 	def courses():
 	    if request.method == 'POST':
@@ -80,6 +106,8 @@ def configure_routes(application):
 def reload_db():
 	from cris.courses.model import Course
 	from cris.reviews.model import Review
+	from cris.users.model import User
+	from cris.instructors.model import Instructor
 	
 	db.drop_all()
 	db.create_all()
@@ -117,6 +145,11 @@ def reload_db():
 	'software verification and validation. Prerequisite: COMP 3350.' )
 	
 	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4)
+
+	admin = User('admin', 'default', True)
+	test_user = User('test', 'password')
+	
+	teacher = Instructor ('Michael Zapp')
 	
 	db.session.add(oo)
 	db.session.add(aut)
@@ -127,5 +160,12 @@ def reload_db():
 	db.session.add(se2)
 
 	db.session.add(review1)
+	
+	db.session.add(teacher)
+
+	db.session.add(admin)
+	db.session.add(test_user)
 
 	db.session.commit()
+	
+	print Instructor.query.all()

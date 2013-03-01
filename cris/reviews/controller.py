@@ -1,22 +1,26 @@
-from flask import Blueprint, jsonify, render_template, request
+from flask import Blueprint, jsonify, render_template, request, flash
 from cris import db
 from model import Review
 
 mod = Blueprint('reviews', __name__, url_prefix='/reviews')
 
-@mod.route('/_submit_review')
+@mod.route('/_submit_review', methods=['POST'])
 def submit_review():
-	data = request.json;
-	review = Review(
-			data['cid'],
-			data['rscr'],
-			data['rdesc'],
-			data['rvote'])
+	if request.method == 'POST':
+		data = request.json
+		print data
 
-	db.session.add(review)
-	db.session.commit()
+		cid = request.json['cid']
+		rscr = request.json['rscr']
+		rdesc = request.json['rdesc']
+		rvote = request.json['rvote']
+		
+		review = Review(cid, rscr, rdesc, rvote)
 
-	flash('Review received and processed')
+		db.session.add(review)
+		db.session.commit()
+
+		return jsonify(rdesc = rdesc, rscr = rscr)
 
 @mod.route('/_query_by_course')
 def query_by_course():

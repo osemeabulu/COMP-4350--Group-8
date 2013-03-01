@@ -5,13 +5,13 @@
 
 class DevConfig():
 	SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/cris.db'
-	
+	SECRET_KEY = "key for logins"	
 	DATABASE_CONNECT_OPTIONS = {}
 
 class TestConfig():
 	TESTING = True
 	CSRF_ENABLED = False
-
+	SECRET_KEY = "testing key"
 	SQLALCHEMY_ECHO = False
 	SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/tests.db'
 

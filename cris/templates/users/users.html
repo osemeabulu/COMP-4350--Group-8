@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="hero-unit" >
+		<h2> Units </h2>
+		<div id=results>
+		</div>
+	</div>
+	<script>
+	$(document).ready(function() {
+		$.getJSON($SCRIPT_ROOT + "{{ url_for('users.query')}}",
+		{
+			key: ''
+		},
+		function(data)
+		{
+			var content = '<ul>';
+			$.each(data.users, function(i, item)
+			{
+				content += '<li>'
+				content += '<p>' + item.username + '</p>'
+				content += '</li>'
+			});
+			content += '</ul>';
+			$('#results').empty().append(content);
+		});
+	
+		return false;
+	});
+	
+	</script>
+{% endblock %}

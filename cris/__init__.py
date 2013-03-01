@@ -4,8 +4,9 @@ from .extensions import db
 from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
 from cris.users.controller import mod as userModule
-from cris.users.model import User
+from cris.followers.controller import mod as followersModule
 from cris.instructors.controller import mod as instructorsModule
+from cris.users.model import User
 
 __all__ = ['create_app']
 
@@ -14,6 +15,7 @@ DEFAULT_BLUEPRINTS = (
 	reviewsModule,
 	userModule,
 	instructorsModule,
+	followersModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -32,7 +34,6 @@ def create_app(blueprints = None, config = None):
 	return application
 
 def configure_app(application, config):
-	application.config.from_object(config)
 	if config is not None:
 		application.config.from_object(config)
 
@@ -106,9 +107,10 @@ def configure_routes(application):
 def reload_db():
 	from cris.courses.model import Course
 	from cris.reviews.model import Review
-	from cris.users.model import User
 	from cris.instructors.model import Instructor
-	
+	from cris.followers.model import Follower	
+	from cris.users.model import User
+
 	db.drop_all()
 	db.create_all()
 
@@ -149,7 +151,10 @@ def reload_db():
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
 	
-	teacher = Instructor ('Michael Zapp')
+	test_follower = Follower(test_user, admin)
+	test_follower = Follower('test', 'admin')
+
+	teacher = Instructor('Michael Zapp')
 	
 	db.session.add(oo)
 	db.session.add(aut)
@@ -166,6 +171,7 @@ def reload_db():
 	db.session.add(admin)
 	db.session.add(test_user)
 
+	db.session.add(test_follower)
+
 	db.session.commit()
 	
-	print Instructor.query.all()

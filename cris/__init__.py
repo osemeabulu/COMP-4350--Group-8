@@ -3,12 +3,14 @@ from .config import DevConfig
 from .extensions import db
 from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
+from cris.instructors.controller import mod as instructorsModule
 
 __all__ = ['create_app']
 
 DEFAULT_BLUEPRINTS = (
 	coursesModule,
 	reviewsModule,
+	instructorsModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -80,6 +82,7 @@ def configure_routes(application):
 def reload_db():
 	from cris.courses.model import Course
 	from cris.reviews.model import Review
+	from cris.instructors.model import Instructor
 	
 	db.drop_all()
 	db.create_all()
@@ -118,6 +121,8 @@ def reload_db():
 	
 	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4)
 	
+	teacher = Instructor ('Michael Zapp')
+	
 	db.session.add(oo)
 	db.session.add(aut)
 	db.session.add(aa)
@@ -127,5 +132,9 @@ def reload_db():
 	db.session.add(se2)
 
 	db.session.add(review1)
+	
+	db.session.add(teacher)
 
 	db.session.commit()
+	
+	print Instructor.query.all()

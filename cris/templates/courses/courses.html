@@ -8,50 +8,59 @@
     </form>
     <div class="accordion" id="results">
     <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+    
 	<script>
-        //(function($) {
-        //    $(function() {
-								function link_to(cid) {
-									window.location.href = $SCRIPT_ROOT + cid;
-					            }
-			    $(document).ready(function () {
-			        $('#target').submit()
-			    });
-
-			    $('#target').keypress(function (e) {
-			        //alert("keypress")
-
-			        $('#target').submit()
-
-			    });
+		function link_to(cid) {
+			window.location.href = $SCRIPT_ROOT + cid;
+		}
+		
+		//This is our callback function for processing courses data
+		function processCourses(data)
+		{	
+			if (data.courses.length != 0)
+			{
+				var content = '';
+				$.each(data.courses, function(i, item)
+				{
+					content += '<div class = "accordion-group">'
+					content += '<div class="accordion-heading">'
+					content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+					content += item.cid +' - '+item.cname
+					content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
+					content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
+							content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
+				});
+				$('#results').empty().append(content);
+			}
+ 		};
+ 		
+ 		//sends a request for a list of courses
+ 		function requestCourses()
+ 		{
+			getObjects(	$SCRIPT_ROOT + "{{ url_for('courses.query') }}",
+						$('input[id="search_key"]').val(),
+						processCourses );
+						
+			return false;
+		};
+		
+		//calls this when document is ready
+		$(document).ready(requestCourses);
+		
+		//updates the list on keypress
+		$(document).ready(function() {
+			$('#target').keyup( function () {
+				getObjects( $SCRIPT_ROOT + "{{ url_for('courses.query') }}",
+							$('input[id="search_key"]').val(),
+							processCourses);
+			});
+		});
+		
+		//requests courses on submit
+		$('#target').submit(requestCourses);
                 
-                $('#target').submit(function() {
-                    //alert('Sending query');
-                    $.getJSON($SCRIPT_ROOT + "{{ url_for('courses.query')}}",
-                    {
-                        key: $('input[id="search_key"]').val()
-                    },
-                    function(data)
-                    {
-                        var content = '';
-                        $.each(data.courses, function(i, item)
-                        {
-                     		content += '<div class = "accordion-group">'
-                           content += '<div class="accordion-heading">'
-                           content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
-                           content += item.cid +' - '+item.cname
-                     		content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
-                     		content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
-									content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
-                        });
-                        $('#results').empty().append(content);
-                    });
-                    
-                    return false;
-                });
-        //    });
-        //})(jQuery);
-    </script>   </div>
+    </script>
+    </div>
    <div id="container">
    </div>
    

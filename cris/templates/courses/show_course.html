@@ -44,7 +44,7 @@
 
     </div>
 
-	<div class="hero-unit">
+	<!--div class="hero-unit">
     	<h2>Reviews:</h2>
 		<div id="results">
 		</div>
@@ -52,7 +52,7 @@
        
 	<script>
 
-		$(window).load(function() {
+		/*$(window).load(function() {
 			$.getJSON($SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
 			{
 				key: "{{ course.cid }}"
@@ -74,13 +74,84 @@
 
                 content+='</tbody></table>';
 
-				$('#results').empty().append(content);
+				$('#results').empty().append(content);*/
+
+    </div-->
+
+    <div class="hero-unit">
+    
+    <h2>Reviews:</h2>
+    <div id="results">
+    </div>
+    </div>
+    
+	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+	<script>
+		function update(data)
+		{
+			location.reload();
+		}
+		
+		//processes the Reviews received from getObjects call to getObjects
+		//call to get all reviews for a course.
+		function processReviews(data)
+		{
+			var content = '';
+			var nil = null;
+			
+			//content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like/Dislike</th></tr></thead><tbody>'; 
+			content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like</th><th>Dislike</th></tr></thead><tbody>';
+			
+			$.each(data.reviews, function(i, item)
+			{
+				//content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td>  <button class="btn btn-success btn-mini" id="upvote' + item.id +'"><i class="icon-white icon-thumbs-up"></i></button>\n' +
+							//'<button class="btn btn-danger btn-mini" id="downvote' + item.id +'"><i class="icon-white icon-thumbs-down"></i></button></td></tr>';
+					
+					content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
+					
+					content +=  '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></td>\n';
+
+					content +=	'<td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-down"></i></button></td></tr>';
+
 			});
+
+			content+='</tbody></table>';
+
+			$('#results').empty().append(content);
+		}
+	
+		//call the getObjects method with the reviews.query url, course id, and a function
+		//callback to processReviews
+		function getReviews()
+		{
+			getObjects(	$SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
+						"{{ course.cid }}",
+						processReviews );
+						
+			return false;
+		}
+		
+		//grabs the review fields, creates and object and sends it with sendObjects.
+		function sendReview()
+		{
+			var review = new Object();
+			review.cid = "{{ course.cid }}"
+		    review.rscr = $('select[id="score"]').val()
+		    review.rdesc = $('textarea[id="description"]').val()
+		    review.rvote = 0
+			review.upvote = 0
+			review.downvote = 0
+			
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.submit_review') }}",
+						 review,
+						 update);
+						 
+			$('#submitReview').modal('hide');
 			
 			return false;
-		});
+		}
     
-		$('#review').submit(function() {
+		/*$('#review').submit(function() {
 			var formObject = new Object();
 			
 			formObject.cid = "{{course.cid}}";
@@ -104,7 +175,8 @@
 			
 			
 			return false;
-		});
+		});*/
+		
 		
 		function vote_reviews(i, upvote, downvote, cid)
 		{
@@ -134,6 +206,12 @@
 			return false;
 			
 		}
-
+		
+		//Get course reviews when page is loaded
+		$(window).load(getReviews);
+		
+		//Send a review when the review submit button is pressed
+		$('#review').submit(sendReview);
+		
 	</script>
 {% endblock content %}

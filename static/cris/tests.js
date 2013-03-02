@@ -19,7 +19,7 @@ asyncTest("getComp4350", 2,
 
 asyncTest("getComp3030", 2,
 	function()
-	{	
+	{
 		var cid = "Comp3030";
 		var cname = "Automata Theory and Formal Languages";
 		
@@ -72,7 +72,7 @@ asyncTest("getComp4350", 1,
 asyncTest("getComp3030", 1,
 	function()
 	{	
-		var cid = "Comp303";
+		var cid = "Comp3030";
 		var num = 0;
 		
 		//I don't know why the url_for doesn't work here

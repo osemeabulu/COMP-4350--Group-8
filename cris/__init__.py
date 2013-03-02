@@ -103,6 +103,10 @@ def configure_routes(application):
 	def page_not_found(e):
   		return render_template('404.html'), 404
 
+	@application.route("/qtests")
+	def qtests():
+		return render_template('tests.html')
+
 
 def reload_db():
 	from cris.courses.model import Course

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CRIS QUnit Tests</title>
+	<link href="{{ url_for('static', filename="qunit/qunit.css") }}" rel="stylesheet">
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script type=text/javascript>
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="{{ url_for('static', filename="qunit/qunit.js") }}"></script>
+	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+	
+	<script src="{{ url_for('static', filename="tests/qunit/CourseTests.js") }}"></script>
+	<script src="{{ url_for('static', filename="tests/qunit/ReviewTests.js") }}"></script>
+</body>
+</html>

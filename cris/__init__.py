@@ -154,7 +154,9 @@ def reload_db():
 	test_follower = Follower(test_user, admin)
 	test_follower = Follower('test', 'admin')
 
-	teacher = Instructor('Michael Zapp')
+	prof = Instructor('Michael Zapp')
+	prof.add_course(se2)
+	prof.add_course(os1)
 	
 	db.session.add(oo)
 	db.session.add(aut)
@@ -166,7 +168,7 @@ def reload_db():
 
 	db.session.add(review1)
 	
-	db.session.add(teacher)
+	db.session.add(prof)
 
 	db.session.add(admin)
 	db.session.add(test_user)

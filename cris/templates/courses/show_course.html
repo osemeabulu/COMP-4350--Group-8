@@ -42,19 +42,6 @@
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
-
-        <p>
-			<!--
-			<a class="btn btn-primary btn-small" href="" id="submit">
-				submit
-			</a>
-			-->
-			
-			<!--
-            <button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>
-            <button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></button>
-            -->
-        </p>
     </div>
 
     <div class="hero-unit">
@@ -62,60 +49,67 @@
     <h2>Reviews:</h2>
     <div id="results">
     </div>
-
     </div>
-
     
-    
+	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 	<script>
-		$(window).load(function() {
-			$.getJSON($SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
+		function update(data)
+		{
+			location.reload();
+		}
+		
+		//processes the Reviews received from getObjects call to getObjects
+		//call to get all reviews for a course.
+		function processReviews(data)
+		{
+			var content = '';
+
+			content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like/Dislike</th></tr></thead><tbody>'; 
+
+			$.each(data.reviews, function(i, item)
 			{
-				key: "{{ course.cid }}"
-			},
-			function(data)
-			{
-			    var content = '';
-
-			    content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like/Dislike</th></tr></thead><tbody>'; 
-
-				$.each(data.reviews, function(i, item)
-				{
-					content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td>  <button class="btn btn-success btn-mini" id="upvote' + item.id +'"><i class="icon-white icon-thumbs-up"></i></button>\n' +
-								'<button class="btn btn-danger btn-mini" id="downvote' + item.id +'"><i class="icon-white icon-thumbs-down"></i></button></td></tr>';
-				});
-
-                content+='</tbody></table>';
-
-				$('#results').empty().append(content);
+				content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td>  <button class="btn btn-success btn-mini" id="upvote' + item.id +'"><i class="icon-white icon-thumbs-up"></i></button>\n' +
+							'<button class="btn btn-danger btn-mini" id="downvote' + item.id +'"><i class="icon-white icon-thumbs-down"></i></button></td></tr>';
 			});
+
+			content+='</tbody></table>';
+
+			$('#results').empty().append(content);
+		}
+	
+		//call the getObjects method with the reviews.query url, course id, and a function
+		//callback to processReviews
+		function getReviews()
+		{
+			getObjects(	$SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
+						"{{ course.cid }}",
+						processReviews );
+						
+			return false;
+		}
+		
+		//grabs the review fields, creates and object and sends it with sendObjects.
+		function sendReview()
+		{
+			var review = new Object();
+			review.cid = "{{ course.cid }}"
+		    review.rscr = $('select[id="score"]').val()
+		    review.rdesc = $('textarea[id="description"]').val()
+		    review.rvote = 0
+
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.submit_review') }}",
+						 review,
+						 update);
+						 
+			$('#submitReview').modal('hide');
 			
 			return false;
-		});
-
-		$('#review').submit(function () {
-		    var formObject = new Object();
-
-		    formObject.cid = "{{ course.cid }}"
-		    formObject.rscr = $('select[id="score"]').val()
-		    formObject.rdesc = $('textarea[id="description"]').val()
-		    formObject.rvote = 0
-
-		    var result;
-		    $.ajax({
-		        type: "POST",
-		        contentType: "application/json; charset=utf-8",
-		        url: "{{ url_for('reviews.submit_review') }}",
-		        data: JSON.stringify(formObject),
-		        success: function (data) {
-		            location.reload();
-		        },
-		        dataType: "json"
-		    });
-
-		    $('#submitReview').modal('hide')
-
-		    return false;
-		});
+		}
+		
+		//Get course reviews when page is loaded
+		$(window).load(getReviews);
+		
+		//Send a review when the review submit button is pressed
+		$('#review').submit(sendReview);
 	</script>
 {% endblock content %}

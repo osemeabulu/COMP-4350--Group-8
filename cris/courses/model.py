@@ -25,3 +25,14 @@ class Course(db.Model):
 			'cname'	: self.cname,
 			'cdesc' : self.cdesc
 		}
+	
+	def avg_rating(self):
+		#print Review.query(self.cid, func.avg(Review.rvote))
+		qry = Review.query.filter(Review.cid == self.cid).all()
+		
+		sum = 0
+		count = 0
+		for _res in qry:
+			sum+= _res.rscr
+			count+=1
+		return sum/count

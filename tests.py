@@ -22,10 +22,9 @@ class crisTestCase(unittest.TestCase):
 	## Unit Testing Courses
 	def test_courses(self):
 		#testing db is empty
-		print Course.query.count()
 		assert Course.query.count() is 0
 		
-		c = Course('testCourseID', 'this is a test course name', 'this is a test description')
+		c = Course('testCourseID', 'this is a test course name', 'this is a test description', 'Science')
 		db.session.add(c)
 		db.session.commit()
 
@@ -50,7 +49,6 @@ class crisTestCase(unittest.TestCase):
 	## Unit Testing Reviews
 	def test_reviews(self):
 		#testing db is empty
-		print Review.query.count()
 		assert Review.query.count() is 0
 		
 		r = Review('testCourseID', 1, 'this is a test review', 4)

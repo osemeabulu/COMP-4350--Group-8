@@ -3,12 +3,13 @@ from cris.extensions import db
 class Review(db.Model):
 	__tablename__ = 'reviews_review'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	cid = db.Column(db.String(10), db.ForeignKey('courses_course.cid'))
+	cid = db.Column(db.String(10), db.ForeignKey('courses_course.cid'))	
 	rscr = db.Column(db.Float)
 	rdesc = db.Column(db.Text)
 	rvote = db.Column(db.Float)
 	upvote = db.Column(db.Integer)
 	downvote = db.Column(db.Integer)
+	
 
 	def __init__(self, cid, rscr, rdesc, rvote=None, upvote=None, downvote=None):
 		self.cid = cid
@@ -24,6 +25,7 @@ class Review(db.Model):
 	@property
 	def serialize(self):
 		return {
+                        'id'    : self.id,
 			'cid'	: self.cid,
 			'rscr'	: self.rscr,
 			'rdesc'	: self.rdesc,
@@ -48,4 +50,3 @@ class Review(db.Model):
 		result = upvote/downvote
 		return result
 
-from cris import db

@@ -7,12 +7,24 @@
         <button type="submit" class="btn">Search</button>
     </form>
     <div class="accordion" id="results">
+    <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 	<script>
         //(function($) {
         //    $(function() {
 								function link_to(cid) {
 									window.location.href = $SCRIPT_ROOT + cid;
-								}
+					            }
+			    $(document).ready(function () {
+			        $('#target').submit()
+			    });
+
+			    $('#target').keypress(function (e) {
+			        //alert("keypress")
+
+			        $('#target').submit()
+
+			    });
+                
                 $('#target').submit(function() {
                     //alert('Sending query');
                     $.getJSON($SCRIPT_ROOT + "{{ url_for('courses.query')}}",

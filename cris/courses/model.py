@@ -8,12 +8,14 @@ class Course(db.Model):
 	cid = db.Column(db.String(10), unique=True)
 	cname = db.Column(db.String(20), unique=True)
 	cdesc = db.Column(db.Text)
+	cflty = db.Column(db.String(10))
 	reviews = db.relationship('Review', backref = 'course', lazy = 'dynamic')
 
-	def __init__(self, cid, cname, cdesc):
+	def __init__(self, cid, cname, cdesc, cflty):
 		self.cid = cid
 		self.cname = cname
 		self.cdesc = cdesc
+		self.cflty = cflty
 
 	def __repr__(self):
 		return '<Course %r>' % self.cname
@@ -23,5 +25,17 @@ class Course(db.Model):
 		return {
 			'cid'	: self.cid,
 			'cname'	: self.cname,
-			'cdesc' : self.cdesc
+			'cdesc' : self.cdesc,
+			'cflty'	: self.cflty
 		}
+	
+	def avg_rating(self):
+		#print Review.query(self.cid, func.avg(Review.rvote))
+		qry = Review.query.filter(Review.cid == self.cid).all()
+		
+		sum = 0
+		count = 0
+		for _res in qry:
+			sum+= _res.rscr
+			count+=1
+		return sum/count

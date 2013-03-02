@@ -1,14 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template, session, url_for, redirect, render_template, flash
 from .config import DevConfig
 from .extensions import db
 from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
+from cris.users.controller import mod as userModule
+from cris.followers.controller import mod as followersModule
+from cris.instructors.controller import mod as instructorsModule
+from cris.users.model import User
 
 __all__ = ['create_app']
 
 DEFAULT_BLUEPRINTS = (
 	coursesModule,
 	reviewsModule,
+	userModule,
+	instructorsModule,
+	followersModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -27,7 +34,6 @@ def create_app(blueprints = None, config = None):
 	return application
 
 def configure_app(application, config):
-	application.config.from_object(config)
 	if config is not None:
 		application.config.from_object(config)
 
@@ -46,6 +52,27 @@ def configure_routes(application):
 	def index():
 		return render_template('index.html')
 
+	@application.route("/login", methods=['GET', 'POST'])
+	def login():
+		error = None
+		if request.method == 'POST':
+			username = request.form['username']
+			password = request.form['password']
+			result = User.query.filter_by(username=username).first()
+			if result and result.password == password:
+				session['username'] = username
+				flash('You were logged in')
+				return redirect(url_for('index'))
+			else:
+				error = 'Unable to validate user'
+		return render_template('login.html', error=error)
+
+	@application.route('/logout')
+	def logout():
+		session.pop('username', None)
+		flash('You were logged out')
+		return redirect(url_for('index'))
+	
 	@application.route("/courses", methods=['GET', 'POST'])
 	def courses():
 	    if request.method == 'POST':
@@ -76,47 +103,64 @@ def configure_routes(application):
 	def page_not_found(e):
   		return render_template('404.html'), 404
 
+	@application.route("/qtests")
+	def qtests():
+		return render_template('tests.html')
+
 
 def reload_db():
 	from cris.courses.model import Course
 	from cris.reviews.model import Review
-	
+	from cris.instructors.model import Instructor
+	from cris.followers.model import Follower	
+	from cris.users.model import User
+
 	db.drop_all()
 	db.create_all()
 
 	oo = Course('Comp2150', 'Object Orientation', 'Calendar Description: Design and development of object-oriented software. Topics will ' +
 	'include inheritance, polymorphism, data abstraction and encapsulation. Examples will be drawn from several programming languages (Lab required).' +
-	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290' )
+	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290', 'Science')
 
 	aut = Course('Comp3030', 'Automata Theory and Formal Languages', 'Calendar Description: An introduction to automata theory, grammars, formal languages' +
 	'and their applications. Topics: finite automata, regular expressions and their properties;' +
 	'context-free grammars, pushdown automata and properties of context-free languages;' +
 	'turing machines. Applications: lexical analysis, text editing, machine design, syntax' +
 	'analysis, parser generation.' +
-	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310')
+	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310', 'Science')
 
 	aa = Course('Comp3170', 'Analysis of Algorithms and Data Structures', 'Calendar Description: Fundamental Algorithms for sorting, searching, storage' +
 	'management, graphs, databases and computational geometry. Correctness and Analysis' +
 	'of those Algorithms using specific data structures. An introduction to lower bounds and' +
-	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420')
+	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420', 'Science')
 	
 	ai = Course('Comp3190', 'Artificial Intelligence', 'Calendar Description: Principles of artificial intelligence; problem solving, knowledge' +
 	'representation and manipulation; the application of these principles to the solution of hard' +
-	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.' )
+	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.', 'Science')
 	
 	se1 = Course('Comp3350', 'Software Engineering 1', 'Calendar Description: Introduction to software engineering. Software life cycle' +
 	'models, system and software requirements analysis, specifications, software design,' +
-	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560' )
+	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560', 'Science')
 	
 	os1 = Course('Comp3430', 'Operating Systems 1', 'Calendar Description: Operating systems, their design, implementation, and usage (Lab ' +
 	'required). Prerequisite: COMP 2140 and COMP 2280 Recommended: COMP 2160 ' +
-	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580' )
+	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580', 'Science')
 
 	se2 = Course('Comp4350', 'Software Engineering 2', 'Calendar Description: Advanced treatment of software development methods. Topics' +
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
-	'software verification and validation. Prerequisite: COMP 3350.' )
+	'software verification and validation. Prerequisite: COMP 3350.', 'Science')
 	
 	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4)
+
+	admin = User('admin', 'default', True)
+	test_user = User('test', 'password')
+	
+	test_follower = Follower(test_user, admin)
+	test_follower = Follower('test', 'admin')
+
+	prof = Instructor('Michael Zapp')
+	prof.add_course(se2)
+	prof.add_course(os1)
 	
 	db.session.add(oo)
 	db.session.add(aut)
@@ -127,5 +171,13 @@ def reload_db():
 	db.session.add(se2)
 
 	db.session.add(review1)
+	
+	db.session.add(prof)
+
+	db.session.add(admin)
+	db.session.add(test_user)
+
+	db.session.add(test_follower)
 
 	db.session.commit()
+	

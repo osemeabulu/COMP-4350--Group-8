@@ -24,7 +24,7 @@ class crisTestCase(unittest.TestCase):
 		#testing db is empty
 		assert Course.query.count() is 0
 		
-		c = Course('testCourseID', 'this is a test course name', 'this is a test description')
+		c = Course('testCourseID', 'this is a test course name', 'this is a test description', 'Science')
 		db.session.add(c)
 		db.session.commit()
 

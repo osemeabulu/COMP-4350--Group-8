@@ -120,35 +120,35 @@ def reload_db():
 
 	oo = Course('Comp2150', 'Object Orientation', 'Calendar Description: Design and development of object-oriented software. Topics will ' +
 	'include inheritance, polymorphism, data abstraction and encapsulation. Examples will be drawn from several programming languages (Lab required).' +
-	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290' )
+	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290', 'Science')
 
 	aut = Course('Comp3030', 'Automata Theory and Formal Languages', 'Calendar Description: An introduction to automata theory, grammars, formal languages' +
 	'and their applications. Topics: finite automata, regular expressions and their properties;' +
 	'context-free grammars, pushdown automata and properties of context-free languages;' +
 	'turing machines. Applications: lexical analysis, text editing, machine design, syntax' +
 	'analysis, parser generation.' +
-	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310')
+	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310', 'Science')
 
 	aa = Course('Comp3170', 'Analysis of Algorithms and Data Structures', 'Calendar Description: Fundamental Algorithms for sorting, searching, storage' +
 	'management, graphs, databases and computational geometry. Correctness and Analysis' +
 	'of those Algorithms using specific data structures. An introduction to lower bounds and' +
-	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420')
+	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420', 'Science')
 	
 	ai = Course('Comp3190', 'Artificial Intelligence', 'Calendar Description: Principles of artificial intelligence; problem solving, knowledge' +
 	'representation and manipulation; the application of these principles to the solution of hard' +
-	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.' )
+	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.', 'Science')
 	
 	se1 = Course('Comp3350', 'Software Engineering 1', 'Calendar Description: Introduction to software engineering. Software life cycle' +
 	'models, system and software requirements analysis, specifications, software design,' +
-	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560' )
+	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560', 'Science')
 	
 	os1 = Course('Comp3430', 'Operating Systems 1', 'Calendar Description: Operating systems, their design, implementation, and usage (Lab ' +
 	'required). Prerequisite: COMP 2140 and COMP 2280 Recommended: COMP 2160 ' +
-	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580' )
+	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580', 'Science')
 
 	se2 = Course('Comp4350', 'Software Engineering 2', 'Calendar Description: Advanced treatment of software development methods. Topics' +
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
-	'software verification and validation. Prerequisite: COMP 3350.' )
+	'software verification and validation. Prerequisite: COMP 3350.', 'Science')
 	
 	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4)
 

@@ -21,6 +21,7 @@ class Review(db.Model):
 	@property
 	def serialize(self):
 		return {
+                        'id'    : self.id,
 			'cid'	: self.cid,
 			'rscr'	: self.rscr,
 			'rdesc'	: self.rdesc,

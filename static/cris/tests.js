@@ -86,3 +86,23 @@ asyncTest("getComp3030", 1,
 	}
 );
 
+asyncTest("sendReview", 1,
+	function()
+	{
+		var review = new Object();
+			
+		review.cid = "Comp3350";
+		review.rscr = 4
+		review.rdesc = "Test review message...";
+		review.rvote = 0
+		
+		sendObjects( $SCRIPT_ROOT + "/reviews/_sumbit_review",
+					 review,
+					 function(data)
+					 {
+						 equal(data.rdesc, review.rdesc, "Succesfully got our description back.");
+						 equal(data.rscr, review.rscr, "Successfully gout our score back.");
+						 start();
+					 });
+	}
+);

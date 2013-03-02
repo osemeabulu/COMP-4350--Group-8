@@ -7,3 +7,21 @@ function getObjects(url, val, func)
 {
 	$.getJSON(url, {key: val}, func);
 }
+
+//accepts a url, an object to send, and function callback
+//it sends the json object and runs the function on success using the ajax call.
+//Note: .post jquery call didn't work
+function sendObjects(url, val, func)
+{
+	$.ajax({
+		type: "POST",
+		contentType: "application/json; charset=utf-8",
+		url: url,
+		data: JSON.stringify(val),
+		success: func,
+		dataType:"json"
+	});
+	//var jsonString = JSON.stringify(val);
+	
+	//$.post(url, jsonString, func, { contentType: 'application/json'});
+}

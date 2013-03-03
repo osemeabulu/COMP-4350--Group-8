@@ -9,6 +9,15 @@ def index():
 	print "Instructors route worked"
 	return render_template('instructors/instructors.html')
 
+@mod.route('/<string:instructor>')
+def show_instructor(instructor):
+	result = Instructor.query.filter_by(pname = instructor).first()
+
+	if result:
+		return render_template('instructors/show_instructor.html', instructor=result)
+	else:
+		abort(404) 
+
 @mod.route('/_query')
 def query():
 	key = request.args.get('key', '')

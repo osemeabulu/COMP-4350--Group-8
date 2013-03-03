@@ -161,9 +161,17 @@ def reload_db():
 	test_follower = Follower(test_user, admin)
 	test_follower = Follower('test', 'admin')
 
+	
 	prof = Instructor('Michael Zapp')
 	prof.add_course(se2)
 	prof.add_course(os1)
+	
+	prof2 = Instructor('John Braico')
+	prof2.add_course(se1)
+	
+	prof3 = Instructor('John Anderson')
+	prof3.add_course(ai)
+	
 	
 	db.session.add(oo)
 	db.session.add(aut)

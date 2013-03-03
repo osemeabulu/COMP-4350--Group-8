@@ -30,7 +30,6 @@ class Course(db.Model):
 		}
 	
 	def avg_rating(self):
-		#print Review.query(self.cid, func.avg(Review.rvote))
 		qry = Review.query.filter(Review.cid == self.cid).all()
 		
 		sum = 0

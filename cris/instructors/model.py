@@ -4,7 +4,7 @@ class Association(db.Model):
 	__tablename__ = 'association'
 	pname = db.Column(db.String(20), db.ForeignKey('instructors_instructor.pname'), primary_key=True)
 	cid = db.Column(db.String(20), db.ForeignKey('courses_course.cid'), primary_key=True)
-	a_course = db.relationship("Course", backref="parent_assocs")
+	a_course = db.relationship("Course", backref="courses")
 	
 	def __init__(self, pname, cid):
 		self.pname = pname
@@ -12,12 +12,11 @@ class Association(db.Model):
 		
 
 	def __repr__(self):
-		return '<Assoc %r>' % self.pname + " " + self.cid
+		return '<%r>' % self.cid
 
 	@property
 	def serialize(self):
 		return {
-			'pname'	: self.pname,
 			'cid'	: self.cid
 		}
 
@@ -35,12 +34,13 @@ class Instructor(db.Model):
 		
 
 	def __repr__(self):
-		return '<Instructor %r>' % self.pname
+		return '<Instructor %r, courses %r >' % (self.pname, self.courses)
 
 	@property
 	def serialize(self):
 		return {
-			'pname'	: self.pname
+			'pname'		: self.pname,
+			'courses'	: self.courses
 		}
 	
 	def add_course(self, course):

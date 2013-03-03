@@ -55,6 +55,9 @@ def configure_routes(application):
 	@application.route("/login", methods=['GET', 'POST'])
 	def login():
 		error = None
+		if 'username' in session:
+			flash ("Already Logged In.")
+			return redirect(url_for('index'))
 		if request.method == 'POST':
 			username = request.form['username']
 			password = request.form['password']

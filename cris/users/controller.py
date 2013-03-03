@@ -14,7 +14,7 @@ def register():
 	error = None
 	#make sure we arn't logged in
 	if 'username' in session:
-		flash("You are already logged in")
+		flash("You can not register an account when you are logged in")
 		return redirect(url_for('index'))
 
 	if request.method == 'POST':

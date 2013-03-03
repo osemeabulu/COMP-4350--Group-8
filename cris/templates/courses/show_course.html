@@ -106,8 +106,12 @@
 			{
 				//content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td>  <button class="btn btn-success btn-mini" id="upvote' + item.id +'"><i class="icon-white icon-thumbs-up"></i></button>\n' +
 							//'<button class="btn btn-danger btn-mini" id="downvote' + item.id +'"><i class="icon-white icon-thumbs-down"></i></button></td></tr>';
-					
-					content += '<tr><td>N/A</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
+					username= 'N/A';
+					if (item.username != null)	
+					{
+						username = item.username;
+					}
+					content += '<tr><td>' + username + '</td><td>'+ item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
 					
 					content +=  '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></td>\n';
 

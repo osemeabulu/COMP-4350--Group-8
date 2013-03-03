@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, flash
+from flask import Blueprint, jsonify, render_template, request, flash, session
 from cris import db
 from model import Review
 
@@ -17,7 +17,11 @@ def submit_review():
 		upvote = request.json['upvote']
 		downvote = request.json['downvote']
 		
-		review = Review(cid, rscr, rdesc, rvote, upvote, downvote)
+		#find username if logged in		
+		username = None
+		if 'username' in session:
+			username = session['username']
+		review = Review(cid, rscr, rdesc, rvote, upvote, downvote, username)
 
 		db.session.add(review)
 		db.session.commit()

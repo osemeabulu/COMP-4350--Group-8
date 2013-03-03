@@ -9,15 +9,16 @@ class Review(db.Model):
 	rvote = db.Column(db.Float)
 	upvote = db.Column(db.Integer)
 	downvote = db.Column(db.Integer)
-	
+	username = db.Column(db.String(40), db.ForeignKey('Users_User.username'))
 
-	def __init__(self, cid, rscr, rdesc, rvote=None, upvote=None, downvote=None):
+	def __init__(self, cid, rscr, rdesc, rvote=None, upvote=None, downvote=None, username=None):
 		self.cid = cid
 		self.rscr = rscr
 		self.rdesc = rdesc
 		self.rvote = rvote
 		self.upvote = upvote
 		self.downvote = downvote
+		self.username = username
 
 	def __repr__(self):
 		return '<Review %r>' % self.rdesc
@@ -31,7 +32,8 @@ class Review(db.Model):
 			'rdesc'	: self.rdesc,
 			'rvote'	: self.rvote,
 			'upvote' : self.upvote,
-			'downvote' : self.downvote
+			'downvote' : self.downvote,
+			'username' : self.username
 		}
 		
 	def set_upvote(self, vote):

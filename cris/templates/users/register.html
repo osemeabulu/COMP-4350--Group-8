@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class= "hero-unit">
+		<h2>Register User</h2>
+		{% if error %}
+			<div class="alert alert-error"><strong>Error: </strong>{{ error }}</div>
+		{% endif %}
+		<form action="{{ url_for('users.register') }}" method=post>
+			<dl>
+      		<dt>Username:
+      			<dd><input type=text name=username>
+      		<dt>Password:
+      		<dd><input type=password name=password>
+      		<dt>Confirm Password:
+      		<dd><input type=password name=password_c>
+      		<dd><input type=submit class="btn" value=Register>
+    		</dl>
+  		</form>
+	</div>
+
+
+{% endblock %}

@@ -12,12 +12,18 @@ def index():
 @mod.route('/register', methods = ['GET', 'POST'])
 def register():	
 	error = None
+	#make sure we arn't logged in
+	if 'username' in session:
+		flash("You are already logged in")
+		return redirect(url_for('index'))
+
 	if request.method == 'POST':
 		if request.form['password'] == request.form['password_c']:
 			try:
 				db.session.add(User(request.form['username'], request.form['password']))
 				db.session.commit()
 				session['username'] = request.form['username'] #login
+				flash("Account successfully created")
 				return redirect(url_for('index'))
 			except IntegrityError:
 				error = "User with that name already exists"

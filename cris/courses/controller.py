@@ -18,6 +18,31 @@ def show_course(course):
   else:
     abort(404)
 
+@mod.route('/top_rated')
+def top_index():
+	return render_template('courses/top_rated.html')
+
+@mod.route('/_top_query')
+def top_query():
+	list = []	
+	index = 0
+	courses_list = Course.query.all()
+	for course in courses_list:
+		reviews_list = Review.query.filter_by(cid=course.cid).all()
+		average = 0
+		if len(reviews_list) > 0:
+			for review in reviews_list:
+				average = average + review.rscr
+			average = average / len(reviews_list)
+		list.append([course, average])
+	list = sorted(list, key=lambda tup: tup[1], reverse=True)
+	courses = []
+	for item in list:
+		temp_dict = item[0].serialize
+		temp_dict['avg'] = item[1]
+		courses.append(temp_dict)
+	return jsonify(courses = courses) 
+
 @mod.route('/_query')
 def query():
 	key = request.args.get('key', '')

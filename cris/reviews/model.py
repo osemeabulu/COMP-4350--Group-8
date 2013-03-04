@@ -35,20 +35,4 @@ class Review(db.Model):
 			'downvote' : self.downvote,
 			'username' : self.username
 		}
-		
-	def set_upvote(self, vote):
-		self.upvote = vote
-	
-	def set_downvote(self, vote):
-		self.downvote = vote
-		
-	def getUpvote(self):
-		return self.upvote
-		
-	def getDownvote(self):
-		return self.downvote
-		
-	def getRvote(self):
-		result = upvote/downvote
-		return result
-
+				

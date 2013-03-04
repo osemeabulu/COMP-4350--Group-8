@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, render_template, request, flash, session
 from cris import db
 from model import Review
+from decimal import *
 
 mod = Blueprint('reviews', __name__, url_prefix='/reviews')
 
@@ -48,15 +49,21 @@ def calculate_vote():
 	newvote = 0;
 	
 	if upvote != 'null':
-		review.set_upvote(upvote)
+		review.upvote = upvote
 		db.session.commit()
-		newvote = review.getUpvote()
 
 	else:
-		review.set_downvote(downvote)
+		review.downvote = downvote
 		db.session.commit()
-		newvote = review.getDownvote()
+	
+	getcontext().prec = 2
+	if review.downvote:
+		review.rvote = Decimal(review.upvote)/Decimal(review.downvote)
+	else:
+		review.rvote = review.upvote
+				
+	db.session.commit()
 		
-	return jsonify(result=newvote)
+	return jsonify(score=review.rvote, up=review.upvote, down=review.downvote)
 	
 	

@@ -2,5 +2,51 @@
 
 {% block content %}
 	<h5>Top Rated Courses</h5>
-	<p> Our site is currently still under development please come back at a later time.</p>
+    	<div class="accordion" id="results">
+    	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+    
+	<script>
+		function link_to(cid) {
+			window.location.href = 'courses/' + cid;
+		}
+		
+		//This is our callback function for processing courses data
+		function processCourses(data)
+		{	
+			if (data.courses.length != 0)
+			{
+				var content = '';
+				$.each(data.courses, function(i, item)
+				{
+					content += '<div class = "accordion-group">'
+					content += '<div class="accordion-heading">'
+					content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+					content += item.cid + ' - ' + item.cname + ' - Score: ' + item.avg + '/5</a></div>'
+					content += '<div id="info_' + i + '" class="accordion-body collapse">'
+					content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
+					content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
+
+					//idea: progress bar for score?
+					//content += '<div class="progress">' + item.avg + '/5 - ' + item.cid + ' - ' + item.cname + '<div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div>'
+				});
+				$('#results').empty().append(content);
+			}
+ 		};
+ 		
+		function request_top_courses()
+		{
+			getObjects($SCRIPT_ROOT + "{{ url_for('courses.top_query') }}",
+						null,
+						processCourses);
+
+			return false;
+		}
+
+		$(document).ready(request_top_courses);
+		
+    </script>
+    </div>
+   <div id="container">
+   </div>
+   
 {% endblock content %}

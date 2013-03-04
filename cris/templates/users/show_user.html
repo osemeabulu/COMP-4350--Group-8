@@ -52,7 +52,34 @@
     <div id="results">
     </div>
 </div>
+<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 <script>
+
+    //processes the Reviews received from getObjects call to getObjects
+    //call to get all reviews from specific author
+    function processReviews(data) {
+        var content = '';
+        var nil = null;
+
+        $.each(data.reviews, function (i, item) {
+            content += '<p>"' + item.rdesc + '" -- in <a href="/courses/' + item.cid + '">' + item.cid + '</a></p>'
+        });
+
+        $('#results').empty().append(content);
+    }
+
+    //call the getObjects method with the reviews.query url, course id, and a function
+    //callback to processReviews
+    function getReviews() {
+        getObjects($SCRIPT_ROOT + "{{ url_for('reviews.query_by_user') }}",
+						"{{ user.username }}",
+						processReviews);
+
+        return false;
+    }
+
+    //Get course reviews when page is loaded
+    $(window).load(getReviews);
 
 </script>
 {% endblock %} 

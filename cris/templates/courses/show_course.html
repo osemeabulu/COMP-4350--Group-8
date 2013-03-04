@@ -76,7 +76,7 @@
 						username = item.username;
 					}
 
-					content += '<tr><td>' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
+					content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
 					
 					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></td>\n';
 

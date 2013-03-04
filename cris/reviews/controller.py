@@ -35,6 +35,13 @@ def query_by_course():
 
 	results = Review.query.filter_by(cid=key).all()
 	return jsonify(reviews = [i.serialize for i in results])
+
+@mod.route('/_query_by_user')
+def query_by_user():
+	key = request.args.get('key', '')
+
+	results = Review.query.filter_by(username=key).all()
+	return jsonify(reviews = [i.serialize for i in results])
 	
 @mod.route('/_vote')
 def calculate_vote():

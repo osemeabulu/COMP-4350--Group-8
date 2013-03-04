@@ -62,7 +62,7 @@ def follow_user():
 					result = True
 					flash('You are now following ' + followed.username + '.')
 			else:
-				error = 'Cannot follow ' + username + '.'
+				error = 'Cannot follow ' + user_followed + '.'
 				flash(error)
 	else:
 		error = 'Please log in if you wish to follow this user.'
@@ -84,7 +84,7 @@ def unfollow_user():
 					result = True
 					flash('You are no longer following ' + followed.username + '.')
 			else:
-				error = 'Cannot unfollow ' + username + '.'
+				error = 'Cannot unfollow ' + user_followed + '.'
 				flash(error)
 	else:
 		error = 'Please log in if you wish to unfollow this user.'

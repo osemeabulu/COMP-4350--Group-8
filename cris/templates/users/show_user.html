@@ -1,0 +1,58 @@
+{% extends "layout.html" %} {% block content %}
+<div id="showFollowers" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            x</button>
+        <h3 id="modalLabel">
+            {{user.username}}'s Followers:
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            <h2>
+                Placeholder
+            </h2>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">
+            Close</button>
+    </div>
+</div>
+<div class="row">
+    <div class="span6">
+        <div class="row">
+            <div class="span1" style="padding-top: 15px;">
+                <button class="btn btn-success btn-mini">
+                    <i class="icon-white icon-heart"></i>Follow
+                </button>
+            </div>
+            <div class="span3">
+                <h1>
+                    <div id="username" style="text-align: left;">
+                        {{user.username}}
+                    </div>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <h1>
+            <div style="text-align: center;">
+                <a href="#showFollowers" data-toggle="modal">X Followers</a>
+            </div>
+        </h1>
+    </div>
+</div>
+<div class="well">
+    <h2>
+        Activity:
+    </h2>
+    <div id="results">
+    </div>
+</div>
+<script>
+
+</script>
+{% endblock %} 

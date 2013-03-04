@@ -90,7 +90,17 @@ def unfollow_user():
 		error = 'Please log in if you wish to unfollow this user.'
 		flash(error)
 
-	return jsonify(unfollowed = result) 
+	return jsonify(unfollowed = result)
+
+@mod.route('/<string:user>')
+def show_user(user):
+  print user
+  result = User.query.filter_by(username=user).first()
+  
+  if result:
+    return render_template('users/show_user.html', user=result)
+  else:
+    abort(404)
 
 @mod.route('/_query')
 def query():

@@ -150,7 +150,7 @@ def reload_db():
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
 	'software verification and validation. Prerequisite: COMP 3350.', 'Science')
 	
-	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 4)
+	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 0, 0, 4)
 
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')

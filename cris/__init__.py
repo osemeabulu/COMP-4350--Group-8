@@ -4,7 +4,6 @@ from .extensions import db
 from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
 from cris.users.controller import mod as userModule
-from cris.followers.controller import mod as followersModule
 from cris.instructors.controller import mod as instructorsModule
 from cris.users.model import User
 
@@ -15,7 +14,6 @@ DEFAULT_BLUEPRINTS = (
 	reviewsModule,
 	userModule,
 	instructorsModule,
-	followersModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -115,7 +113,6 @@ def reload_db():
 	from cris.courses.model import Course
 	from cris.reviews.model import Review
 	from cris.instructors.model import Instructor
-	from cris.followers.model import Follower	
 	from cris.users.model import User
 
 	db.drop_all()
@@ -158,10 +155,6 @@ def reload_db():
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
 	
-	test_follower = Follower(test_user, admin)
-	test_follower = Follower('test', 'admin')
-
-	
 	prof = Instructor('Michael Zapp')
 	prof.add_course(se2)
 	prof.add_course(os1)
@@ -188,7 +181,5 @@ def reload_db():
 	db.session.add(admin)
 	db.session.add(test_user)
 
-	db.session.add(test_follower)
 
 	db.session.commit()
-	

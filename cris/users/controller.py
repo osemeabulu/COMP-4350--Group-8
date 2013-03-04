@@ -1,8 +1,7 @@
-from flask import Blueprint, jsonify, render_template, redirect, url_for, request, flash, session
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, request, flash, session
 from cris import db
 from sqlalchemy.exc import IntegrityError
 from model import User
-
 mod = Blueprint('users', __name__, url_prefix='/users')
 
 @mod.route('/')
@@ -32,8 +31,66 @@ def register():
 
 	return render_template('users/register.html', error=error)
    
-		
 
+
+@mod.route('/_check_follower', methods = ['GET'])
+def check_follower():
+	result = False
+	if 'username' in session:
+		username = session['username']
+		if request is not None:
+			user_followed = request.args.get('follow', '')
+			followed = User.query.get(user_followed)
+			follower = User.query.get(username)
+			if follower and followed is not None:
+				result = follower.check_following(followed)
+
+	return jsonify(followed = result) 
+
+@mod.route('/_follow_user', methods = ['GET'])
+def follow_user():
+	result = False
+	if 'username' in session:
+		username = session['username']
+		if request is not None:
+			user_followed = request.args.get('follow', '')
+			print user_followed
+			followed = User.query.get(user_followed)
+			follower = User.query.get(username)
+			if follower and followed is not None:
+				if follower.follow(followed) is not None:
+					result = True
+					flash('You are now following ' + followed.username + '.')
+			else:
+				error = 'Cannot follow ' + username + '.'
+				flash(error)
+	else:
+		error = 'Please log in if you wish to follow this user.'
+		flash(error)
+
+	return jsonify(followed = result) 
+
+@mod.route('/_unfollow_user', methods = ['GET'])
+def unfollow_user():
+	result = False
+	if 'username' in session:
+		username = session['username']
+		if request is not None:
+			user_followed = request.args.get('follow', '')
+			followed = User.query.get(user_followed)
+			follower = User.query.get(username)
+			if follower and followed is not None:
+				if follower.unfollow(followed) is not None:
+					result = True
+					flash('You are no longer following ' + followed.username + '.')
+			else:
+				error = 'Cannot unfollow ' + username + '.'
+				flash(error)
+	else:
+		error = 'Please log in if you wish to unfollow this user.'
+		flash(error)
+
+	return jsonify(unfollowed = result) 
 
 @mod.route('/_query')
 def query():

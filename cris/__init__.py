@@ -150,7 +150,9 @@ def reload_db():
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
 	'software verification and validation. Prerequisite: COMP 3350.', 'Science')
 	
-	review1 = Review('Comp4350', 0.85, 'This was a hard course that required a lot of background research and work.', 0, 0, 4)
+	review1 = Review('Comp4350', 4, 'This was a hard course that required a lot of background research and work.', 0.75, 3, 4)
+	review2 = Review('Comp2150', 4, 'I learned alot from this course and I can now make a simple program.', 0.50, 2, 4)
+
 
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
@@ -175,6 +177,7 @@ def reload_db():
 	db.session.add(se2)
 
 	db.session.add(review1)
+	db.session.add(review2)
 	
 	db.session.add(prof)
 

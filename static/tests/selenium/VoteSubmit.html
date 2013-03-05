@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://127.0.0.1:5000/" />
-<title>ReviewSubmit</title>
+<title>VoteSubmit</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ReviewSubmit</td></tr>
+<tr><td rowspan="1" colspan="3">VoteSubmit</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -22,13 +22,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=search_key</td>
-	<td>Comp4350</td>
+	<td>click</td>
+	<td>link=Comp2150 - Object Orientation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='numup0']/button</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=button.btn</td>
+	<td>//td[@id='numup0']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Courses</td>
 	<td></td>
 </tr>
 <tr>
@@ -38,22 +53,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=div.accordion-inner &gt; button.btn</td>
+	<td>css=#info_6 &gt; div.accordion-inner &gt; button.btn</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=score</td>
-	<td>4</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=description</td>
-	<td>Test comment.</td>
+	<td>verifyElementPresent</td>
+	<td>//td[@id='numdown0']/button</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=button.btn</td>
+	<td>//td[@id='numdown0']/button</td>
 	<td></td>
 </tr>
 </tbody></table>

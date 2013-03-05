@@ -10,6 +10,7 @@ class Course(db.Model):
 	cdesc = db.Column(db.Text)
 	cflty = db.Column(db.String(10))
 	reviews = db.relationship('Review', backref = 'course', lazy = 'dynamic')
+        instructor = db.relationship('Instructor', backref = 'instructor', lazy = 'dynamic')
 
 	def __init__(self, cid, cname, cdesc, cflty):
 		self.cid = cid

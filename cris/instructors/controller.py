@@ -4,7 +4,12 @@ from model import Instructor
 
 mod = Blueprint('instructors', __name__, url_prefix='/instructors')
 
-@mod.route('/_query_instructors')
+@mod.route("/")
+def index():
+	print "Instructors route worked"
+	return render_template('instructors/instructors.html')
+
+@mod.route('/_query')
 def query():
 	key = request.args.get('key', '')
 
@@ -12,5 +17,5 @@ def query():
 		results = Instructor.query.all()
 		return jsonify(instructors = [i.serialize for i in results])
 	else:
-		results = Instructor.query.filter("tname like :value").params(value = '%' + key + '%').all()
+		results = Instructor.query.filter("pname like :value").params(value = '%' + key + '%').all()
 		return jsonify(instructors = [i.serialize for i in results])

@@ -153,20 +153,11 @@ def reload_db():
 	review1 = Review('Comp4350', 4, 'This was a hard course that required a lot of background research and work.', 0.75, 3, 4)
 	review2 = Review('Comp2150', 4, 'I learned alot from this course and I can now make a simple program.', 0.50, 2, 4)
 
-
+        prof1 = Instructor('Comp4350', 'John Braico')
+        prof2 = Instructor('Comp2150', 'Mike Zapp')
+        
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
-	
-	prof = Instructor('Michael Zapp')
-	prof.add_course(se2)
-	prof.add_course(os1)
-	
-	prof2 = Instructor('John Braico')
-	prof2.add_course(se1)
-	
-	prof3 = Instructor('John Anderson')
-	prof3.add_course(ai)
-	
 	
 	db.session.add(oo)
 	db.session.add(aut)
@@ -179,7 +170,8 @@ def reload_db():
 	db.session.add(review1)
 	db.session.add(review2)
 	
-	db.session.add(prof)
+	db.session.add(prof1)
+	db.session.add(prof2)
 
 	db.session.add(admin)
 	db.session.add(test_user)

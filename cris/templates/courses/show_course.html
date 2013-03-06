@@ -84,13 +84,11 @@
 					
 					content +=   '<td id="rvote' + i + '">' + item.rvote + '</td>';
 					
-					//content += '<td id="follow' + i + '"><button class="btn btn-follow btn-mini"></button></td></tr>';
-
         				if (item.followed == true) {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + item.username + '\')">Unfollow</button></td></tr>'
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + username + '\')">Unfollow</button></td></tr>'
         				}
         				else {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + item.username + '\')">follow</button></td></tr>'
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + username + '\')">follow</button></td></tr>'
         				}
 			});
 

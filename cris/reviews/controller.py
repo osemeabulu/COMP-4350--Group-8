@@ -45,10 +45,13 @@ def query_by_course():
 		
 		if len(reviews) > 0:
 			for review in reviews:
-				review_user = User.query.get(review.username)
 				temp_dict = review.serialize
-				if len(following) > 0 and review_user in following:
-					temp_dict['followed'] = True
+				if review.username is not None:
+					review_user = User.query.get(review.username)
+					if len(following) > 0 and review_user in following:
+						temp_dict['followed'] = True
+					else:					
+						temp_dict['followed'] = False
 				else:
 					temp_dict['followed'] = False
 				results.append(temp_dict)

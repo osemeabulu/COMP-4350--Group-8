@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<h5>Search Instructors</h5>
+	<form id="target" class="well form-search">  
+        <input type="text" class="input-large search-query" id="search_key">
+        <button type="submit" class="btn">Search</button>
+    </form>
+    <div class="well" id="results">
+    <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+    
+	<script>
+	    //This is our callback function for processing instructor data
+	    function processInstructors(data) {
+	        if (data.instructors.length != 0) {
+	            var content = '';
+	            $.each(data.instructors, function (i, item) {
+	                content += '<a href="/instructors/' + item.id +'">' + item.pname + '</a><br/>'
+	            });
+	            $('#results').empty().append(content);
+	        }
+	    };
+
+	    //sends a request for a list of instructors
+	    function requestInstructors() {
+	        getObjects($SCRIPT_ROOT + "{{ url_for('instructors.query') }}",
+						$('input[id="search_key"]').val(),
+						processInstructors);
+
+	        return false;
+	    };
+
+	    //calls this when document is ready
+	    $(document).ready(requestInstructors);
+
+	    //updates the list on keypress
+	    $(document).ready(function () {
+	        $('#target').keyup(function () {
+	            getObjects($SCRIPT_ROOT + "{{ url_for('instructors.query') }}",
+							$('input[id="search_key"]').val(),
+							processInstructors);
+	        });
+	    });
+
+	    //requests instructors on submit
+	    $('#target').submit(requestInstructors);
+                
+    </script>
+    </div>
+   <div id="container">
+   </div>
+
+{% endblock content %}

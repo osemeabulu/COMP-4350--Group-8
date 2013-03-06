@@ -3,14 +3,14 @@ asyncTest("getComp4350", 1,
 	function()
 	{	
 		var cid = "Comp4350";
-		var expected = 0.85;
+		var expected = 4;
 		
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/reviews/_query_by_course",
 					cid,
 					function(data)
 					{
-						equal(data.reviews[0].rscr, 0.85, "We have successfully received the one review for Comp4350");
+						equal(data.reviews[0].rscr, expected, "We have successfully received the one review for Comp4350");
 						start();
 					});
 	}
@@ -76,8 +76,8 @@ asyncTest("CalculateVotes", 3,
 			
 		}, function(data) {
 			equal(data.score, 0.25, "Successfully calculated the vote ratio");	
-			equal(data.up, 1, "Successfully got our upvotes");
-			equal(data.down, 4, "Successfully got our downvotes");
+			equal(data.up, upvote, "Successfully got our upvotes");
+			equal(data.down, downvote, "Successfully got our downvotes");
 			start();
 			
 		});	

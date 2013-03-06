@@ -21,14 +21,13 @@
 					content += '<div class = "accordion-group">'
 					content += '<div class="accordion-heading">'
 					content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
-					content += item.cid + ' - ' + item.cname + ' - Score: ' + item.avg + '/5</a></div>'
+					content += item.cid + ' - ' + item.cname + ' - Score: ' + item.avg + '/5</a>'
+					content += '<div class="progress"><div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div></div></div>'
 					content += '<div id="info_' + i + '" class="accordion-body collapse">'
 					content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
 					content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
 
-					//idea: progress bar for score?
-					//content += '<div class="progress">' + item.avg + '/5 - ' + item.cid + ' - ' + item.cname + '<div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div>'
-					content += '<div class="progress"><div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div>'
+	
 				});
 				$('#results').empty().append(content);
 			}

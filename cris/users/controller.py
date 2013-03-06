@@ -67,7 +67,6 @@ def follow_user():
 	else:
 		error = 'Please log in if you wish to follow this user.'
 		flash(error)
-	print "FOLLOW!!!!! {0}".format(result)
 	return jsonify(followed = result) 
 
 @mod.route('/_unfollow_user', methods = ['GET', 'POST'])
@@ -90,7 +89,6 @@ def unfollow_user():
 		error = 'Please log in if you wish to unfollow this user.'
 		flash(error)
 
-	print "FOLLOW!!!!! {0}".format(result)
 	return jsonify(unfollowed = result)
 
 @mod.route('/_query_followers')

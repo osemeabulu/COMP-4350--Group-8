@@ -23,7 +23,7 @@ class User(db.Model):
 		self.admin = admin
 
     	def follow(self, user):
-        	if self is not None:
+		if self is not None:
 			if not self.check_following(user):
             			self.followed.append(user)
 				db.session.add(self)
@@ -42,6 +42,9 @@ class User(db.Model):
 
     	def check_following(self, user):
         	return self.followed.filter(followers.c.followed_id == user.username).count() > 0
+
+	def get_followers(self):
+		return self.followed.filter(followers.c.follower_id == self.username).all()
 
 	def __repr__(self):
 		return '<User %r>' % self.username

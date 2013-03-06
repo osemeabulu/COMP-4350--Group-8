@@ -35,26 +35,26 @@ def register():
 
 @mod.route('/_check_follower', methods = ['GET'])
 def check_follower():
-	result = False
+	result = []
+	temp_dict = {}
 	if 'username' in session:
 		username = session['username']
 		if request is not None:
-			user_followed = request.args.get('follow', '')
+			user_followed = request.args.get('follower', '')
 			followed = User.query.get(user_followed)
 			follower = User.query.get(username)
 			if follower and followed is not None:
-				result = follower.check_following(followed)
-
+				temp_dict['followed'] = (follower.check_following(followed) > 0)
+			result.append(temp_dict)
 	return jsonify(followed = result) 
 
-@mod.route('/_follow_user', methods = ['GET'])
+@mod.route('/_follow_user', methods = ['GET', 'POST'])
 def follow_user():
 	result = False
 	if 'username' in session:
 		username = session['username']
 		if request is not None:
-			user_followed = request.args.get('follow', '')
-			print user_followed
+			user_followed = request.args.get('key', '')
 			followed = User.query.get(user_followed)
 			follower = User.query.get(username)
 			if follower and followed is not None:
@@ -67,16 +67,16 @@ def follow_user():
 	else:
 		error = 'Please log in if you wish to follow this user.'
 		flash(error)
-
+	print "FOLLOW!!!!! {0}".format(result)
 	return jsonify(followed = result) 
 
-@mod.route('/_unfollow_user', methods = ['GET'])
+@mod.route('/_unfollow_user', methods = ['GET', 'POST'])
 def unfollow_user():
 	result = False
 	if 'username' in session:
 		username = session['username']
 		if request is not None:
-			user_followed = request.args.get('follow', '')
+			user_followed = request.args.get('key', '')
 			followed = User.query.get(user_followed)
 			follower = User.query.get(username)
 			if follower and followed is not None:
@@ -90,7 +90,22 @@ def unfollow_user():
 		error = 'Please log in if you wish to unfollow this user.'
 		flash(error)
 
+	print "FOLLOW!!!!! {0}".format(result)
 	return jsonify(unfollowed = result)
+
+@mod.route('/_query_followers')
+def query_followers():
+	result = []
+	username = request.args.get('user', '')
+	if username is not None:
+		print username
+		user = User.query.get(username)
+		if user is not None:
+			followers = user.get_followers()
+			for follower in followers:
+				result.append(follower.serialize)
+	return jsonify(followed = result)		
+	
 
 @mod.route('/<string:user>')
 def show_user(user):

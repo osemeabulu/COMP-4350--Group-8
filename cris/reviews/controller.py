@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, render_template, request, flash, session
 from cris import db
 from model import Review
 from decimal import *
+from cris.users.controller import check_follower
+from cris.users.model import User
 
 mod = Blueprint('reviews', __name__, url_prefix='/reviews')
 
@@ -31,16 +33,45 @@ def submit_review():
 
 @mod.route('/_query_by_course')
 def query_by_course():
-	key = request.args.get('key', '')
+	results = []
+	temp_dict = {}
 
-	results = Review.query.filter_by(cid=key).all()
-	return jsonify(reviews = [i.serialize for i in results])
+	key = request.args.get('key', '')
+	reviews = Review.query.filter_by(cid=key).all()
+	
+	if 'username' in session:
+		curr_user = User.query.get(session['username'])
+		following = curr_user.get_followers()
+		
+		if len(reviews) > 0:
+			for review in reviews:
+				review_user = User.query.get(review.username)
+				temp_dict = review.serialize
+				if len(following) > 0 and review_user in following:
+					temp_dict['followed'] = True
+				else:
+					temp_dict['followed'] = False
+				results.append(temp_dict)
+ 	 		#first sort by the review rating tuple
+			results = sorted(results, key=lambda k: k['rvote'], reverse=True)
+			#second sort by the review followed tuple
+			if len(following) > 0:
+				results = sorted(results, key=lambda k: k['followed'], reverse=True)			
+	else:
+		if len(reviews) > 0:
+			for review in reviews:
+				temp_dict = review.serialize
+				temp_dict['followed'] = False
+				results.append(temp_dict)
+ 	 		#only sort by the review rating tuple
+			results = sorted(results, key=lambda k: k['rvote'], reverse=True)
+	return jsonify(reviews = results)
 
 @mod.route('/_query_by_user')
 def query_by_user():
 	key = request.args.get('key', '')
-
 	results = Review.query.filter_by(username=key).all()
+
 	return jsonify(reviews = [i.serialize for i in results])
 	
 @mod.route('/_vote')

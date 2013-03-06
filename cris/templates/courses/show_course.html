@@ -65,8 +65,7 @@
 			var content = '';
 			var nil = null;
 			
-
-			content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like</th><th>Dislike</th><th>Vote Ratio</th></tr></thead><tbody>';
+			content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like</th><th>Dislike</th><th>Vote Ratio</th><th></th></tr></thead><tbody>';
 			
 			$.each(data.reviews, function(i, item)
 			{
@@ -85,9 +84,14 @@
 					
 					content +=   '<td id="rvote' + i + '">' + item.rvote + '</td>';
 					
-					content += '<td id="follow' + i + '"><button class="btn btn-follow btn-mini"></button></td></tr>';
+					//content += '<td id="follow' + i + '"><button class="btn btn-follow btn-mini"></button></td></tr>';
 
-					check_follower(username, i)
+        				if (item.followed == true) {
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + item.username + '\')">Unfollow</button></td></tr>'
+        				}
+        				else {
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + item.username + '\')">follow</button></td></tr>'
+        				}
 			});
 
 			content+='</tbody></table>';
@@ -101,19 +105,20 @@
 		{
 			getObjects(	$SCRIPT_ROOT + "{{ url_for('reviews.query_by_course') }}",
 						"{{ course.cid }}",
-						processReviews );
+						processReviews);
 						
 			return false;
 		}
-		
+
+	
 		//grabs the review fields, creates and object and sends it with sendObjects.
 		function sendReview()
 		{
 			var review = new Object();
 			review.cid = "{{ course.cid }}"
-		    review.rscr = $('select[id="score"]').val()
-		    review.rdesc = $('textarea[id="description"]').val()
-		    review.rvote = 0
+		    	review.rscr = $('select[id="score"]').val()
+		    	review.rdesc = $('textarea[id="description"]').val()
+		    	review.rvote = 0
 			review.upvote = 0
 			review.downvote = 0
 			
@@ -127,59 +132,22 @@
 
 		}    
 		
-		function follow_user(user, i)
-		{
-			$.getJSON($SCRIPT_ROOT + "{{ url_for('users.follow_user')}}",
-			{
-				follow: user,
-				key: i
-				
-			}, function(data) {
-        		if(data.followed == true){
-				//use reload instead to update page
-        			//$('#follow'+ i).html('<button class="btn btn-follow btn-mini" onclick="unfollow_user(username,' + i + ')">unfollow</button></td></tr>')
-        		}
-			location.reload(false)
-        	});
-
+		function follow_user(username)
+		{	
+			getObjects( $SCRIPT_ROOT + "{{ url_for('users.follow_user') }}",
+						 username,
+						 update);			
 			return false;
 		}
 		
-		function unfollow_user(user, i)
+		function unfollow_user(username)
 		{
-			$.getJSON($SCRIPT_ROOT + "{{ url_for('users.unfollow_user')}}",
-			{
-				follow: user,
-				key: i
-				
-			}, function(data) {
-        		if(data.unfollowed == true){
-				//user reload instead to update page
-        			//$('#follow'+ i).html('<button class="btn btn-follow btn-mini" onclick="follow_user(username,' + i + ')">Follow</button></td></tr>')
-        		}
-			location.reload(false)
-        	});
+			getObjects( $SCRIPT_ROOT + "{{ url_for('users.unfollow_user') }}",
+						 username,
+						 update);			
 			return false;
 		}
 
-		function check_follower(user, i)
-		{
-			result = '';
-			$.getJSON($SCRIPT_ROOT + "{{ url_for('users.check_follower')}}",
-			{
-				follow: user,
-				key: i,
-			}, function(data) {
-        		if(data.followed == true){
-        			$('#follow'+ i).html('<button class="btn btn-follow btn-mini" onclick="unfollow_user(username,' + i + ')">Unfollow</button></td></tr>')
-        		}
-        		else{
-        			$('#follow'+ i).html('<button class="btn btn-follow btn-mini" onclick="follow_user(username,' + i + ')">follow</button></td></tr>')
-        		}
-        	});
-			return result;
-		}
-		
 		function vote_reviews(i, upvote, downvote, cid)
 		{
 			if(upvote != null){

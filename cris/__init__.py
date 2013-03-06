@@ -154,7 +154,7 @@ def reload_db():
 
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
-	
+
 	prof = Instructor('Michael Zapp')
 	prof.add_course(se2)
 	prof.add_course(os1)

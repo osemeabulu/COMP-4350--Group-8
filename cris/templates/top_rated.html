@@ -28,6 +28,7 @@
 
 					//idea: progress bar for score?
 					//content += '<div class="progress">' + item.avg + '/5 - ' + item.cid + ' - ' + item.cname + '<div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div>'
+					content += '<div class="progress"><div class="bar" style="width:' + ((item.avg/5)*100) + '%"></div>'
 				});
 				$('#results').empty().append(content);
 			}

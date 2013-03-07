@@ -1,24 +1,28 @@
 from cris.extensions import db    
+from cris.courses.model import Course
 
 class Instructor(db.Model):
 	__tablename__ = 'instructors_instructor'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	cid = db.Column(db.String(10), db.ForeignKey('courses_course.cid'))
-	pname = db.Column(db.String(20))
+	pname = db.Column(db.String(20), primary_key=True)
+	courses = db.relationship('Course', backref = 'course', lazy = 'dynamic')
+
+        def teach(self, course):
+                if self is not None:
+                        self.courses.append(course)
+                        db.session.add(self)
+                        db.session.commit()
+                        return self
+                return None
 	
-
-
-	def __init__(self, cid, pname):
+	def __init__(self, pname):
 		self.pname = pname
 		
-
 	def __repr__(self):
 		return '<Instructor %r>' % self.pname
 
 	@property
 	def serialize(self):
 		return {
-                        'id'    : self.id,
 			'pname'	: self.pname
 		}
 

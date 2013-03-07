@@ -14,7 +14,7 @@
 	        if (data.instructors.length != 0) {
 	            var content = '';
 	            $.each(data.instructors, function (i, item) {
-	                content += '<a href="/instructors/' + item.id +'">' + item.pname + '</a><br/>'
+	                content += '<a href="/instructors/' + item.pname +'">' + item.pname + '</a><br/>'
 	            });
 	            $('#results').empty().append(content);
 	        }

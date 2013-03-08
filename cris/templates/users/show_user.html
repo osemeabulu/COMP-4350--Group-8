@@ -5,15 +5,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             x</button>
         <h3 id="modalLabel">
-            {{user.username}}'s Followers:
-        </h3>
+            {{user.username}}'s followers:
+        </h3>    
     </div>
     <div class="modal-body">
-        <div class="well">
-            <h2>
-                Placeholder
-            </h2>
-        </div>
+	<div id="followers"></div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">
@@ -40,8 +36,9 @@
     <div class="span4">
         <h1>
             <div style="text-align: center;">
-                <a href="#showFollowers" data-toggle="modal">X Followers</a>
-            </div>
+		<a href="#showFollowers" onclick="getFollowers()" class="btn" data-toggle="modal">View Followers</a>
+                <!--<button id="#showFollowers" type="button" onclick="getFollowers()" class="btn" data-toggle="modal">Followers</button>-->
+	    </div>
         </h1>
     </div>
 </div>
@@ -68,6 +65,19 @@
         $('#results').empty().append(content);
     }
 
+	function processFollowers(data) {
+		var content = '';
+		var nil = null;
+		
+		content += '<table class="table table-bordered"><thead></thead><tbody>';
+		$.each(data.followed, function(i, item) {
+			content += '<tr><td><a href="/users/' + item.username + '">' + item.username + '</td></tr>';
+		});
+		content += '</tbody></table>';
+
+		$('#followers').empty().append(content);
+	}
+
     //call the getObjects method with the reviews.query url, course id, and a function
     //callback to processReviews
     function getReviews() {
@@ -78,8 +88,22 @@
         return false;
     }
 
+	function getFollowers() {
+		$.getJSON($SCRIPT_ROOT + "{{ url_for('users.query_followers')}}",
+		{
+			user: "{{user.username}}"
+		}, function(data) {
+			processFollowers(data)
+		});
+
+		return false;
+	}
+
     //Get course reviews when page is loaded
     $(window).load(getReviews);
+	
+	//get the followers when the followers button is pressed
+	//$('#showFollowers').submit(getFollowers);
 
 </script>
 {% endblock %} 

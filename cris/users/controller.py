@@ -96,10 +96,9 @@ def query_followers():
 	result = []
 	username = request.args.get('user', '')
 	if username is not None:
-		print username
 		user = User.query.get(username)
 		if user is not None:
-			followers = user.get_followers()
+			followers = user.get_followed()
 			for follower in followers:
 				result.append(follower.serialize)
 	return jsonify(followed = result)		

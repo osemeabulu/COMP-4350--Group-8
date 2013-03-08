@@ -158,7 +158,7 @@ def reload_db():
         
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')
-	
+
 	db.session.add(oo)
 	db.session.add(aut)
 	db.session.add(aa)
@@ -176,5 +176,5 @@ def reload_db():
 	db.session.add(admin)
 	db.session.add(test_user)
 
-
 	db.session.commit()
+	

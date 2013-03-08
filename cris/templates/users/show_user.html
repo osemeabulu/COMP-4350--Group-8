@@ -20,9 +20,8 @@
     <div class="span6">
         <div class="row">
             <div class="span1" style="padding-top: 15px;">
-                <button class="btn btn-success btn-mini">
-                    <i class="icon-white icon-heart"></i>Follow
-                </button>
+		<div id="follow">
+		</div>
             </div>
             <div class="span3">
                 <h1>
@@ -51,6 +50,10 @@
 </div>
 <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 <script>
+	function update(data)
+        {
+		location.reload();
+        }
 
     //processes the Reviews received from getObjects call to getObjects
     //call to get all reviews from specific author
@@ -81,12 +84,35 @@
     //call the getObjects method with the reviews.query url, course id, and a function
     //callback to processReviews
     function getReviews() {
-        getObjects($SCRIPT_ROOT + "{{ url_for('reviews.query_by_user') }}",
+	getObjects($SCRIPT_ROOT + "{{ url_for('reviews.query_by_user') }}",
 						"{{ user.username }}",
 						processReviews);
 
         return false;
     }
+
+	function set_following(data)
+	{
+		var user = "{{user.username}}"
+               	var content = '<button id="btn-follow" class="btn btn-success btn-mini" onclick="follow_user(\'' + user + '\')"><nobr><i class="icon-white icon-heart"></i>Follow</nobr></button>';
+		$.each(data.followed, function(i , item)
+		{
+			if(item.followed == true){
+               			content = '<button id="btn-follow" class="btn btn-success btn-mini" onclick="unfollow_user(\'' + user + '\')"><nobr><i class="icon-white icon-heart"></i>Unfollow</nobr></button>';
+			}	
+		});
+		$('#follow').empty().append(content);
+		return false;
+	}
+
+	function check_following()
+	{
+		var user = "{{user.username}}"
+		getObjects($SCRIPT_ROOT + "{{ url_for('users.check_follower')}}",
+		 				user,
+						set_following);
+		return false;
+	}
 
 	function getFollowers() {
 		$.getJSON($SCRIPT_ROOT + "{{ url_for('users.query_followers')}}",
@@ -99,11 +125,25 @@
 		return false;
 	}
 
-    //Get course reviews when page is loaded
-    $(window).load(getReviews);
-	
-	//get the followers when the followers button is pressed
-	//$('#showFollowers').submit(getFollowers);
+	function follow_user(username)
+	{
+		getObjects( $SCRIPT_ROOT + "{{ url_for('users.follow_user') }}",
+						username,
+						update);
+		return false;
+	}
+
+	function unfollow_user(username)
+	{
+		getObjects( $SCRIPT_ROOT + "{{ url_for('users.unfollow_user') }}",
+						username,
+						update);
+		return false;
+	}
+
+   	//Get course reviews when page is loaded
+    	$(window).load(getReviews);
+	$(window).load(check_following);
 
 </script>
 {% endblock %} 

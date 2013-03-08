@@ -40,12 +40,12 @@ def check_follower():
 	if 'username' in session:
 		username = session['username']
 		if request is not None:
-			user_followed = request.args.get('follower', '')
+			user_followed = request.args.get('key', '')
 			followed = User.query.get(user_followed)
 			follower = User.query.get(username)
 			if follower and followed is not None:
-				temp_dict['followed'] = (follower.check_following(followed) > 0)
-			result.append(temp_dict)
+				temp_dict['followed'] = follower.check_following(followed)
+				result.append(temp_dict)
 	return jsonify(followed = result) 
 
 @mod.route('/_follow_user', methods = ['GET', 'POST'])

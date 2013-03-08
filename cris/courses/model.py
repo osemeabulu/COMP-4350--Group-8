@@ -10,7 +10,7 @@ class Course(db.Model):
 	cdesc = db.Column(db.Text)
 	cflty = db.Column(db.String(10))
 	reviews = db.relationship('Review', backref = 'course', lazy = 'dynamic')
-        instructor = db.relationship('Instructor', backref = 'instructor', lazy = 'dynamic')
+        instructor = db.Column(db.String(20), db.ForeignKey('instructors_instructor.pname'))
 
 	def __init__(self, cid, cname, cdesc, cflty):
 		self.cid = cid
@@ -24,10 +24,11 @@ class Course(db.Model):
 	@property
 	def serialize(self):
 		return {
-			'cid'	: self.cid,
-			'cname'	: self.cname,
-			'cdesc' : self.cdesc,
-			'cflty'	: self.cflty
+			'cid'	        : self.cid,
+			'cname'	        : self.cname,
+			'cdesc'         : self.cdesc,
+			'cflty'	        : self.cflty,
+                        'instructor'    :self.instructor
 		}
 	
 	def avg_rating(self):

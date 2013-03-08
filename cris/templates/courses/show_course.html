@@ -76,20 +76,20 @@
 						username = item.username;
 					}
 
-					content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '">' + item.upvote; 
+					content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '"><nobr>' + item.upvote; 
 					
-					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></td>\n';
+					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></nobr></td>\n';
 
 
-					content +=	'<td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-down"></i></button></td>';
+					content +=	'<nobr><td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-down"></i></button></nobr></td>';
 					
 					content +=   '<td id="rvote' + i + '">' + item.rvote + '</td>';
 					
         				if (item.followed == true) {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + username + '\')">Unfollow</button></td></tr>'
-        				}
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + username + '\')"><nobr><i class ="icon-white icon-remove"></i>Unfollow</nobr></button></td></tr>'
+					}
         				else {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + username + '\')">follow</button></td></tr>'
+        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + username + '\')"><nobr><i class="icon-white icon-heart"></i>Follow</nobr></button></td></tr>'
         				}
 			});
 

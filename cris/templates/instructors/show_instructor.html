@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="hero-unit">
+		<h2>{{ instructor.pname }}</h2>
+
+		<p>Courses taught: </p>
+		<div class="accordion" id="results">
+		{% for course in instructor.courses %}
+			<div class = "accordion-group"><div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href="#info_{{course.cid}}">{{course.cid}} - {{course.cname}}</a>
+			
+			</div>
+			<div id="info_{{course.cid}}" class="accordion-body collapse">
+				<div class= "accordion-inner"<i> {{course.cdesc }} </i><br />
+					<button class="btn" type="button" onclick="window.location.href= '{{url_for('courses.show_course', course= course.cid, )}}'">More Info</button>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

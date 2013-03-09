@@ -8,7 +8,7 @@ from cris.courses.model import Course
 from cris.reviews.model import Review 
 from cris.users.model import User
 import json
-
+from flask import jsonify
 
 class BlueprintTestCase(unittest.TestCase):
 
@@ -45,12 +45,12 @@ class BlueprintTestCase(unittest.TestCase):
     	#list of averages to assert with
 		avglist = [5, 4]
     	
-    	#test to make sure url opens the specified course description page
+    	#test to ensure url opens the specified course description page
 		rv = self.app.get('/courses/Comp2150')
 		self.assertEquals(rv.status_code, 200)
 		
 		#test to ensure the querying partial word returns a result
-		query = 'comp'	
+		query = 'comp3350'	
 		rv = self.app.get('/courses/_query', data={'key': query})
 		d = json.loads(rv.data)	
 		course = d['courses'][0]['cid']		
@@ -61,37 +61,28 @@ class BlueprintTestCase(unittest.TestCase):
 		courses = d['courses']	
 		count = 0;
 		
-		#tests that the averages from server equals the expected averages
+		#tests to ensure that the response from server equals the expected averages
 		for course in courses:
 			self.assertEquals(course['avg'], avglist[count])
 			count+=1
 
 		
-    '''def test_review_bp(self):
-		r = Review('Comp4350', 1, 'this is another test review', 0.75, 3, 4, 'user1')
-		db.session.add(r)
+    def test_review_bp(self):
+		r1 = Review('Comp4350', 1, 'this is another test review', 0.75, 3, 4, 'user1')
+		db.session.add(r1)
 		db.session.commit()
-		
-		rv = self.app.get('reviews/_query_by_user')
-		self.assertEquals(rv.status_code, 200)
-		
-		rv = self.app.get('reviews/_query_by_course')
-		self.assertEquals(rv.status_code, 200)
-		
-		rv = self.app.post('reviews/_submit_review')
-		self.assertEquals(rv.status_code, 200)
-		
-		rv = self.app.post('reviews/_submit_review', data={
+				
+		rv = self.app.post('reviews/_submit_review', content_type='application/json', data = json.dumps({
 		'cid':'Comp3350',
 		'rscr': '4',
 		'rdesc': 'this is a test',
 		'rvote': '3',
 		'upvote': '0',
-		'downvote': '0'}, follow_redirects=True)
+		'downvote': '0'}))
 		
-		self.assertEquals(rv.status_code, 200)'''
-
-        
+		#tests that server responses with a review page
+		self.assertEquals(rv.status_code, 200)
+		       
         
 if __name__ == '__main__':
     unittest.main()

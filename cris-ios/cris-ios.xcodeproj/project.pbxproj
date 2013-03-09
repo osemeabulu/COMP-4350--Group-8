@@ -29,6 +29,7 @@
 		026D281F16EA8C3400BAFB8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EC16EA8C3300BAFB8F /* Foundation.framework */; };
 		026D282716EA8C3400BAFB8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 026D282516EA8C3400BAFB8F /* InfoPlist.strings */; };
 		026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 026D282916EA8C3400BAFB8F /* cris_iosTests.m */; };
+		B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		026D282616EA8C3400BAFB8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		026D282816EA8C3400BAFB8F /* cris_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cris_iosTests.h; sourceTree = "<group>"; };
 		026D282916EA8C3400BAFB8F /* cris_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cris_iosTests.m; sourceTree = "<group>"; };
+		B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesTableViewController.h; sourceTree = "<group>"; };
+		B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 			children = (
 				026D27F916EA8C3300BAFB8F /* AppDelegate.h */,
 				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
+				B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */,
+				B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */,
 				026D280216EA8C3400BAFB8F /* MainStoryboard_iPhone.storyboard */,
 				026D280516EA8C3400BAFB8F /* MainStoryboard_iPad.storyboard */,
 				026D280816EA8C3400BAFB8F /* FirstViewController.h */,
@@ -299,6 +304,7 @@
 				026D27FB16EA8C3300BAFB8F /* AppDelegate.m in Sources */,
 				026D280A16EA8C3400BAFB8F /* FirstViewController.m in Sources */,
 				026D281116EA8C3400BAFB8F /* SecondViewController.m in Sources */,
+				B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +495,7 @@
 				026D282F16EA8C3400BAFB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		026D283016EA8C3400BAFB8F /* Build configuration list for PBXNativeTarget "cris-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +504,7 @@
 				026D283216EA8C3400BAFB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

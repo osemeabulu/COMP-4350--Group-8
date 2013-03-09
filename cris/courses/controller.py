@@ -5,12 +5,12 @@ mod = Blueprint('courses', __name__, url_prefix='/courses')
 
 @mod.route("/")
 def index():
-	print "Courses route worked"
+	#print "Courses route worked"
 	return render_template('courses/courses.html')
 
 @mod.route('/<string:course>')
 def show_course(course):
-  print course
+  #print course
   result = Course.query.filter_by(cid=course).first()
   
   if result:
@@ -18,9 +18,10 @@ def show_course(course):
   else:
     abort(404)
 
-@mod.route('/top_rated')
-def top_index():
-	return render_template('courses/top_rated.html')
+#already have a top rated route without courses prefix
+#@mod.route('/top_rated')
+#def top_index():
+#	return render_template('courses/top_rated.html')
 
 @mod.route('/_top_query')
 def top_query():

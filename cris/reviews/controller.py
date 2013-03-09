@@ -86,9 +86,7 @@ def calculate_vote():
 	
 	r = Review.query.filter_by(cid=course).all()
 	review = r.pop(int(num))
-	
-	newvote = 0;
-	
+		
 	if upvote != 'null':
 		review.upvote = upvote
 		db.session.commit()

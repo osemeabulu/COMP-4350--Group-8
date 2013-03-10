@@ -77,32 +77,39 @@ def query_by_user():
 
 	return jsonify(reviews = [i.serialize for i in results])
 	
-@mod.route('/_vote')
+@mod.route('/_vote', methods=['POST'])
 def calculate_vote():
-	upvote = request.args.get('uvote', '')
-	downvote = request.args.get('dvote', '')
-	course = request.args.get('course', '')
-	num = request.args.get('key', '')
 	
-	r = Review.query.filter_by(cid=course).all()
-	review = r.pop(int(num))
+	if request.method == 'POST':
+		data = request.json		
+		print data
 		
-	if upvote != 'null':
-		review.upvote = upvote
-		db.session.commit()
+		course = request.json['cid']
+		num = request.json['index']
+		upvote = request.json['upvote']
+		downvote = request.json['downvote']
+		
+		r = Review.query.filter_by(cid=course).all()
+		review = r.pop(int(num))
+		
+		if upvote is not None:
+			upvote+=1
+			review.upvote = upvote
+			db.session.commit()
 
-	else:
-		review.downvote = downvote
-		db.session.commit()
+		else:
+			downvote+=1
+			review.downvote = downvote
+			db.session.commit()
 	
-	getcontext().prec = 2
-	if review.downvote:
-		review.rvote = Decimal(review.upvote)/Decimal(review.downvote)
-	else:
-		review.rvote = review.upvote
+		getcontext().prec = 2
+		if review.downvote:
+			review.rvote = Decimal(review.upvote)/Decimal(review.downvote)
+		else:
+			review.rvote = review.upvote
 				
-	db.session.commit()
+		db.session.commit()
 		
-	return jsonify(score=review.rvote, up=review.upvote, down=review.downvote)
+		return jsonify(score=review.rvote, up=review.upvote, down=review.downvote, i=num)
 	
 	

@@ -97,7 +97,14 @@
 
 			$('#results').empty().append(content);
 		}
-	
+		
+		function processVotes(data) {
+        		
+			$('#numup'+ data.i).html(data.up + '<button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>');
+			$('#numdown' + data.i).html(data.down + '<button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></i></button>');
+			$('#rvote' + data.i).html(data.score );
+        }
+        
 		//call the getObjects method with the reviews.query url, course id, and a function
 		//callback to processReviews
 		function getReviews()
@@ -149,7 +156,18 @@
 
 		function vote_reviews(i, upvote, downvote, cid)
 		{
-			if(upvote != null){
+			var vote = new Object();
+			vote.index = i
+			vote.upvote = upvote
+			vote.downvote = downvote
+			vote.cid = cid
+			
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.calculate_vote') }}",
+						 vote,
+						 processVotes);
+			
+			return false;
+			/*if(upvote != null){
 				upvote++;
 			}
 			else{
@@ -170,7 +188,7 @@
         		$('#rvote' + i).html(data.score );
         	});
 			
-			return false;
+			return false;*/
 			
 		}
 		

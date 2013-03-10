@@ -22,7 +22,7 @@ def create_app(blueprints = None, config = None):
 	if config is None:
 		config = DevConfig
 
-	application = Flask(__name__, static_folder='../static')
+	application = Flask(__name__, static_folder='static')
 
 	configure_app(application, config)	
 	configure_extensions(application, config)	

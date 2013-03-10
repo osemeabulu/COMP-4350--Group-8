@@ -1,0 +1,6 @@
+[
+	{"Namespace": "aws:elasticbeanstalk:container:python:staticfiles",
+	"OptionName": "/static/",
+	"Value": "static/"}
+]
+

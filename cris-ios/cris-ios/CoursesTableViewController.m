@@ -2,7 +2,7 @@
 //  CoursesTableViewController.m
 //  cris-ios
 //
-//  Created by Finn Wake on 2013-03-09.
+//  Created by Rory Finnegan on 2013-03-09.
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
@@ -10,13 +10,15 @@
 
 @interface CoursesTableViewController ()
 
-@property(strong)NSArray *courses;
+@property (nonatomic, strong) NSMutableArray *courses;
+@property (nonatomic, strong) NSMutableData *responseData;
 
 @end
 
 @implementation CoursesTableViewController
 
 @synthesize courses;
+@synthesize responseData = _responseData;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,13 +31,19 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    NSLog(@"viewdidload");
+    self.courses = [NSMutableArray array];
+    self.responseData = [NSMutableData data];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/courses/_query?key="]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
+    [super viewDidLoad];
+    /*
     self.courses = @[@"Comp4350 - Software Engineering 2",
                      @"Comp3430 - Operating Systems 1",
                      @"Comp4380 - Database Implementation",
                      @"Comp2150 - Object Orientation"];
-
+     */
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -130,4 +138,42 @@
      */
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"didReceiveResponse");
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError");
+    NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"connectionDidFinishLoading");
+    NSLog(@"Succeeded! Received %d bytes of data", [self.responseData length]);
+    
+    //convert to JSON
+    NSError *myError = nil;
+    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+    
+    NSArray *jsonCourses = [res objectForKey:@"courses"];
+    
+    // get each courses attributes and place them into the array of strings
+    for (NSDictionary *result in jsonCourses)
+    {
+        NSString *course = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"cid"], [result objectForKey:@"cname"]];
+        
+        [self.courses addObject:course];
+    }
+    
+    [self.tableView reloadData];
+}
 @end

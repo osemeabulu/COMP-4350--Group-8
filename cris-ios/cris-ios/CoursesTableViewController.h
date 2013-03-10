@@ -2,7 +2,7 @@
 //  CoursesTableViewController.h
 //  cris-ios
 //
-//  Created by Finn Wake on 2013-03-09.
+//  Created by Rory Finnegan on 2013-03-09.
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 

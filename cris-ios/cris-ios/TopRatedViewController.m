@@ -1,22 +1,18 @@
 //
-//  CoursesTableViewController.m
+//  TopRatedViewController.m
 //  cris-ios
 //
-//  Created by Finn Wake on 2013-03-09.
+//  Created by Osemekhian Abulu on 2013-03-09.
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
-#import "CoursesTableViewController.h"
+#import "TopRatedViewController.h"
 
-@interface CoursesTableViewController ()
-
-@property(strong)NSArray *courses;
+@interface TopRatedViewController ()
 
 @end
 
-@implementation CoursesTableViewController
-
-@synthesize courses;
+@implementation TopRatedViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,11 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.courses = @[@"Comp4350 - Software Engineering 2",
-                     @"Comp3430 - Operating Systems 1",
-                     @"Comp4380 - Database Implementation",
-                     @"Comp2150 - Object Orientation"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -53,12 +44,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.courses count];
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,14 +61,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
-
-    
-    cell.textLabel.text = [self.courses objectAtIndex:indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+    // Configure the cell...
     
     return cell;
 }

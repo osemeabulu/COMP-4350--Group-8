@@ -5,15 +5,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             x</button>
         <h3 id="modalLabel">
-            {{user.username}}'s Followers:
-        </h3>
+            {{user.username}}'s followers:
+        </h3>    
     </div>
     <div class="modal-body">
-        <div class="well">
-            <h2>
-                Placeholder
-            </h2>
-        </div>
+	<div id="followers"></div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">
@@ -24,9 +20,8 @@
     <div class="span6">
         <div class="row">
             <div class="span1" style="padding-top: 15px;">
-                <button class="btn btn-success btn-mini">
-                    <i class="icon-white icon-heart"></i>Follow
-                </button>
+		<div id="follow">
+		</div>
             </div>
             <div class="span3">
                 <h1>
@@ -40,8 +35,9 @@
     <div class="span4">
         <h1>
             <div style="text-align: center;">
-                <a href="#showFollowers" data-toggle="modal">X Followers</a>
-            </div>
+		<a href="#showFollowers" onclick="getFollowers()" class="btn" data-toggle="modal">View Followers</a>
+                <!--<button id="#showFollowers" type="button" onclick="getFollowers()" class="btn" data-toggle="modal">Followers</button>-->
+	    </div>
         </h1>
     </div>
 </div>
@@ -54,6 +50,10 @@
 </div>
 <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 <script>
+	function update(data)
+        {
+		location.reload();
+        }
 
     //processes the Reviews received from getObjects call to getObjects
     //call to get all reviews from specific author
@@ -68,18 +68,82 @@
         $('#results').empty().append(content);
     }
 
+	function processFollowers(data) {
+		var content = '';
+		var nil = null;
+		
+		content += '<table class="table table-bordered"><thead></thead><tbody>';
+		$.each(data.followed, function(i, item) {
+			content += '<tr><td><a href="/users/' + item.username + '">' + item.username + '</td></tr>';
+		});
+		content += '</tbody></table>';
+
+		$('#followers').empty().append(content);
+	}
+
     //call the getObjects method with the reviews.query url, course id, and a function
     //callback to processReviews
     function getReviews() {
-        getObjects($SCRIPT_ROOT + "{{ url_for('reviews.query_by_user') }}",
+	getObjects($SCRIPT_ROOT + "{{ url_for('reviews.query_by_user') }}",
 						"{{ user.username }}",
 						processReviews);
 
         return false;
     }
 
-    //Get course reviews when page is loaded
-    $(window).load(getReviews);
+	function set_following(data)
+	{
+		var user = "{{user.username}}"
+               	var content = '<button id="btn-follow" class="btn btn-success btn-mini" onclick="follow_user(\'' + user + '\')"><nobr><i class="icon-white icon-heart"></i>Follow</nobr></button>';
+		$.each(data.followed, function(i , item)
+		{
+			if(item.followed == true){
+               			content = '<button id="btn-follow" class="btn btn-success btn-mini" onclick="unfollow_user(\'' + user + '\')"><nobr><i class="icon-white icon-heart"></i>Unfollow</nobr></button>';
+			}	
+		});
+		$('#follow').empty().append(content);
+		return false;
+	}
+
+	function check_following()
+	{
+		var user = "{{user.username}}"
+		getObjects($SCRIPT_ROOT + "{{ url_for('users.check_follower')}}",
+		 				user,
+						set_following);
+		return false;
+	}
+
+	function getFollowers() {
+		$.getJSON($SCRIPT_ROOT + "{{ url_for('users.query_followers')}}",
+		{
+			user: "{{user.username}}"
+		}, function(data) {
+			processFollowers(data)
+		});
+
+		return false;
+	}
+
+	function follow_user(username)
+	{
+		getObjects( $SCRIPT_ROOT + "{{ url_for('users.follow_user') }}",
+						username,
+						update);
+		return false;
+	}
+
+	function unfollow_user(username)
+	{
+		getObjects( $SCRIPT_ROOT + "{{ url_for('users.unfollow_user') }}",
+						username,
+						update);
+		return false;
+	}
+
+   	//Get course reviews when page is loaded
+    	$(window).load(getReviews);
+	$(window).load(check_following);
 
 </script>
 {% endblock %} 

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="15">
+            <objects>
+                <tabBarController id="4" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="5">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="oHH-Hy-0Yf" kind="relationship" relationship="viewControllers" id="cAN-CW-8vt"/>
+                        <segue destination="MLY-it-BP5" kind="relationship" relationship="viewControllers" id="mMH-u2-NV2"/>
+                        <segue destination="EfC-mU-xpS" kind="relationship" relationship="viewControllers" id="xx3-zz-EDx"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="742" y="-641"/>
+        </scene>
+        <!--Courses Table View Controller - Courses-->
+        <scene sceneID="4UM-Bb-Do3">
+            <objects>
+                <tableViewController id="oHH-Hy-0Yf" customClass="CoursesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ymM-Zi-9UO">
+                        <rect key="frame" x="0.0" y="20" width="768" height="955"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NEg-yU-rKv">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="rsx-Hx-IqI">
+                                            <items>
+                                                <navigationItem title="Courses" id="Yyx-Ng-fbF"/>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="rsx-Hx-IqI" firstAttribute="top" secondItem="NEg-yU-rKv" secondAttribute="top" type="default" id="aPW-1G-INO"/>
+                                    <constraint firstItem="rsx-Hx-IqI" firstAttribute="leading" secondItem="NEg-yU-rKv" secondAttribute="leading" type="default" id="lb5-Gp-83h"/>
+                                    <constraint firstItem="rsx-Hx-IqI" firstAttribute="trailing" secondItem="NEg-yU-rKv" secondAttribute="trailing" type="default" id="qic-JK-DaV"/>
+                                </constraints>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oHH-Hy-0Yf" id="1kH-P8-xEa"/>
+                            <outlet property="delegate" destination="oHH-Hy-0Yf" id="fHM-c8-Elx"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Courses" id="GfB-KR-nY6"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uqi-3i-uL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2137" y="-1203"/>
+        </scene>
+        <!--Instructors View Controller - Instructors-->
+        <scene sceneID="5aT-Xp-gLE">
+            <objects>
+                <tableViewController id="MLY-it-BP5" customClass="InstructorsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yDV-FE-mcc">
+                        <rect key="frame" x="0.0" y="20" width="768" height="955"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bqL-gs-pCO">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="JLF-76-QTM">
+                                            <items>
+                                                <navigationItem title="Instructors" id="Kiy-TA-XBA"/>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="JLF-76-QTM" firstAttribute="trailing" secondItem="bqL-gs-pCO" secondAttribute="trailing" type="default" id="GsK-eU-UdS"/>
+                                    <constraint firstItem="JLF-76-QTM" firstAttribute="leading" secondItem="bqL-gs-pCO" secondAttribute="leading" type="default" id="Vie-P5-4Du"/>
+                                    <constraint firstItem="JLF-76-QTM" firstAttribute="top" secondItem="bqL-gs-pCO" secondAttribute="top" constant="-1" id="hEM-DE-O44"/>
+                                </constraints>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MLY-it-BP5" id="mZJ-zi-19Y"/>
+                            <outlet property="delegate" destination="MLY-it-BP5" id="g33-5k-mnx"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Instructors" id="xoW-a9-kYS"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dsy-qW-6u7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2137" y="105"/>
+        </scene>
+        <!--Top Rated View Controller - Top Rated-->
+        <scene sceneID="if2-MJ-TXF">
+            <objects>
+                <tableViewController id="EfC-mU-xpS" customClass="TopRatedViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i3e-N0-Uac">
+                        <rect key="frame" x="0.0" y="20" width="768" height="955"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PsI-CR-Jot">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="CM2-vh-Mzx">
+                                            <items>
+                                                <navigationItem title="Top Rated Courses" id="nXN-F8-ZUC"/>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="trailing" secondItem="PsI-CR-Jot" secondAttribute="trailing" type="default" id="UKF-tP-GES"/>
+                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="leading" secondItem="PsI-CR-Jot" secondAttribute="leading" type="default" id="lQo-oL-r0B"/>
+                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="top" secondItem="PsI-CR-Jot" secondAttribute="top" constant="-1" id="xLv-kB-tLR"/>
+                                </constraints>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EfC-mU-xpS" id="plZ-6m-5vd"/>
+                            <outlet property="delegate" destination="EfC-mU-xpS" id="XUQ-75-5wD"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Top Rated" id="7rj-Xz-5de"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9GQ-jc-7Ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2137" y="1367"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="CoursesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="InstructorsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="TopRatedViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

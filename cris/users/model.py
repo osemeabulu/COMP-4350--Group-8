@@ -14,7 +14,7 @@ class User(db.Model):
 			secondary = followers,
 			primaryjoin = (followers.c.follower_id == username),
 			secondaryjoin = (followers.c.followed_id == username),
-			backref = db.backref('Followers_Follower', lazy = 'dynamic'),
+			backref = db.backref('followers', lazy = 'dynamic'),
 			lazy = 'dynamic')
 
 	def __init__(self, username, password, admin= False):
@@ -45,6 +45,9 @@ class User(db.Model):
 
 	def get_followers(self):
 		return self.followed.filter(followers.c.follower_id == self.username).all()
+
+	def get_followed(self):
+		return self.followers.all()
 
 	def __repr__(self):
 		return '<User %r>' % self.username

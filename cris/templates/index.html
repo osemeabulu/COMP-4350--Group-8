@@ -1,15 +1,62 @@
-{% extends "layout.html" %}
-
-{% block content %}
-	<div class="hero-unit">
-        <h1>CRIS</h1>
-        <h2>Course Review Information System</h2>
-        <br />
-        <p>Coming Soon!</p>
-        <p>
-            <a class="btn btn-primary btn-large" href="{{ url_for('contact') }}">
-                Learn more
-            </a>
-        </p>
+{% extends "layout.html" %} {% block content %}
+<div class="hero-unit">
+    <h1>
+        CRIS</h1>
+    <h2>
+        Course Review Information System</h2>
+    <br />
+    <div id="crisInfo" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#crisInfo" data-slide-to="0" class="active"></li>
+            <li data-target="#crisInfo" data-slide-to="1"></li>
+            <li data-target="#crisInfo" data-slide-to="2"></li>
+            <li data-target="#crisInfo" data-slide-to="3"></li>
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <img src="http://placehold.it/1200x480" alt="" />
+                <div class="carousel-caption">
+                    <p>
+                        Good/bad experience with a class? Too hard? Too easy? Tell/warn the world!
+                    </p>
+                    <br />
+                    <h4>
+                        Leave reviews for everyone to see!
+                    </h4>
+                </div>
+            </div>
+            <div class="item">
+                <img src="http://placehold.it/1200x480" alt="" />
+                <div class="carousel-caption">
+                    <p>
+                        Follow Your friends!</p>
+                    <br />
+                    <h4>
+                        Do you prefer someone else's opinion? Keep up to date with your most trusted reviewers!</h4>
+                </div>
+            </div>
+            <div class="item">
+                <img src="http://placehold.it/1200x480" alt="" />
+                <div class="carousel-caption">
+                    <p>
+                        Jump Right In!</p>
+                    <br />
+                    <h4>
+                        You don't even need to create an account to read or write reviews.</h4>
+                </div>
+            </div>
+            <div class="item">
+                <img src="http://placehold.it/1200x480" alt="" />
+                <div class="carousel-caption">
+                    <p>
+                        Slide 4</p>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#crisInfo" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#crisInfo" data-slide="next">&rsaquo;</a>
     </div>
+</div>
 {% endblock content %}

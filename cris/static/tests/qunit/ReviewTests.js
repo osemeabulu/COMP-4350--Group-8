@@ -62,22 +62,19 @@ asyncTest("sendReview", 5,
 asyncTest("CalculateVotes", 3,
 	function()
 	{
-		var cid = "Comp4350";
-		var downvote = 4;
-		var upvote = 1;
-		var i = 0;
+		var review = new Object();
+		review.key = 1;
+		review.downvote = 0;
+		review.upvote = 1;
+		review.index = 0;
 		
-		$.getJSON($SCRIPT_ROOT + "/reviews/_vote",
+		sendObjects($SCRIPT_ROOT + "/reviews/_vote",
+		review,
+		function(data) 
 		{
-			uvote: upvote,
-			dvote: downvote,
-			course: cid,
-			key: i
-			
-		}, function(data) {
-			equal(data.score, 0.25, "Successfully calculated the vote ratio");	
-			equal(data.up, upvote, "Successfully got our upvotes");
-			equal(data.down, downvote, "Successfully got our downvotes");
+			equal(data.score, data.up/data.down, "Successfully calculated the vote ratio");	
+			equal(data.up, 2, "Successfully got our upvotes");
+			equal(data.down, 4, "Successfully got our downvotes");
 			start();
 			
 		});	

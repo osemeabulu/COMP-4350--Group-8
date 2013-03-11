@@ -11,7 +11,7 @@ mod = Blueprint('reviews', __name__, url_prefix='/reviews')
 def submit_review():
 	if request.method == 'POST':
 		data = request.json
-		print data
+		#print data
 
 		cid = request.json['cid']
 		rscr = request.json['rscr']
@@ -85,7 +85,7 @@ def calculate_vote():
 	
 	if request.method == 'POST':
 		data = request.json		
-		print data
+		#print data
 		
 		pk = request.json['key']
 		num = request.json['index']

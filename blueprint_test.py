@@ -49,12 +49,12 @@ class BlueprintTestCase(unittest.TestCase):
 		rv = self.app.get('/courses/Comp2150')
 		self.assertEquals(rv.status_code, 200)
 		
-		#test to ensure the querying partial word returns a result
-		query = 'comp3350'	
-		rv = self.app.get('/courses/_query', data={'key': query})
+		#test to ensure the querying partial word returns a result	
+		rv = self.app.get('/courses/_query?key=comp3350')
 		d = json.loads(rv.data)	
-		course = d['courses'][0]['cid']		
-		self.assertEquals(course, 'Comp2150')
+		course = d['courses'][0]['cid']
+		
+		self.assertEquals(course, 'Comp3350')
 		
 		rv = self.app.get('/courses/_top_query')
 		d = json.loads(rv.data)
@@ -65,24 +65,47 @@ class BlueprintTestCase(unittest.TestCase):
 		for course in courses:
 			self.assertEquals(course['avg'], avglist[count])
 			count+=1
-
 		
     def test_review_bp(self):
-		r1 = Review('Comp4350', 1, 'this is another test review', 0.75, 3, 4, 'user1')
+		r1 = Review('Comp4350', 1, 'this is another test review 1', 3, 3, 1, 'user1')
 		db.session.add(r1)
 		db.session.commit()
 				
 		rv = self.app.post('reviews/_submit_review', content_type='application/json', data = json.dumps({
-		'cid':'Comp3350',
-		'rscr': '4',
-		'rdesc': 'this is a test',
-		'rvote': '3',
-		'upvote': '0',
-		'downvote': '0'}))
+		'cid':'Comp4350',
+		'rscr': 4,
+		'rdesc': 'this is another test review 2',
+		'rvote': 2,
+		'upvote': 4,
+		'downvote': 2}))
+		
+		votelist = [3, 2]
 		
 		#tests that server responses with a review page
 		self.assertEquals(rv.status_code, 200)
+				
+		rv = self.app.get('/reviews/_query_by_course?key=Comp4350')
+		d = json.loads(rv.data)
+		reviews = d['reviews']	
+		count = 0;
 		       
-        
+        #tests to ensure that the response from server equals the expected sorted votes
+		for review in reviews:
+			self.assertEquals(review['rvote'], votelist[count])
+			count+=1
+			
+		rv = self.app.post('reviews/_vote', content_type='application/json', data = json.dumps({
+		'key': 2,
+		'index': 2,
+		'upvote': 4,
+		'downvote': 0}))
+		
+		r = Review.query.get(2)
+		
+		#tests to ensure that the response from server equals the expected upvotes and vote ratio for a review
+		self.assertEquals(r.upvote, 5)
+		self.assertEquals(r.rvote, 2.5)
+		
+				
 if __name__ == '__main__':
     unittest.main()

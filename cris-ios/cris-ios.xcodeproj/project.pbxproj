@@ -29,6 +29,7 @@
 		026D281F16EA8C3400BAFB8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EC16EA8C3300BAFB8F /* Foundation.framework */; };
 		026D282716EA8C3400BAFB8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 026D282516EA8C3400BAFB8F /* InfoPlist.strings */; };
 		026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 026D282916EA8C3400BAFB8F /* cris_iosTests.m */; };
+		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
 		B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */; };
@@ -74,6 +75,8 @@
 		026D282616EA8C3400BAFB8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		026D282816EA8C3400BAFB8F /* cris_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cris_iosTests.h; sourceTree = "<group>"; };
 		026D282916EA8C3400BAFB8F /* cris_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cris_iosTests.m; sourceTree = "<group>"; };
+		479CD49D16ED21A900F31372 /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
+		479CD49E16ED21A900F31372 /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
 		47D672DC16EC26640076FFE4 /* InstructorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorsViewController.h; sourceTree = "<group>"; };
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */,
 				026D280216EA8C3400BAFB8F /* MainStoryboard_iPhone.storyboard */,
 				026D280516EA8C3400BAFB8F /* MainStoryboard_iPad.storyboard */,
+				479CD49D16ED21A900F31372 /* CourseDetailViewController.h */,
+				479CD49E16ED21A900F31372 /* CourseDetailViewController.m */,
 				026D280816EA8C3400BAFB8F /* FirstViewController.h */,
 				026D280916EA8C3400BAFB8F /* FirstViewController.m */,
 				026D280B16EA8C3400BAFB8F /* first.png */,
@@ -317,6 +322,7 @@
 				B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */,
 				47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */,
 				47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */,
+				479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

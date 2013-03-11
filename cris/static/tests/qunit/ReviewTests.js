@@ -64,8 +64,8 @@ asyncTest("CalculateVotes", 3,
 	{
 		var review = new Object();
 		review.key = 1;
-		review.downvote = 0;
-		review.upvote = 1;
+		review.downvote = 4;
+		review.upvote = null;
 		review.index = 0;
 		
 		sendObjects($SCRIPT_ROOT + "/reviews/_vote",
@@ -73,8 +73,8 @@ asyncTest("CalculateVotes", 3,
 		function(data) 
 		{
 			equal(data.score, data.up/data.down, "Successfully calculated the vote ratio");	
-			equal(data.up, 2, "Successfully got our upvotes");
-			equal(data.down, 4, "Successfully got our downvotes");
+			equal(data.up, 3, "Successfully got our upvotes");
+			equal(data.down, 5, "Successfully got our downvotes");
 			start();
 			
 		});	

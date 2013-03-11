@@ -81,7 +81,6 @@ def query_by_user():
 	
 @mod.route('/_vote', methods=['POST'])
 def calculate_vote():
-	results = []
 	
 	if request.method == 'POST':
 		data = request.json		

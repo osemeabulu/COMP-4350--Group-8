@@ -78,10 +78,9 @@
 
 					content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '"><nobr>' + item.upvote; 
 					
-					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-up"></i></button></nobr></td>\n';
+					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', ' + item.id + ')"><i class="icon-white icon-thumbs-up"></i></button></nobr></td>\n';
 
-
-					content +=	'<nobr><td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', \'' + item.cid + '\')"><i class="icon-white icon-thumbs-down"></i></button></nobr></td>';
+					content +=	'<nobr><td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', ' + item.id + ')"><i class="icon-white icon-thumbs-down"></i></button></nobr></td>';
 					
 					content +=   '<td id="rvote' + i + '">' + item.rvote + '</td>';
 					
@@ -154,42 +153,20 @@
 			return false;
 		}
 
-		function vote_reviews(i, upvote, downvote, cid)
+		function vote_reviews(i, upvote, downvote, pk)
 		{
 			var vote = new Object();
 			vote.index = i
 			vote.upvote = upvote
 			vote.downvote = downvote
-			vote.cid = cid
+			vote.key = pk
 			
 			sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.calculate_vote') }}",
 						 vote,
 						 processVotes);
 			
 			return false;
-			/*if(upvote != null){
-				upvote++;
-			}
-			else{
-				downvote++;
-			}
-					
-			$.getJSON($SCRIPT_ROOT + "{{ url_for('reviews.calculate_vote')}}",
-			{
-				uvote: upvote,
-				dvote: downvote,
-				course: cid,
-				key: i
-				
-			}, function(data) {
-        		
-				$('#numup'+ i).html(data.up + '<button class="btn btn-success btn-mini"><i class="icon-white icon-thumbs-up"></i></button>');
-				$('#numdown' + i).html(data.down + '<button class="btn btn-danger btn-mini"><i class="icon-white icon-thumbs-down"></i></i></button>');
-        		$('#rvote' + i).html(data.score );
-        	});
-			
-			return false;*/
-			
+						
 		}
 		
 		//Get course reviews when page is loaded

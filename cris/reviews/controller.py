@@ -68,7 +68,9 @@ def query_by_course():
 				results.append(temp_dict)
  	 		#only sort by the review rating tuple
 			results = sorted(results, key=lambda k: k['rvote'], reverse=True)
+			
 	return jsonify(reviews = results)
+
 
 @mod.route('/_query_by_user')
 def query_by_user():
@@ -79,37 +81,38 @@ def query_by_user():
 	
 @mod.route('/_vote', methods=['POST'])
 def calculate_vote():
+	results = []
 	
 	if request.method == 'POST':
 		data = request.json		
 		print data
 		
-		course = request.json['cid']
+		pk = request.json['key']
 		num = request.json['index']
 		upvote = request.json['upvote']
 		downvote = request.json['downvote']
 		
-		r = Review.query.filter_by(cid=course).all()
-		review = r.pop(int(num))
+		r = Review.query.get(pk)
 		
 		if upvote is not None:
 			upvote+=1
-			review.upvote = upvote
+			r.upvote = upvote
 			db.session.commit()
 
 		else:
 			downvote+=1
-			review.downvote = downvote
+			r.downvote = downvote
 			db.session.commit()
 	
 		getcontext().prec = 2
-		if review.downvote:
-			review.rvote = Decimal(review.upvote)/Decimal(review.downvote)
+					
+		if r.downvote:
+			r.rvote = Decimal(r.upvote)/Decimal(r.downvote)
 		else:
-			review.rvote = review.upvote
+			r.rvote = r.upvote
 				
 		db.session.commit()
 		
-		return jsonify(score=review.rvote, up=review.upvote, down=review.downvote, i=num)
+		return jsonify(score=r.rvote, up=r.upvote, down=r.downvote, i=num)
 	
 	

@@ -130,12 +130,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    
+     CourseDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailViewController"];
+    //[[CourseDetailViewController alloc] initWithNibName:@"detailViewController" bundle:[NSBundle mainBundle]];
      // ...
      // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+     [self presentViewController:detailViewController animated:YES completion:nil];
+    
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -172,6 +174,7 @@
         NSString *course = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"cid"], [result objectForKey:@"cname"]];
         
         [self.courses addObject:course];
+        
     }
     
     [self.tableView reloadData];

@@ -14,6 +14,8 @@
 
 @implementation CourseDetailViewController
 
+@synthesize courseIdLabel, courseNameLabel, courseDescriptionLabel, averageRatingLabel, facultyLabel, course;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	self.courseIdLabel.text= self.course.cid;
+    self.courseNameLabel.text = self.course.cname;
+    self.courseDescriptionLabel.text = self.course.cdesc;
+    self.facultyLabel.text = self.course.cflty;
 }
 
 - (void)didReceiveMemoryWarning

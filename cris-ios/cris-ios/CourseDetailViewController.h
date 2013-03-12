@@ -7,19 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoursesTableViewController.h"
+#import "Course.h"
 
 @interface CourseDetailViewController : UIViewController
 
-
+@property (weak, nonatomic) IBOutlet UILabel *courseIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courseDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averageRatingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *facultyLabel;
-@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 
 
-- (IBAction)backButton:(id)sender;
+@property (strong) Course *course;
+
+
 - (IBAction)seeReviewButton:(id)sender;
 - (IBAction)createReviewButton:(id)sender;
 

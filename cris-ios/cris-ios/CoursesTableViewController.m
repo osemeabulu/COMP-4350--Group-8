@@ -7,6 +7,7 @@
 //
 
 #import "CoursesTableViewController.h"
+#import "Course.h"
 
 @interface CoursesTableViewController ()
 
@@ -57,6 +58,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"CourseDetailSegue"]) {
+        UITableViewCell *cell = (UITableViewCell *)sender;
+        NSIndexPath *ip = [self.tableView indexPathForCell:cell];
+        Course *c = [self.courses objectAtIndex:ip.row];
+        
+        CourseDetailViewController *cdv = (CourseDetailViewController *) segue.destinationViewController;
+        cdv.course = c;
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -72,17 +85,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
 
+    Course *c = [self.courses objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [self.courses objectAtIndex:indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", c.cid, c.cname];
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //cell.textLabel.text = [self.courses objectAtIndex:indexPath.row];
     
-    
+       
     return cell;
 }
 
@@ -131,11 +146,11 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     
-     CourseDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailViewController"];
+     //CourseDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailViewController"];
     //[[CourseDetailViewController alloc] initWithNibName:@"detailViewController" bundle:[NSBundle mainBundle]];
      // ...
      // Pass the selected object to the new view controller.
-     [self presentViewController:detailViewController animated:YES completion:nil];
+     //[self presentViewController:detailViewController animated:YES completion:nil];
     
     
 }
@@ -171,11 +186,13 @@
     // get each courses attributes and place them into the array of strings
     for (NSDictionary *result in jsonCourses)
     {
-        NSString *course = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"cid"], [result objectForKey:@"cname"]];
+        Course *course = [[Course alloc] initWithCid:[NSString stringWithFormat:@"%@",[result objectForKey:@"cid"]] cname:[NSString stringWithFormat:@"%@",[result objectForKey:@"cname"]] cdesc:[NSString stringWithFormat:@"%@",[result objectForKey:@"cdesc"]] cflty:[NSString stringWithFormat:@"%@",[result objectForKey:@"cflty"]]];
+        //NSString *course = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"cid"], [result objectForKey:@"cname"]];
         
         [self.courses addObject:course];
         
     }
+    
     
     [self.tableView reloadData];
 }

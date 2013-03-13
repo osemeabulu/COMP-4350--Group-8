@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<table class="table table-bordered"><tr><th>Your recent posts:</th><th>What your followers are saying:</th></tr>
+	<tr>
+	
+	<td>
+	<div class="well" id="results">
+    	<div class="accordion" id="posts">
+    	</div>
+	</div>
+	</td>
+
+	<td>
+	<div class="well" id="results">
+    	<div class="accordion" id="follower-posts">
+    	</div>
+	</div>
+	</td>
+
+	</tr>
+	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+	<script>
+    	</script>
+   	<div id="container">
+   	</div>
+   
+{% endblock content %}

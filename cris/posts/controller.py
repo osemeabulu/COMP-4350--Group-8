@@ -3,6 +3,21 @@ from cris.users.model import User
 
 mod = Blueprint('posts', __name__, url_prefix='/posts')
 
+@mod.route('/_query_followers')
+def query_followers():
+	key = request.args.get('key', '')
+	results = []
+	if 'username' in session:
+		username = session['username']
+		user = User.query.get(username)
+		if user is not None:
+			results = user.get_posts()
+		else:
+			results = None
+	else:
+		results = None
+	return jsonify(posts = [i.serialize for i in results])	
+
 @mod.route('/_query')
 def query():
 	key = request.args.get('key', '')

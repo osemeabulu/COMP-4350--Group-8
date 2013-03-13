@@ -14,6 +14,8 @@
 @property(strong, nonatomic) NSString *cname;
 @property(strong, nonatomic) NSString *cdesc;
 @property(strong, nonatomic) NSString *cflty;
+@property(strong, nonatomic) NSString *cavg;
 
 -(id)initWithCid:(NSString *)aCid cname:(NSString *)aCname cdesc:(NSString *)aCdesc cflty:(NSString *)aCflty;
+-(void) addAVG: (NSString *)newAVG;
 @end

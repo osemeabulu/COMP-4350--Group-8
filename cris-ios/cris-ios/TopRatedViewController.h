@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopRatedViewController : UITableViewController{
-    NSMutableArray *topRatedCourses;
-}
+@interface TopRatedViewController : UITableViewController
 
 @property (nonatomic, retain) IBOutlet UITableView *topRatedTable;
 

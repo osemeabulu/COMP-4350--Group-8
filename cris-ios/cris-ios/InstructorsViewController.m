@@ -161,10 +161,10 @@
     NSError *myError = nil;
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     
-    NSArray *jsoninstructors = [res objectForKey:@"instructors"];
+    NSArray *jsonInstructors = [res objectForKey:@"instructors"];
     
     // get each instructors attributes and place them into the array of strings
-    for (NSDictionary *result in jsoninstructors)
+    for (NSDictionary *result in jsonInstructors)
     {
         NSString *instructor = [NSString stringWithFormat:@"%@", [result objectForKey:@"pname"]];
         

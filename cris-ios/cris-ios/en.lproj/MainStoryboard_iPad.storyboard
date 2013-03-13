@@ -22,7 +22,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-400" y="-643"/>
+            <point key="canvasLocation" x="-428" y="-107"/>
         </scene>
         <!--Courses Table View Controller - Courses-->
         <scene sceneID="4UM-Bb-Do3">
@@ -274,7 +274,6 @@
         <class className="CourseDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="createReviewButton:"/>
                 <relationship kind="action" name="seeReviewButton:"/>
                 <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>

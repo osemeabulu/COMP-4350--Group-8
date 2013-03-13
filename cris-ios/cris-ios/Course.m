@@ -24,5 +24,8 @@
     return self;
 }
 
+-(void) addAVG:(NSString *)newAVG{
+    self.cavg = newAVG;
+}
 
 @end

@@ -5,6 +5,7 @@ from cris.courses.controller import mod as coursesModule
 from cris.reviews.controller import mod as reviewsModule
 from cris.users.controller import mod as userModule
 from cris.instructors.controller import mod as instructorsModule
+from cris.posts.controller import mod as postsModule
 from cris.users.model import User
 
 __all__ = ['create_app']
@@ -14,6 +15,7 @@ DEFAULT_BLUEPRINTS = (
 	reviewsModule,
 	userModule,
 	instructorsModule,
+	postsModule,
 )
 
 def create_app(blueprints = None, config = None):
@@ -84,6 +86,10 @@ def configure_routes(application):
 	def top_rated():
 		return render_template('top_rated.html')
 
+	@application.route("/posts")
+	def posts():
+		return render_template('posts.html')
+
 	@application.route("/program_planner")
 	def program_planner():
 	    return render_template('program_planner.html')
@@ -107,7 +113,6 @@ def configure_routes(application):
 	@application.route("/qtests")
 	def qtests():
 		return render_template('tests.html')
-
 
 def reload_db():
 	from cris.courses.model import Course

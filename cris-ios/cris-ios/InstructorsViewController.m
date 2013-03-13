@@ -10,9 +10,15 @@
 
 @interface InstructorsViewController ()
 
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong)  NSMutableArray *instructors;
+
 @end
 
 @implementation InstructorsViewController
+
+@synthesize responseData = _responseData;
+@synthesize instructors;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,7 +33,10 @@
 {
     [super viewDidLoad];
     
-    instructors = [[NSMutableArray alloc]initWithObjects:@"Michael Zapp", @"JOhn Braico", @"C Penner", nil];
+    self.instructors = [NSMutableArray array];//initWithObjects:@"Michael Zapp", @"JOhn Braico", @"C Penner", nil];
+    self.responseData = [NSMutableData data];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/instructors/_query?key="]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -125,5 +134,47 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"didReceiveResponse");
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError");
+    NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"connectionDidFinishLoading");
+    NSLog(@"Succeeded! Received %d bytes of data", [self.responseData length]);
+    
+    //convert to JSON
+    NSError *myError = nil;
+    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+    
+    NSArray *jsoninstructors = [res objectForKey:@"instructors"];
+    
+    // get each instructors attributes and place them into the array of strings
+    for (NSDictionary *result in jsoninstructors)
+    {
+        NSString *instructor = [NSString stringWithFormat:@"%@", [result objectForKey:@"pname"]];
+        
+        [self.instructors addObject:instructor];
+        
+    }
+    
+    
+    [self.tableView reloadData];
+}
+
 
 @end

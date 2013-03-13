@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InstructorsViewController : UITableViewController{
-    NSMutableArray *instructors;
-}
+@interface InstructorsViewController : UITableViewController
+
 
 @property (nonatomic, retain) IBOutlet UITableView *instructorsTable;
 

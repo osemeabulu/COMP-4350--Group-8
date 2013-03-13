@@ -60,11 +60,14 @@ class User(db.Model):
 	def get_followed(self):
 		return self.followers.all()
 
-	def get_followed_posts(self):
+	def get_followers_posts(self):
+		return Post.query.join(followers, (followers.c.follower_id == Post.owner)).filter(followers.c.followed_id == self.username).order_by(Post.time.desc()).all()		
+
+	def get_following_posts(self):
 		return Post.query.join(followers, (followers.c.followed_id == Post.owner)).filter(followers.c.follower_id == self.username).order_by(Post.time.desc()).all()
 
 	def get_posts(self):
-		return self.posts.all()
+		return self.posts.order_by(Post.time.desc()).all()
 
 	def __repr__(self):
 		return '<User %r>' % self.username

@@ -1,19 +1,48 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<table class="table table-bordered"><tr><th>Your recent posts:</th><th>What your followers are saying:</th></tr>
+	<table class="table table-bordered" style="table-layout: fixed; width: 100%"><tr><th>Your recent posts:</th><th>What people you're following are saying:</th><th>What your followers are saying:</th></tr>
 	<tr>
 	
-	<td>
-	<div class="well" id="results">
+	<td style="word-wrap: break-word">
+	<div class="well" id="user">
     	<div class="accordion" id="posts">
+    	</div>
+	</div>
+        <a href="#submitPost" role="button" class="btn" data-toggle="modal">New Post</a>
+
+        <div id="submitPost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        	<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        		<h3 id="modalLabel">Create a new post for your followers!</h3>
+        	</div>
+        	<div class="modal-body">
+        		<form id="post">
+        		<fieldset>
+                	<div>
+                		<label class="control-label" for="message">Message:</label>
+                        	<textarea class="input-xlarge" data-jsonify-name="msg" id="message" rows="7"></textarea>
+                	</div>
+                	<button type="submit" class="btn">Submit</button>
+			</fieldset>
+      			</form>
+        	</div>
+        	<div class="modal-footer">
+        		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        	</div>
+        </div>
+	</td>
+
+	<td style="word-wrap: break-word">
+	<div class="well" id="following">
+    	<div class="accordion" id="following-posts">
     	</div>
 	</div>
 	</td>
 
-	<td>
-	<div class="well" id="results">
-    	<div class="accordion" id="follower-posts">
+	<td style="word-wrap: break-word">
+	<div class="well" id="followers">
+    	<div class="accordion" id="followers-posts">
     	</div>
 	</div>
 	</td>
@@ -21,6 +50,110 @@
 	</tr>
 	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
 	<script>
+		function link_to(user) {
+			window.location.href = $SCRIPT_ROOT + user;
+		}
+
+                function update(data)
+                {
+                        location.reload();
+                }
+
+		function send_post()
+		{
+			var post = new Object();
+			post.msg = $('textarea[id="message"]').val()
+
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('posts.submit_post') }}",
+							post,
+							update);
+			$('#submitPost').modal('hide');
+			return false;
+		}
+
+		function process_recent(data)
+		{
+                        if (data.posts.length != 0)
+                        {
+                                var content = '';
+                                $.each(data.posts, function(i, item)
+                                {
+                                        content += '<div class="accordion-group">'
+                                        content += '<div class="accordion-heading">'
+                                        content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#posts" href= "#info_' + i + '">'
+                                        content += item.owner + ' posted at ' + item.time
+                                        content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
+                                        content += '<div class="accordion-inner"><i>' + item.message + '</i><br />'
+                                	content += '</div></div></div>'
+				});
+                                $('#posts').empty().append(content);
+                        }
+
+			return false;
+		}
+
+		function process_following(data)
+		{
+                        if (data.posts.length != 0)
+                        {
+                                var content = '';
+                                $.each(data.posts, function(i, item)
+                                {
+                                        content += '<div class = "accordion-group">'
+                                        content += '<div class="accordion-heading">'
+                                        content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#following-posts" href= "#finfo_' + i + '">'
+                                        content += item.owner + ' posted at ' + item.time
+                                        content += '</a></div><div id="finfo_' + i + '" class="accordion-body collapse">'
+                                        content += '<div class = "accordion-inner"><i>' + item.message + '</i><br />'
+                                	content += '<button class="btn" type="button" onclick=link_to("' + $SCRIPT_ROOT + '/users/' + item.owner + '")>View User</button>'
+                                	content += '</div></div></div>'
+				});
+                                $('#following-posts').empty().append(content);
+                        }
+			return false;
+		}
+
+		function process_followers(data)
+		{
+                        if (data.posts.length != 0)
+                        {
+                                var content = '';
+                                $.each(data.posts, function(i, item)
+                                {
+                                        content += '<div class = "accordion-group">'
+                                        content += '<div class="accordion-heading">'
+                                        content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#followers-posts" href= "#rinfo_' + i + '">'
+                                        content += item.owner + ' posted at ' + item.time
+                                        content += '</a></div><div id="rinfo_' + i + '" class="accordion-body collapse">'
+                                        content += '<div class = "accordion-inner"><i>' + item.message + '</i><br />'
+                                	content += '<button class="btn" type="button" onclick=link_to("' + $SCRIPT_ROOT + '/users/' + item.owner + '")>View User</button>'
+					content += '</div></div></div>'
+				});
+                                $('#followers-posts').empty().append(content);
+                        }
+
+			return false;
+		}
+
+		function load_posts()
+		{
+                        getObjects(     $SCRIPT_ROOT + "{{ url_for('posts.query') }}",
+                                                null,
+                                                process_recent);
+
+                        getObjects(     $SCRIPT_ROOT + "{{ url_for('posts.query_following') }}",
+                                                null,
+                                                process_following);
+
+                        getObjects(     $SCRIPT_ROOT + "{{ url_for('posts.query_followers') }}",
+                                                null,
+                                                process_followers);
+			return false;
+		}
+
+		//get posts when page is loaded
+		$(window).load(load_posts);
+		$('#post').submit(send_post);
     	</script>
    	<div id="container">
    	</div>

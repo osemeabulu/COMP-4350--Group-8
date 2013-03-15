@@ -35,7 +35,7 @@
     NSLog(@"viewdidload");
     self.courses = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/courses/_query?key="]];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/courses/_query?key="]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     [super viewDidLoad];

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *courseDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *averageRatingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *facultyLabel;
+@property (weak, nonatomic) IBOutlet UITableView *reviewList;
 
 
 @property (strong) Course *course;

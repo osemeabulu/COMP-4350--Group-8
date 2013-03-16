@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Course.h"
 
-@interface CourseDetailViewController : UIViewController
+@interface CourseDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *courseIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
@@ -19,9 +19,18 @@
 @property (weak, nonatomic) IBOutlet UITableView *reviewList;
 
 
+
+
 @property (strong) Course *course;
 
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (IBAction)seeReviewButton:(id)sender;
 - (IBAction)createReviewButton:(id)sender;
 

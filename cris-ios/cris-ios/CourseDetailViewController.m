@@ -16,8 +16,9 @@
 
 @implementation CourseDetailViewController
 
-@synthesize courseIdLabel, courseNameLabel, courseDescriptionLabel, averageRatingLabel, facultyLabel, reviewList, course;
+@synthesize courseIdLabel, courseNameLabel, courseDescriptionLabel, averageRatingLabel, facultyLabel, course;
 
+@synthesize reviewList;
 @synthesize reviews;
 @synthesize responseData;
 
@@ -36,7 +37,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    self.reviewList.delegate = self;
+    self.reviewList.dataSource = self;
 	self.courseIdLabel.text= self.course.cid;
     self.courseNameLabel.text = self.course.cname;
     self.courseDescriptionLabel.text = self.course.cdesc;
@@ -44,8 +46,10 @@
     
     self.reviews = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/reviews/_query_by_course?key="]];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"http://cris-release-env-przrapykha.elasticbeanstalk.com/reviews/_query_by_course?key=%@", self.course.cid]]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    [super viewDidLoad];
     
 }
 
@@ -69,6 +73,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"Loading cell");
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -76,11 +81,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    Course *c = [self.reviews objectAtIndex:indexPath.row];
+    //Course *c = [self.reviews objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", c.cid, c.cname];
+    //cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", c.cid, c.cname];
     //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    //cell.textLabel.text = [self.courses objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.reviews objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont fontWithName: @"Arial" size: 14.0];
     
     
     return cell;
@@ -172,7 +178,7 @@
     for (NSDictionary *result in jsonCourses)
     {
         //Course *course = [[Course alloc] initWithCid:[NSString stringWithFormat:@"%@",[result objectForKey:@"cid"]] cname:[NSString stringWithFormat:@"%@",[result objectForKey:@"cname"]] cdesc:[NSString stringWithFormat:@"%@",[result objectForKey:@"cdesc"]] cflty:[NSString stringWithFormat:@"%@",[result objectForKey:@"cflty"]]];
-        NSString *review = [NSString stringWithFormat:@"%@: %@ (%@)", [result objectForKey:@"username"], [result objectForKey:@"rdesc"], [result objectForKey:(@"rscr")]];
+        NSString *review = [NSString stringWithFormat:@"%@ (%@)", [result objectForKey:@"rdesc"], [result objectForKey:(@"rscr")]];
         
         [self.reviews addObject:review];
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -122,6 +122,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30k-Vd-4K5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="721" id="DTl-J9-hZb"/>
                                     <constraint firstAttribute="height" constant="567" id="fNA-0j-3h7"/>
                                 </constraints>
                                 <prototypes>
@@ -135,17 +136,20 @@
                                         </view>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="cU7-lo-Gmq" id="LvS-fG-1wG"/>
+                                    <outlet property="delegate" destination="cU7-lo-Gmq" id="8uC-nA-IeQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fkb-BF-Cew" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="1G0-a4-Mok"/>
-                            <constraint firstItem="30k-Vd-4K5" firstAttribute="leading" secondItem="j5q-0Q-gdO" secondAttribute="leading" type="default" id="56i-gj-9y3"/>
+                            <constraint firstItem="30k-Vd-4K5" firstAttribute="leading" secondItem="2gN-J8-VEh" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7D7-OH-QEK"/>
                             <constraint firstItem="UFT-nb-dMu" firstAttribute="centerX" secondItem="2gN-J8-VEh" secondAttribute="centerX" type="default" id="BmY-5c-7Ie"/>
                             <constraint firstItem="fkb-BF-Cew" firstAttribute="leading" secondItem="j5q-0Q-gdO" secondAttribute="leading" type="default" id="GTY-fW-99X"/>
                             <constraint firstAttribute="trailing" secondItem="4Cs-ay-umu" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="H0a-sg-sJN"/>
                             <constraint firstItem="30k-Vd-4K5" firstAttribute="top" secondItem="4Cs-ay-umu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JHD-St-d1y"/>
-                            <constraint firstAttribute="trailing" secondItem="30k-Vd-4K5" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="LnO-tU-6ea"/>
                             <constraint firstItem="pMK-QK-OBF" firstAttribute="baseline" secondItem="j5q-0Q-gdO" secondAttribute="baseline" type="default" id="Nau-m1-2al"/>
                             <constraint firstItem="mcR-HF-mOf" firstAttribute="top" secondItem="UFT-nb-dMu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="SVd-4p-1vF"/>
                             <constraint firstItem="UFT-nb-dMu" firstAttribute="top" secondItem="2gN-J8-VEh" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Sdx-OE-vEc"/>
@@ -162,7 +166,7 @@
                         <outlet property="courseIdLabel" destination="UFT-nb-dMu" id="DUT-Y5-h9U"/>
                         <outlet property="courseNameLabel" destination="mcR-HF-mOf" id="zpJ-Ma-5tL"/>
                         <outlet property="facultyLabel" destination="pMK-QK-OBF" id="rKI-wc-VVQ"/>
-                        <outlet property="reviewList" destination="30k-Vd-4K5" id="P41-0b-8q4"/>
+                        <outlet property="reviewList" destination="30k-Vd-4K5" id="n4N-EF-SQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWl-uv-csf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,43 +353,6 @@
             <point key="canvasLocation" x="991" y="2351"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CourseDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButton:"/>
-                <relationship kind="action" name="createReviewButton:"/>
-                <relationship kind="action" name="seeReviewButton:"/>
-                <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="courseDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="courseIdLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="courseNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="facultyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="reviewList" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CoursesTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="InstructorsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TopRatedViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

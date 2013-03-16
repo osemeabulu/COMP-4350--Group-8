@@ -9,14 +9,16 @@ class Course(db.Model):
 	cname = db.Column(db.String(20), unique=True)
 	cdesc = db.Column(db.Text)
 	cflty = db.Column(db.String(10))
+	csem = db.Column(db.String(10))
 	reviews = db.relationship('Review', backref = 'course', lazy = 'dynamic')
         instructor = db.Column(db.String(20), db.ForeignKey('instructors_instructor.pname'))
 
-	def __init__(self, cid, cname, cdesc, cflty):
+	def __init__(self, cid, cname, cdesc, cflty, csem):
 		self.cid = cid
 		self.cname = cname
 		self.cdesc = cdesc
 		self.cflty = cflty
+                self.csem = csem
 
 	def __repr__(self):
 		return '<Course %r>' % self.cname
@@ -28,7 +30,8 @@ class Course(db.Model):
 			'cname'	        : self.cname,
 			'cdesc'         : self.cdesc,
 			'cflty'	        : self.cflty,
-                        'instructor'    :self.instructor
+                        'instructor'    : self.instructor,
+                        'csem'          : self.csem
 		}
 	
 	def avg_rating(self):

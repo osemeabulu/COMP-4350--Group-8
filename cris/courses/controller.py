@@ -54,3 +54,14 @@ def query():
 	else:
 		results = Course.query.filter("cid like :value or cname like :value").params(value = '%' + key + '%').all()
 		return jsonify(courses = [i.serialize for i in results])
+
+@mod.route('/_semester/<string:semester>')
+def semester(semester):
+        key = request.args.get('key', '')
+
+        if key == '':
+                results = Course.query.filter_by(csem=semester).all()
+                return jsonify(courses = [i.serialize for i in results])
+        else:
+                results = Course.query.filter("(cid like :value or cname like :value) and csem like :sem").params(value = '%' + key + '%', sem = '%' + semester + '%').all()
+                return jsonify(courses = [i.serialize for i in results])

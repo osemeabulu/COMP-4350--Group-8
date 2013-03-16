@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<h5 id="chosen_sem"></h5>
+	<form id="target" class="well form-search">  
+        <input type="text" class="input-large search-query" id="search_key">
+        <button type="submit" class="btn">Search</button>
+    </form>
+    <div class="accordion" id="results">
+    <script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+    
+	<script>
+		function link_to(cid) {
+			window.location.href = $SCRIPT_ROOT + cid;
+		}
+		
+		//This is our callback function for processing courses data
+		function processCourses(data)
+		{	
+			if (data.courses.length != 0)
+			{
+				var content = '';
+				$.each(data.courses, function(i, item)
+				{
+					content += '<div class = "accordion-group">'
+					content += '<div class="accordion-heading">'
+					content += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href= "#info_' + i + '">'
+					content += item.cid +' - '+item.cname
+					content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
+					content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
+							content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
+				});
+				$('#results').empty().append(content);
+			}
+ 		};
+ 		
+ 		//sends a request for a list of courses in chosen semester
+ 		function requestCourses()
+ 		{
+ 		    //get chosen semester
+ 		    sem = getUrlVar("sem");
+ 		    content = "";
+ 		    url = "";
+
+            //set text for title and url for search
+ 		    if (sem == "Fall") {
+ 		        content = "Fall 2012";
+ 		        url = "{{ url_for('courses.semester', semester='Fall') }}";
+ 		    } else {
+ 		        content = "Winter 2011";
+ 		        url = "{{ url_for('courses.semester', semester='Winter') }}";
+ 		    }
+
+ 		    $('#chosen_sem').empty().append("Courses listed for " + content);
+
+ 		    getObjects($SCRIPT_ROOT + url,
+						$('input[id="search_key"]').val(),
+						processCourses );
+						
+			return false;
+		};
+		
+		//calls this when document is ready
+		$(document).ready(requestCourses);
+		
+		//updates the list on keypress
+		$("#target").keyup(function () {
+		    requestCourses();
+		});
+
+		//requests courses on submit
+		$('#target').submit(requestCourses);
+
+        //gets the value of variable in url
+		function getUrlVar(key) {
+		    var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+		    return result && result[1] || "";
+		}
+                
+    </script>
+    </div>
+   <div id="container">
+   </div>
+   
+{% endblock content %}

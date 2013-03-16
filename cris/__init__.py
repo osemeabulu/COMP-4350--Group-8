@@ -86,6 +86,10 @@ def configure_routes(application):
 	def top_rated():
 		return render_template('top_rated.html')
 
+	@application.route("/show_semester")
+	def show_semester():
+                return render_template('show_semester.html')
+
 	@application.route("/posts")
 	def posts():
 		return render_template('posts.html')
@@ -125,35 +129,35 @@ def reload_db():
 
 	oo = Course('Comp2150', 'Object Orientation', 'Calendar Description: Design and development of object-oriented software. Topics will ' +
 	'include inheritance, polymorphism, data abstraction and encapsulation. Examples will be drawn from several programming languages (Lab required).' +
-	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290', 'Science')
+	'Prerequisite: COMP 2140 and 2160 This course is a prerequisite for: COMP 3010, COMP 3350 and COMP 4290', 'Science', 'Fall')
 
 	aut = Course('Comp3030', 'Automata Theory and Formal Languages', 'Calendar Description: An introduction to automata theory, grammars, formal languages' +
 	'and their applications. Topics: finite automata, regular expressions and their properties;' +
 	'context-free grammars, pushdown automata and properties of context-free languages;' +
 	'turing machines. Applications: lexical analysis, text editing, machine design, syntax' +
 	'analysis, parser generation.' +
-	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310', 'Science')
+	'Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4310', 'Science', 'Winter')
 
 	aa = Course('Comp3170', 'Analysis of Algorithms and Data Structures', 'Calendar Description: Fundamental Algorithms for sorting, searching, storage' +
 	'management, graphs, databases and computational geometry. Correctness and Analysis' +
 	'of those Algorithms using specific data structures. An introduction to lower bounds and' +
-	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420', 'Science')
+	'intractability. Prerequisites: COMP 2080 and COMP 2140. This course is a prerequisite for: COMP 4340 and COMP 4420', 'Science', 'Fall')
 	
 	ai = Course('Comp3190', 'Artificial Intelligence', 'Calendar Description: Principles of artificial intelligence; problem solving, knowledge' +
 	'representation and manipulation; the application of these principles to the solution of hard' +
-	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.', 'Science')
+	'problems. Prerequisite: COMP 2140. This course is a prerequisite for: COMP 4190, COMP 4200 and COMP 4360.', 'Science', 'Winter')
 	
 	se1 = Course('Comp3350', 'Software Engineering 1', 'Calendar Description: Introduction to software engineering. Software life cycle' +
 	'models, system and software requirements analysis, specifications, software design,' +
-	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560', 'Science')
+	'testing, and maintenance, software quality. Prerequisite: COMP 2150. This course is a prerequisite for: COMP 4050, COMP 4350 and COMP 4560', 'Science', 'Fall')
 	
 	os1 = Course('Comp3430', 'Operating Systems 1', 'Calendar Description: Operating systems, their design, implementation, and usage (Lab ' +
 	'required). Prerequisite: COMP 2140 and COMP 2280 Recommended: COMP 2160 ' +
-	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580', 'Science')
+	'This course is a prerequisite for: COMP 4430, COMP 4510, COMP 4550 and COMP 4580', 'Science', 'Fall')
 
 	se2 = Course('Comp4350', 'Software Engineering 2', 'Calendar Description: Advanced treatment of software development methods. Topics' +
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
-	'software verification and validation. Prerequisite: COMP 3350.', 'Science')
+	'software verification and validation. Prerequisite: COMP 3350.', 'Science', 'Winter')
 	
 	review1 = Review('Comp4350', 4, 'This was a hard course that required a lot of background research and work.', 0.75, 3, 4)
 	review2 = Review('Comp2150', 4, 'I learned alot from this course and I can now make a simple program.', 0.50, 2, 4)

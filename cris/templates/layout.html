@@ -42,15 +42,22 @@
 							<a href="{{ url_for('logout') }}" class="navbar-link">Log out</a>
 						{% else %}
 							<a href="{{ url_for('login') }}" class="navbar-link">Log in</a> |
-							<a href="{{ url_for('users.register') }}" class="navbar-link">Register</a>
+							<a href="{{ url_for('users.register') }}" class="navbar-link">Register |</a>
 						{% endif %}
 					</p>
                     <ul class="nav">
-                        <li><a href="{{ url_for('courses.index') }}">Courses</a></li>
+                        <li class="dropdown">
+                            <a id="A1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Courses<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('courses.index') }}">View All</a></li>
+                                <li class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('show_semester', sem='Fall') }}">Fall 2012</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('show_semester', sem='Winter') }}">Winter 2012</a></li>
+                            </ul>
+                        </li>
 					    <li><a href="{{ url_for('instructors') }}">Instructors</a></li>
 					    <li><a href="{{ url_for('program_planner') }}">Program Planner</a></li>
 					    <li><a href="{{ url_for('top_rated') }}">Top Rated Courses</a></li>
-              		    <li><a href="#">Current Semester</a></li>
 					    <li><a href="{{ url_for('posts') }}">Posts</a></li>
                     </ul>
                 </div><!--nav-collapse collapse-->

@@ -28,7 +28,7 @@
 					content += item.cid +' - '+item.cname
 					content += '</a></div><div id="info_' + i + '" class="accordion-body collapse">'
 					content += '<div class = "accordion-inner"><i>' + item.cdesc + '</i><br />'
-							content += '<button class="btn" type="button" onclick= link_to("' + item.cid + '")>More Info</button></div></div></div>'
+							content += '<button class="btn" type="button" onclick= link_to("/courses/' + item.cid + '")>More Info</button></div></div></div>'
 				});
 				$('#results').empty().append(content);
 			}

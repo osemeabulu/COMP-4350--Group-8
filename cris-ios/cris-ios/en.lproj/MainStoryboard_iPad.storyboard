@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3104" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -230,7 +230,7 @@
             </objects>
             <point key="canvasLocation" x="2089" y="2359"/>
         </scene>
-        <!--Top Rated View Controller-->
+        <!--Top Rated View Controller - Top Rated Courses-->
         <scene sceneID="if2-MJ-TXF">
             <objects>
                 <tableViewController id="EfC-mU-xpS" customClass="TopRatedViewController" sceneMemberID="viewController">
@@ -239,25 +239,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="PsI-CR-Jot">
-                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TRcell" rowHeight="55" id="PsI-CR-Jot">
+                                <rect key="frame" x="0.0" y="22" width="768" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="748" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="CM2-vh-Mzx">
-                                            <items>
-                                                <navigationItem title="Top Rated Courses" id="nXN-F8-ZUC"/>
-                                            </items>
-                                        </navigationBar>
+                                        <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t49-Lb-6nf">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="27" id="JCG-ed-AsD"/>
+                                                <constraint firstAttribute="width" constant="81" id="hiQ-8A-IdR"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" text="Course ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-fE-ddo">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="429" id="2sf-2G-cJ3"/>
+                                                <constraint firstAttribute="height" constant="21" id="vkZ-el-1F9"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="trailing" secondItem="PsI-CR-Jot" secondAttribute="trailing" type="default" id="UKF-tP-GES"/>
-                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="leading" secondItem="PsI-CR-Jot" secondAttribute="leading" type="default" id="lQo-oL-r0B"/>
-                                    <constraint firstItem="CM2-vh-Mzx" firstAttribute="top" secondItem="PsI-CR-Jot" secondAttribute="top" constant="-1" id="xLv-kB-tLR"/>
+                                    <constraint firstItem="UMx-fE-ddo" firstAttribute="top" secondItem="PsI-CR-Jot" secondAttribute="top" constant="13" id="6EL-j2-yuO"/>
+                                    <constraint firstAttribute="trailing" secondItem="t49-Lb-6nf" secondAttribute="trailing" constant="69" id="9FI-pY-t3Y"/>
+                                    <constraint firstItem="UMx-fE-ddo" firstAttribute="leading" secondItem="PsI-CR-Jot" secondAttribute="leading" constant="31" id="aCd-k8-Jrq"/>
+                                    <constraint firstItem="UMx-fE-ddo" firstAttribute="top" secondItem="t49-Lb-6nf" secondAttribute="top" type="default" id="z6j-Jz-gxI"/>
                                 </constraints>
                             </tableViewCell>
                         </prototypes>
@@ -266,7 +277,7 @@
                             <outlet property="delegate" destination="EfC-mU-xpS" id="XUQ-75-5wD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eFm-nG-w02"/>
+                    <navigationItem key="navigationItem" title="Top Rated Courses" id="eFm-nG-w02"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9GQ-jc-7Ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

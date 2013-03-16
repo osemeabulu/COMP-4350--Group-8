@@ -67,25 +67,46 @@
     // Return the number of rows in the section.
     return self.topRatedCourses.count;
 }
-
+- (UIImage *)imageForRating:(int)rating
+{
+	switch (rating)
+	{
+		case 1: return [UIImage imageNamed:@"1StarSmall.png"];
+		case 2: return [UIImage imageNamed:@"2StarsSmall.png"];
+		case 3: return [UIImage imageNamed:@"3StarsSmall.png"];
+		case 4: return [UIImage imageNamed:@"4StarsSmall.png"];
+		case 5: return [UIImage imageNamed:@"5StarsSmall.png"];
+	}
+	return nil;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MainCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //static NSString *CellIdentifier = @"MainCell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TRcell"];
+
     
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MainCell"];
-    }
+    //if (cell == nil){
+      //  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MainCell"];
+    //}
     
     // Configure the cell...
     
     Course *c = [self.topRatedCourses  objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@: %@ star ", c.cid, c.cname, c.cavg];
+    //cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@: %@ star ", c.cid, c.cname, c.cavg];
     
     //cell.textLabel.text = [topRatedCourses objectAtIndex:indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = [UIColor redColor];
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //cell.textLabel.textColor = [UIColor redColor];
+    
+    UILabel *cidLabel = (UILabel *)[cell viewWithTag:100];
+	cidLabel.text = [NSString stringWithFormat:@"%@ - %@", c.cid, c.cname];
+	//UILabel *descLabel = (UILabel *)[cell viewWithTag:101];
+	//descLabel.text = c.cname;
+	UIImageView * ratingImageView = (UIImageView *)
+    [cell viewWithTag:102];
+	ratingImageView.image = [self imageForRating:c.cavg.intValue];
     return cell;
 }
 

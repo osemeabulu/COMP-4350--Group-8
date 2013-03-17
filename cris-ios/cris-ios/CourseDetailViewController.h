@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReviewViewController.h"
 #import "Course.h"
 
 @interface CourseDetailViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>

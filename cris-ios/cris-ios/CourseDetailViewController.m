@@ -60,6 +60,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"ReviewSegue"]) {
+        UITableViewCell *cell = (UITableViewCell *)sender;
+        NSIndexPath *ip = [self.reviewList indexPathForCell:cell];
+        Review *r = [self.reviews objectAtIndex:ip.row];
+        
+        ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
+        rvc.review = r;
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

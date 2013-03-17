@@ -57,6 +57,7 @@
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
+		B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6838F2616F636A90095D56D /* ReviewViewController.m */; };
 		B687E2F816F5548F00BE2831 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = B687E2F716F5548F00BE2831 /* Review.m */; };
 		B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,8 @@
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
 		47D672E016EC26830076FFE4 /* TopRatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRatedViewController.m; sourceTree = "<group>"; };
+		B6838F2516F636A90095D56D /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		B6838F2616F636A90095D56D /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		B687E2F616F5548F00BE2831 /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		B687E2F716F5548F00BE2831 /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesTableViewController.h; sourceTree = "<group>"; };
@@ -196,32 +199,34 @@
 		026D27F016EA8C3300BAFB8F /* cris-ios */ = {
 			isa = PBXGroup;
 			children = (
-				0419111A16F404B3009E9E5A /* Images */,
 				026D27F916EA8C3300BAFB8F /* AppDelegate.h */,
-				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
-				47D672DC16EC26640076FFE4 /* InstructorsViewController.h */,
-				47D672DF16EC26830076FFE4 /* TopRatedViewController.h */,
-				47D672E016EC26830076FFE4 /* TopRatedViewController.m */,
-				47D672DD16EC26640076FFE4 /* InstructorsViewController.m */,
-				B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */,
-				B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */,
-				026D280216EA8C3400BAFB8F /* MainStoryboard_iPhone.storyboard */,
-				026D280516EA8C3400BAFB8F /* MainStoryboard_iPad.storyboard */,
+				477FC6D116EE8A5500CCB2B2 /* Course.h */,
 				479CD49D16ED21A900F31372 /* CourseDetailViewController.h */,
+				B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */,
+				026D280816EA8C3400BAFB8F /* FirstViewController.h */,
+				47D672DC16EC26640076FFE4 /* InstructorsViewController.h */,
+				B687E2F616F5548F00BE2831 /* Review.h */,
+				B6838F2516F636A90095D56D /* ReviewViewController.h */,
+				026D280F16EA8C3400BAFB8F /* SecondViewController.h */,
+				47D672DF16EC26830076FFE4 /* TopRatedViewController.h */,
+				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
+				477FC6D216EE8A5500CCB2B2 /* Course.m */,
 				479CD49E16ED21A900F31372 /* CourseDetailViewController.m */,
+				B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */,
 				026D280916EA8C3400BAFB8F /* FirstViewController.m */,
+				47D672DD16EC26640076FFE4 /* InstructorsViewController.m */,
+				B687E2F716F5548F00BE2831 /* Review.m */,
+				B6838F2616F636A90095D56D /* ReviewViewController.m */,
+				026D281016EA8C3400BAFB8F /* SecondViewController.m */,
+				47D672E016EC26830076FFE4 /* TopRatedViewController.m */,
 				026D280B16EA8C3400BAFB8F /* first.png */,
 				026D280D16EA8C3400BAFB8F /* first@2x.png */,
-				026D280816EA8C3400BAFB8F /* FirstViewController.h */,
-				026D280F16EA8C3400BAFB8F /* SecondViewController.h */,
-				026D281016EA8C3400BAFB8F /* SecondViewController.m */,
 				026D281216EA8C3400BAFB8F /* second.png */,
 				026D281416EA8C3400BAFB8F /* second@2x.png */,
+				0419111A16F404B3009E9E5A /* Images */,
+				026D280516EA8C3400BAFB8F /* MainStoryboard_iPad.storyboard */,
+				026D280216EA8C3400BAFB8F /* MainStoryboard_iPhone.storyboard */,
 				026D27F116EA8C3300BAFB8F /* Supporting Files */,
-				477FC6D116EE8A5500CCB2B2 /* Course.h */,
-				477FC6D216EE8A5500CCB2B2 /* Course.m */,
-				B687E2F616F5548F00BE2831 /* Review.h */,
-				B687E2F716F5548F00BE2831 /* Review.m */,
 			);
 			path = "cris-ios";
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */,
 				477FC6D316EE8A5500CCB2B2 /* Course.m in Sources */,
 				B687E2F816F5548F00BE2831 /* Review.m in Sources */,
+				B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

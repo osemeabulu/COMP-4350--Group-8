@@ -57,6 +57,7 @@
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
+		B687E2F816F5548F00BE2831 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = B687E2F716F5548F00BE2831 /* Review.m */; };
 		B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,8 @@
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
 		47D672E016EC26830076FFE4 /* TopRatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRatedViewController.m; sourceTree = "<group>"; };
+		B687E2F616F5548F00BE2831 /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		B687E2F716F5548F00BE2831 /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		B68A5D1D16EBD9B50013EF57 /* CoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesTableViewController.h; sourceTree = "<group>"; };
 		B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,6 +220,8 @@
 				026D27F116EA8C3300BAFB8F /* Supporting Files */,
 				477FC6D116EE8A5500CCB2B2 /* Course.h */,
 				477FC6D216EE8A5500CCB2B2 /* Course.m */,
+				B687E2F616F5548F00BE2831 /* Review.h */,
+				B687E2F716F5548F00BE2831 /* Review.m */,
 			);
 			path = "cris-ios";
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */,
 				479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */,
 				477FC6D316EE8A5500CCB2B2 /* Course.m in Sources */,
+				B687E2F816F5548F00BE2831 /* Review.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

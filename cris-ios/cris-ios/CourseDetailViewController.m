@@ -7,6 +7,7 @@
 //
 
 #import "CourseDetailViewController.h"
+#import "Review.h"
 
 @interface CourseDetailViewController ()
 @property (nonatomic, strong) NSMutableArray *reviews;
@@ -71,6 +72,19 @@
     return [self.reviews count];
 }
 
+- (UIImage *)imageForRating:(int)rating
+{
+	switch (rating)
+	{
+		case 1: return [UIImage imageNamed:@"1StarSmall.png"];
+		case 2: return [UIImage imageNamed:@"2StarsSmall.png"];
+		case 3: return [UIImage imageNamed:@"3StarsSmall.png"];
+		case 4: return [UIImage imageNamed:@"4StarsSmall.png"];
+		case 5: return [UIImage imageNamed:@"5StarsSmall.png"];
+	}
+	return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Loading cell");
@@ -78,15 +92,28 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
     
     //Course *c = [self.reviews objectAtIndex:indexPath.row];
     
-    //cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", c.cid, c.cname];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [self.reviews objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName: @"Arial" size: 14.0];
+    Review *r = [self.reviews objectAtIndex:indexPath.row];
+    
+    NSRange textRange = [r.username rangeOfString:@"null"];
+    if (textRange.location != NSNotFound)
+    {
+        cell.textLabel.text = [NSString stringWithFormat:@"N/A"];
+    }
+    
+    else
+    {
+        cell.textLabel.text = r.username;
+    }
+    
+    cell.detailTextLabel.text = r.rdesc;
+    cell.imageView.image = [self imageForRating:r.rscr.intValue];
+    //cell.textLabel.text = [self.reviews objectAtIndex:indexPath.row];
+    //cell.textLabel.font = [UIFont fontWithName: @"Arial" size: 14.0];
     
     
     return cell;
@@ -178,7 +205,9 @@
     for (NSDictionary *result in jsonCourses)
     {
         //Course *course = [[Course alloc] initWithCid:[NSString stringWithFormat:@"%@",[result objectForKey:@"cid"]] cname:[NSString stringWithFormat:@"%@",[result objectForKey:@"cname"]] cdesc:[NSString stringWithFormat:@"%@",[result objectForKey:@"cdesc"]] cflty:[NSString stringWithFormat:@"%@",[result objectForKey:@"cflty"]]];
-        NSString *review = [NSString stringWithFormat:@"%@ (%@)", [result objectForKey:@"rdesc"], [result objectForKey:(@"rscr")]];
+        Review *review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [result objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [result objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [result objectForKey:@"rscr"]]];
+        
+        //NSString *review = [NSString stringWithFormat:@"%@ (%@)", [result objectForKey:@"rdesc"], [result objectForKey:(@"rscr")]];
         
         [self.reviews addObject:review];
         

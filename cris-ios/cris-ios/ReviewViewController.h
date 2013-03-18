@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseDetailViewController.h"
 #import "Review.h"
 
 @interface ReviewViewController : UIViewController <UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
@@ -20,4 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *descText;
 
 @property (strong) Review *review;
+
+@property (strong) CourseDetailViewController *cdvc;
+
 @end

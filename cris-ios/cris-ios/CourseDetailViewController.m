@@ -7,6 +7,7 @@
 //
 
 #import "CourseDetailViewController.h"
+#import "ReviewViewController.h"
 #import "Review.h"
 
 @interface CourseDetailViewController ()
@@ -61,13 +62,24 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"ReviewSegue"]) {
+    
+    if ([segue.identifier isEqualToString:@"ReviewSelectionSegue"])
+    {
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *ip = [self.reviewList indexPathForCell:cell];
         Review *r = [self.reviews objectAtIndex:ip.row];
         
         ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
         rvc.review = r;
+    }
+    
+    else if ([segue.identifier isEqualToString:@"ReviewCreationSegue"])
+    {
+        Review *r = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", self.course.cid] username: @"" rdesc: @"" rscr: @""];
+        
+        ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
+        rvc.review = r;
+        rvc.cdvc = self;
     }
     
 }

@@ -118,6 +118,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="U9r-yu-00z" kind="push" identifier="ReviewCreationSegue" id="uLz-xA-Hb7"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30k-Vd-4K5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,7 +150,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="U9r-yu-00z" kind="push" identifier="ReviewSegue" id="fSm-eF-4k2"/>
+                                            <segue destination="U9r-yu-00z" kind="push" identifier="ReviewSelectionSegue" id="fSm-eF-4k2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -513,4 +516,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="uLz-xA-Hb7"/>
+    </inferredMetricsTieBreakers>
 </document>

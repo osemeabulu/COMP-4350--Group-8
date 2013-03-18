@@ -88,15 +88,11 @@ def configure_routes(application):
 
 	@application.route("/show_semester")
 	def show_semester():
-                return render_template('show_semester.html')
+		return render_template('show_semester.html')
 
 	@application.route("/posts")
 	def posts():
 		return render_template('posts.html')
-
-	@application.route("/program_planner")
-	def program_planner():
-	    return render_template('program_planner.html')
 
 	@application.route("/instructors")
 	def instructors():

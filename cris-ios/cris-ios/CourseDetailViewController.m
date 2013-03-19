@@ -65,8 +65,9 @@
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *ip = [self.reviewList indexPathForCell:cell];
         Review *r = [self.reviews objectAtIndex:ip.row];
-        
+        int row = ip.row;
         ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
+        r.index = [NSString stringWithFormat:@"%d",row];
         rvc.review = r;
     }
     
@@ -217,7 +218,7 @@
     for (NSDictionary *result in jsonCourses)
     {
         //Course *course = [[Course alloc] initWithCid:[NSString stringWithFormat:@"%@",[result objectForKey:@"cid"]] cname:[NSString stringWithFormat:@"%@",[result objectForKey:@"cname"]] cdesc:[NSString stringWithFormat:@"%@",[result objectForKey:@"cdesc"]] cflty:[NSString stringWithFormat:@"%@",[result objectForKey:@"cflty"]]];
-        Review *review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [result objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [result objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [result objectForKey:@"rscr"]]];
+        Review *review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [result objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [result objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [result objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [result objectForKey:@"id"]]];
         
         //NSString *review = [NSString stringWithFormat:@"%@ (%@)", [result objectForKey:@"rdesc"], [result objectForKey:(@"rscr")]];
         

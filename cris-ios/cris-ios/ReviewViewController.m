@@ -9,15 +9,21 @@
 #import "ReviewViewController.h"
 
 @interface ReviewViewController ()
-
+@property (nonatomic, strong) NSMutableData *responseData;
+- (void)postJSONObjects:(NSData *)jsonRequest;
 @end
 
 @implementation ReviewViewController
 
+@synthesize responseData;
 @synthesize courseLabel;
 @synthesize userLabel;
 @synthesize scorePicker;
 @synthesize descText;
+@synthesize likeButton;
+@synthesize dislikeButton;
+@synthesize likeLabel;
+@synthesize dislikeLabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -44,14 +50,16 @@
     {
         self.userLabel.text = self.review.username;
     }
-    
+    self.responseData = [NSMutableData data];
     self.scorePicker.dataSource = self;
     self.scorePicker.delegate = self;
     [self.scorePicker reloadAllComponents];
     [self.scorePicker selectRow:self.review.rscr.intValue - 1 inComponent:0 animated:YES];
     self.descText.delegate = self;
     self.descText.text = self.review.rdesc;
-    
+    self.likeLabel.text = self.review.upvote;
+    self.dislikeLabel.text = self.review.downvote;
+        
 	// Do any additional setup after loading the view.
 }
 
@@ -90,5 +98,80 @@
     return result;
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"didReceiveResponse");
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError");
+    NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"connectionDidFinishLoading");
+    NSLog(@"Received JSON votes! Received %d bytes of data", [self.responseData length]);
+    
+    //convert to JSON
+    NSError *myError = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+
+    NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
+    NSString *upvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"up"]];
+    NSString *downvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"down"]];
+    NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
+
+    self.likeLabel.text = upvote;
+    self.dislikeLabel.text = downvote;
+    
+}
+
+
+- (IBAction)like:(id)sender {
+    NSError* error;
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt: self.review.index.intValue ], @"index", [NSNumber numberWithInt: self.review.upvote.intValue], @"upvote", [NSNull null], @"downvote", [NSNumber numberWithInt: self.review.pk.intValue], @"key",nil];
+    
+    NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    
+    [self postJSONObjects:jsonObj];
+    
+    [self.likeButton setEnabled:NO];
+    
+}
+
+- (IBAction)dislike:(id)sender {
+    NSError* error;
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt: self.review.index.intValue ], @"index", [NSNull null], @"upvote", [NSNumber numberWithInt: self.review.downvote.intValue], @"downvote", [NSNumber numberWithInt: self.review.pk.intValue], @"key",nil];
+    
+    NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    [self postJSONObjects:jsonObj];
+    
+    [self.dislikeButton setEnabled:NO];
+
+}
+
+- (void)postJSONObjects:(NSData *)jsonRequest{
+    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    //NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody: jsonRequest];
+    
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+}
 
 @end

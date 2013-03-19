@@ -19,5 +19,18 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *descText;
 
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *dislikeButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *dislikeLabel;
+
 @property (strong) Review *review;
+
+- (IBAction)like:(id)sender;
+
+- (IBAction)dislike:(id)sender;
+
 @end

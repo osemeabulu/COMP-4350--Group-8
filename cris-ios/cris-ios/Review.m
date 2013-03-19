@@ -11,16 +11,20 @@
 @implementation Review
 
 
-@synthesize cid, username, rdesc, rscr;
+@synthesize cid, username, rdesc, rscr, upvote, downvote, pk, index;
 
--(id)initWithCid:(NSString *)aCid username:(NSString *)aUsername rdesc:(NSString *)aRdesc rscr:(NSString *)aRscr
+-(id)initWithCid:(NSString *)aCid username:(NSString *)aUsername rdesc:(NSString *)aRdesc rscr:(NSString *)aRscr upvote:(NSString *)aUpvote downvote:(NSString *)aDownvote rvote:(NSString *)aRvote pk:(NSString *)aPk;
 {
     self = [super init];
     if(self){
+        self.pk = aPk;
         self.cid = aCid;
         self.username = aUsername;
         self.rdesc = aRdesc;
         self.rscr = aRscr;
+        self.upvote = aUpvote;
+        self.downvote = aDownvote;
+        self.rvote = aRvote;
     }
     
     return self;

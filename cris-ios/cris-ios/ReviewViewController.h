@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseDetailViewController.h"
 #import "Review.h"
 
 @interface ReviewViewController : UIViewController <UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
@@ -29,8 +30,12 @@
 
 @property (strong) Review *review;
 
+@property (strong) CourseDetailViewController *cdvc;
+
 - (IBAction)like:(id)sender;
 
 - (IBAction)dislike:(id)sender;
+
+
 
 @end

@@ -5,7 +5,7 @@
     <h2>
         Course Review Information System</h2>
     <br />
-    <div id="crisInfo" class="carousel slide">
+    <div id="crisInfo" class="carousel slide" style="width: 600px; margin: 0 auto">
         <ol class="carousel-indicators">
             <li data-target="#crisInfo" data-slide-to="0" class="active"></li>
             <li data-target="#crisInfo" data-slide-to="1"></li>
@@ -15,7 +15,7 @@
         <!-- Carousel items -->
         <div class="carousel-inner">
             <div class="active item">
-                <img src="http://placehold.it/1200x480" alt="" />
+                <img src="{{ url_for('static', filename='unbearable-class.jpg') }}" alt="" />
                 <div class="carousel-caption">
                     <p>
                         Good/bad experience with a class? Too hard? Too easy? Tell/warn the world!
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="http://placehold.it/1200x480" alt="" />
+                <img src="{{ url_for('static', filename='social-network.jpg') }}" alt="" />
                 <div class="carousel-caption">
                     <p>
                         Follow Your friends!</p>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="http://placehold.it/1200x480" alt="" />
+                <img src="{{ url_for('static', filename='cannonball.jpg') }}" alt="" />
                 <div class="carousel-caption">
                     <p>
                         Jump Right In!</p>
@@ -47,10 +47,13 @@
                 </div>
             </div>
             <div class="item">
-                <img src="http://placehold.it/1200x480" alt="" />
+                <img src="{{ url_for('static', filename='back-to-school.jpg') }}" alt="" />
                 <div class="carousel-caption">
                     <p>
-                        Slide 4</p>
+                        Plan Your Semester!</p>
+                    <br />
+                    <h4>
+                        See what courses are being offered in each semester.</h4>
                 </div>
             </div>
         </div>

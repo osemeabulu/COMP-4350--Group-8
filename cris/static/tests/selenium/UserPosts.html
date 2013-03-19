@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:5000/" />
+<title>UserPosts</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">UserPosts</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Posts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Post</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=message</td>
+	<td>This post should fail.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Please log in if you wish to create posts.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Register |</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>testposter1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password_c</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Account successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Posts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Post</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=message</td>
+	<td>This is a post from testposter1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Post was successfully created.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=regexpi:^testposter1 posted at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:This is a post from testposter1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Register |</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>testposter2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password_c</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Account successfully created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Posts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=New Post</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=message</td>
+	<td>This is a post from testposter2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:Post was successfully created.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=regexpi:^testposter2 posted at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:This is a post from testposter2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=A1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View All</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp2150 - Object Orientation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Review by testposter2. This is so that testposter1 can find testposter2.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>testposter1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=A1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View All</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search_key</td>
+	<td>Comp2150</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp2150 - Object Orientation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=testposter2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=btn-follow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You are now following testposter2.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=View Followers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:testposter1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Posts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=regexpi:^testposter2 posted at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:This is a post from testposter2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>testposter2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Posts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=regexpi:^testposter1 posted at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:This is a post from testposter1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:You were logged out</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

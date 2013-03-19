@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://127.0.0.1:5000/" />
+<title>TopRatedSearch</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TopRatedSearch</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 0/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 0/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_5 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase the rating from 0 to 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 1/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 1/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase the rating from 1 to 1.5</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 1.5/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 1.5/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase the rating from 1.5 to 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 2/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 2/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase the rating from 2 to 2.75</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 2.75/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 2.75/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase rating from 2.75 to 3.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 3.2/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 3.2/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase rating from 3.2 to 3.5</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 3.5/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Comp3350 - Software Engineering 1 - Score: 3.5/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#info_2 &gt; div.accordion-inner &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Submit a Review</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=score</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase </td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase rating from 3.5 to 3.7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>This will increase rating from 3.5 to 3.714</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Top Rated Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Comp3350 - Software Engineering 1 - Score: 3.7142857142857144/5</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

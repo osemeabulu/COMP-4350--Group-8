@@ -29,6 +29,8 @@
 		026D281F16EA8C3400BAFB8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EC16EA8C3300BAFB8F /* Foundation.framework */; };
 		026D282716EA8C3400BAFB8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 026D282516EA8C3400BAFB8F /* InfoPlist.strings */; };
 		026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 026D282916EA8C3400BAFB8F /* cris_iosTests.m */; };
+		02D5390F16FA4F910088621D /* PostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5390E16FA4F910088621D /* PostsViewController.m */; };
+		02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5391116FA6FD30088621D /* NewPostViewController.m */; };
 		0419113316F404B3009E9E5A /* 1Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419111B16F404B3009E9E5A /* 1Star.png */; };
 		0419113416F404B3009E9E5A /* 1Star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419111C16F404B3009E9E5A /* 1Star@2x.png */; };
 		0419113516F404B3009E9E5A /* 1StarSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419111D16F404B3009E9E5A /* 1StarSmall.png */; };
@@ -104,6 +106,10 @@
 		026D282616EA8C3400BAFB8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		026D282816EA8C3400BAFB8F /* cris_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cris_iosTests.h; sourceTree = "<group>"; };
 		026D282916EA8C3400BAFB8F /* cris_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cris_iosTests.m; sourceTree = "<group>"; };
+		02D5390D16FA4F910088621D /* PostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsViewController.h; sourceTree = "<group>"; };
+		02D5390E16FA4F910088621D /* PostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsViewController.m; sourceTree = "<group>"; };
+		02D5391016FA6FD30088621D /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
+		02D5391116FA6FD30088621D /* NewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
 		0419111B16F404B3009E9E5A /* 1Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1Star.png; sourceTree = "<group>"; };
 		0419111C16F404B3009E9E5A /* 1Star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1Star@2x.png"; sourceTree = "<group>"; };
 		0419111D16F404B3009E9E5A /* 1StarSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1StarSmall.png; sourceTree = "<group>"; };
@@ -213,6 +219,8 @@
 				B6838F2516F636A90095D56D /* ReviewViewController.h */,
 				026D280F16EA8C3400BAFB8F /* SecondViewController.h */,
 				47D672DF16EC26830076FFE4 /* TopRatedViewController.h */,
+				02D5390D16FA4F910088621D /* PostsViewController.h */,
+				02D5391016FA6FD30088621D /* NewPostViewController.h */,
 				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
 				477FC6D216EE8A5500CCB2B2 /* Course.m */,
 				479CD49E16ED21A900F31372 /* CourseDetailViewController.m */,
@@ -223,6 +231,8 @@
 				B6838F2616F636A90095D56D /* ReviewViewController.m */,
 				026D281016EA8C3400BAFB8F /* SecondViewController.m */,
 				47D672E016EC26830076FFE4 /* TopRatedViewController.m */,
+				02D5390E16FA4F910088621D /* PostsViewController.m */,
+				02D5391116FA6FD30088621D /* NewPostViewController.m */,
 				026D280B16EA8C3400BAFB8F /* first.png */,
 				026D280D16EA8C3400BAFB8F /* first@2x.png */,
 				026D281216EA8C3400BAFB8F /* second.png */,
@@ -453,6 +463,8 @@
 				477FC6D316EE8A5500CCB2B2 /* Course.m in Sources */,
 				B687E2F816F5548F00BE2831 /* Review.m in Sources */,
 				B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */,
+				02D5390F16FA4F910088621D /* PostsViewController.m in Sources */,
+				02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

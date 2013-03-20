@@ -11,7 +11,7 @@
         <p> This course is being offered in the {{ course.csem }}.</p>
         <br />
 
-        <a href="#submitReview" role="button" class="btn" data-toggle="modal">Submit a Review</a>
+        <a href="#submitReview" role="button" class="btn btn-inverse" data-toggle="modal">Submit a Review</a>
 
         <div id="submitReview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -36,12 +36,12 @@
 						<label class="control-label" for="description">Description</label>
 						<textarea class="input-xlarge" data-jsonify-name="rdesc" id="description" rows="7"></textarea>
 					</div>
-                    <button type="submit" class="btn">Submit</button>
+                    <button type="submit" class="btn btn-inverse">Submit</button>
 				</fieldset>
 			</form>
             </div>
             <div class="modal-footer">            	
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
 
@@ -67,31 +67,41 @@
 		{
 			var content = '';
 			var nil = null;
-			
-			content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th>Like</th><th>Dislike</th><th>Vote Ratio</th><th></th></tr></thead><tbody>';
-			
-			$.each(data.reviews, function(i, item)
-			{
-					username= 'N/A';
-					if (item.username != null)	
-					{
-						username = item.username;
-					}
+            var loggedInUser = "{{ session.username }}";
 
-					content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' +item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '"><nobr>' + item.upvote; 
-					
-					content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', ' + item.id + ')"><i class="icon-white icon-thumbs-up"></i></button></nobr></td>\n';
+            content += '<table class="table table-bordered"><thead><tr><th>User</th><th>Score</th><th>Review</th><th style="width: 50px";>Like</th><th style="width: 50px";>Dislike</th><th>Vote Ratio</th><th></th></tr></thead><tbody>';
 
-					content +=	'<nobr><td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', ' + item.id + ')"><i class="icon-white icon-thumbs-down"></i></button></nobr></td>';
-					
-					content +=   '<td id="rvote' + i + '">' + item.rvote + '</td>';
-					
-        				if (item.followed == true) {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="unfollow_user(\'' + username + '\')"><nobr><i class ="icon-white icon-remove"></i>Unfollow</nobr></button></td></tr>'
-					}
-        				else {
-        					content += '<td><button class="btn btn-follow btn-mini" onclick="follow_user(\'' + username + '\')"><nobr><i class="icon-white icon-heart"></i>Follow</nobr></button></td></tr>'
-        				}
+			$.each(data.reviews, function (i, item) {
+			    username = 'N/A';
+			    if (item.username != null) {
+			        username = item.username;
+			    }
+
+			    content += '<tr><td><a href="/users/' + username + '">' + username + '</td><td>' + item.rscr + '</td><td>' + item.rdesc + '</td><td id="numup' + i + '"><nobr>' + item.upvote;
+
+			    content += '<button class="btn btn-success btn-mini" onclick="vote_reviews(' + i + ', ' + item.upvote + ', ' + nil + ', ' + item.id + ')"><i class="icon-white icon-thumbs-up"></i></button></nobr></td>\n';
+
+			    content += '<nobr><td id="numdown' + i + '">' + item.downvote + '<button class="btn btn-danger btn-mini" onclick="vote_reviews(' + i + ', ' + nil + ', ' + item.downvote + ', ' + item.id + ')"><i class="icon-white icon-thumbs-down"></i></button></nobr></td>';
+
+			    content += '<td id="rvote' + i + '">' + item.rvote + '</td>';
+
+			    if (item.followed == true) {
+			        content += '<td><button class="btn btn-follow btn-inverse btn-mini" onclick="unfollow_user(\'' + username + '\')"><nobr><i class ="icon-white icon-remove" ></i>Unfollow</nobr></button></td>'; //</tr>
+			    } else {
+			        content += '<td><button class="btn btn-follow btn-inverse btn-mini" onclick="follow_user(\'' + username + '\')"><nobr><i class="icon-white icon-heart"></i>Follow</nobr></button></td>'; //</tr>
+			    }
+
+			    if (loggedInUser) {
+			        if (username == loggedInUser) {
+
+			            content += '<td><button class="btn btn-inverse btn-mini" onclick="update_review(\'' + loggedInUser + '\',\'' + item.username + '\',\'' + item.id + '\')" rel="tooltip" data-title="Edit this review"><i class="icon-white icon-pencil"></i></button></td>';
+			            content += '<td><button class="btn btn-inverse btn-mini" onclick="delete_review(\'' + loggedInUser + '\',\'' + item.username + '\',\'' + item.id + '\')" rel="tooltip" data-title="Delete this review"><i class="icon-white icon-trash"></i></button></td>';
+
+			        }
+			    }
+
+			    content += '</tr>';
+
 			});
 
 			content+='</tbody></table>';
@@ -155,6 +165,17 @@
 			return false;
 		}
 
+		function delete_review(sessionUsername, reviewUsername, reviewID) 
+        {
+            alert(sessionUsername + " is trying to delete review made by " + reviewUsername + " with review ID: " + reviewID);
+		}
+
+		function update_review(sessionUsername, reviewUsername, reviewID) 
+        {
+
+		    alert(sessionUsername + " is trying to update review made by " + reviewUsername + " with review ID: " + reviewID);
+		}
+
 		function vote_reviews(i, upvote, downvote, pk)
 		{
 			var vote = new Object();
@@ -176,6 +197,11 @@
 		
 		//Send a review when the review submit button is pressed
 		$('#review').submit(sendReview);
+
+		//trigger tooltips
+		$('body').tooltip({
+		    selector: '[rel="tooltip"]'
+		});
 		
 	</script>
 {% endblock content %}

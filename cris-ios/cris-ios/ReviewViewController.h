@@ -2,7 +2,7 @@
 //  ReviewViewController.h
 //  cris-ios
 //
-//  Created by Finn Wake on 2013-03-17.
+//  Created by Rory Finnegan on 2013-03-17.
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *descText;
 
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *dislikeButton;
@@ -36,6 +38,7 @@
 
 - (IBAction)dislike:(id)sender;
 
+- (IBAction)create:(id)sender;
 
 
 @end

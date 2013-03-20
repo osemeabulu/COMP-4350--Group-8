@@ -11,7 +11,7 @@
 #import "Review.h"
 
 @interface CourseDetailViewController ()
-@property (nonatomic, strong) NSMutableArray *reviews;
+
 @property (nonatomic, strong) NSMutableData *responseData;
 
 @end

@@ -2,24 +2,35 @@
 //  ReviewViewController.m
 //  cris-ios
 //
-//  Created by Finn Wake on 2013-03-17.
+//  Created by Rory Finnegan on 2013-03-17.
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
 #import "ReviewViewController.h"
 
 @interface ReviewViewController ()
-@property (nonatomic, strong) NSMutableData *responseData;
-- (void)postJSONObjects:(NSData *)jsonRequest;
+@property (nonatomic, strong) NSMutableData *createResponseData;
+@property (nonatomic, strong) NSMutableData *voteResponseData;
+@property (nonatomic, strong) NSURLConnection *createConn;
+@property (nonatomic, strong) NSURLConnection *voteConn;
+
+- (void)postJSONObjects:(NSData *)jsonRequest
+                       connection:(NSURLConnection *)connection
+                       url:(NSURL *)url;
+
 @end
 
 @implementation ReviewViewController
 
-@synthesize responseData;
+@synthesize createResponseData;
+@synthesize voteResponseData;
+@synthesize createConn;
+@synthesize voteConn;
 @synthesize courseLabel;
 @synthesize userLabel;
 @synthesize scorePicker;
 @synthesize descText;
+@synthesize createButton;
 @synthesize likeButton;
 @synthesize dislikeButton;
 @synthesize likeLabel;
@@ -50,7 +61,8 @@
     {
         self.userLabel.text = self.review.username;
     }
-    self.responseData = [NSMutableData data];
+    self.createResponseData = [NSMutableData data];
+    self.voteResponseData = [NSMutableData data];
     self.scorePicker.dataSource = self;
     self.scorePicker.delegate = self;
     [self.scorePicker reloadAllComponents];
@@ -59,6 +71,8 @@
     self.descText.text = self.review.rdesc;
     self.likeLabel.text = self.review.upvote;
     self.dislikeLabel.text = self.review.downvote;
+    self.createConn = nil;
+    self.voteConn = nil;
         
 	// Do any additional setup after loading the view.
 }
@@ -101,12 +115,12 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     NSLog(@"didReceiveResponse");
-    [self.responseData setLength:0];
+    [self.voteResponseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [self.responseData appendData:data];
+    [self.voteResponseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -118,19 +132,41 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     NSLog(@"connectionDidFinishLoading");
-    NSLog(@"Received JSON votes! Received %d bytes of data", [self.responseData length]);
+    NSLog(@"Received JSON votes! Received %d bytes of data", [self.voteResponseData length]);
     
-    //convert to JSON
-    NSError *myError = nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+    if (connection != nil && connection == voteConn)
+    {
+        //convert to JSON
+        NSError *myError = nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.voteResponseData options:NSJSONReadingMutableLeaves error:&myError];
 
-    NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
-    NSString *upvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"up"]];
-    NSString *downvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"down"]];
-    NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
+        NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
+        NSString *upvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"up"]];
+        NSString *downvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"down"]];
+        NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
 
-    self.likeLabel.text = upvote;
-    self.dislikeLabel.text = downvote;
+        self.likeLabel.text = upvote;
+        self.dislikeLabel.text = downvote;
+    }
+    
+    else if (connection != nil && connection == createConn)
+    {
+        //perform post request review creation processing
+        if (self.cdvc != nil)
+        {
+            NSError *err = nil;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.createResponseData options:NSJSONReadingMutableLeaves error:&err];
+            
+            //create a new review locally
+            self.review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [json objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [json objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [json objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [json objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]]];
+            
+            //add the review to the CoureDetailViewController
+            [self.cdvc.reviews addObject:self.review];
+            
+            //Then reload the reviewLists data to complete update on CourseDetailViewController
+            [self.cdvc.reviewList reloadData];
+        }
+    }
     
 }
 
@@ -141,7 +177,8 @@
     
     NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     
-    [self postJSONObjects:jsonObj];
+    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    [self postJSONObjects:jsonObj connection:self.voteConn url:url];
     
     [self.likeButton setEnabled:NO];
     
@@ -152,14 +189,33 @@
     NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt: self.review.index.intValue ], @"index", [NSNull null], @"upvote", [NSNumber numberWithInt: self.review.downvote.intValue], @"downvote", [NSNumber numberWithInt: self.review.pk.intValue], @"key",nil];
     
     NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
-    [self postJSONObjects:jsonObj];
+    
+    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    [self postJSONObjects:jsonObj connection:self.voteConn url:url];
     
     [self.dislikeButton setEnabled:NO];
 
 }
 
-- (void)postJSONObjects:(NSData *)jsonRequest{
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+- (IBAction)create:(id)sender {
+    //perform creating code
+    NSError* error;
+    
+    NSInteger scr = [self.scorePicker selectedRowInComponent:0] + 1;
+    
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:self.review.cid, @"cid", scr, @"rscr", self.descText.text, @"rdesc", 0, @"rvote", 0, "upvote", 0, "downvote", nil];
+    
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_submit_review"];
+    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+    
+    [self.createButton setEnabled:NO];
+}
+
+- (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
+{
+    //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
     
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -170,8 +226,7 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody: jsonRequest];
     
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 @end

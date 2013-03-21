@@ -9,9 +9,11 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize baseURL;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    baseURL = @"http://cris-release-env-przrapykha.elasticbeanstalk.com/";
     // Override point for customization after application launch.
     return YES;
 }

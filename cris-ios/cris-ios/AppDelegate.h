@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    UIWindow *window;
+    NSString *baseURL;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSString *baseURL;
 
 @end

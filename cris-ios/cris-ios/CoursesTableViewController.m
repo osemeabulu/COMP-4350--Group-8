@@ -7,6 +7,7 @@
 //
 
 #import "CoursesTableViewController.h"
+#import "AppDelegate.h"
 #import "Course.h"
 
 @interface CoursesTableViewController ()
@@ -35,7 +36,10 @@
     NSLog(@"viewdidload");
     self.courses = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/courses/_query?key="]];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@courses/_query", appDel.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/courses/_query?key="]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     [super viewDidLoad];

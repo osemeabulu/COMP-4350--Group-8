@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "TopRatedViewController.h"
 #import "Course.h"
 
@@ -38,7 +39,10 @@
     
     self.topRatedCourses = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/courses/_top_query?key="]];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@courses/_top_query", appDel.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/courses/_top_query?key="]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // Uncomment the following line to preserve selection between presentations.

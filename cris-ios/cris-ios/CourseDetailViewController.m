@@ -8,6 +8,7 @@
 
 #import "CourseDetailViewController.h"
 #import "ReviewViewController.h"
+#import "AppDelegate.h"
 #import "Review.h"
 
 @interface CourseDetailViewController ()
@@ -48,7 +49,10 @@
     
     self.reviews = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"http://cris-release-env-przrapykha.elasticbeanstalk.com/reviews/_query_by_course?key=%@", self.course.cid]]];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_query_by_course?key=%@", appDel.baseURL, self.course.cid];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: [NSString stringWithFormat: @"http://cris-release-env-przrapykha.elasticbeanstalk.com/reviews/_query_by_course?key=%@", self.course.cid]]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     [super viewDidLoad];

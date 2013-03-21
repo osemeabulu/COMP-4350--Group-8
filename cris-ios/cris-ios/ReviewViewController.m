@@ -7,6 +7,7 @@
 //
 
 #import "ReviewViewController.h"
+#import "AppDelegate.h"
 
 @interface ReviewViewController ()
 @property (nonatomic, strong) NSMutableData *createResponseData;
@@ -177,7 +178,11 @@
     
     NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_vote", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     [self postJSONObjects:jsonObj connection:self.voteConn url:url];
     
     [self.likeButton setEnabled:NO];
@@ -190,7 +195,10 @@
     
     NSData* jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_vote", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
     [self postJSONObjects:jsonObj connection:self.voteConn url:url];
     
     [self.dislikeButton setEnabled:NO];
@@ -217,7 +225,10 @@
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     
-        NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_submit_review"];
+        //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_submit_review"];
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@reviews/_submit_review", appDel.baseURL];
+        NSURL *url = [NSURL URLWithString:urlString];
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
         [self.createButton setEnabled:NO];

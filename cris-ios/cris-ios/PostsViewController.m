@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Scott Hofer. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "PostsViewController.h"
 
 @interface PostsViewController ()
@@ -67,16 +68,25 @@
     self.myPosts = [NSMutableArray array];
     self.responseData = [NSMutableData data];
     if (control.selectedSegmentIndex == 0) {
-        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     }
     if (control.selectedSegmentIndex == 1) {
-        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
     if (control.selectedSegmentIndex == 2) {
-        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
 }

@@ -7,6 +7,7 @@
 //
 
 #import "InstructorsViewController.h"
+#import "AppDelegate.h"
 
 @interface InstructorsViewController ()
 
@@ -35,7 +36,10 @@
     
     self.instructors = [NSMutableArray array];//initWithObjects:@"Michael Zapp", @"JOhn Braico", @"C Penner", nil];
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/instructors/_query?key="]];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/instructors/_query?key="]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // Uncomment the following line to preserve selection between presentations.

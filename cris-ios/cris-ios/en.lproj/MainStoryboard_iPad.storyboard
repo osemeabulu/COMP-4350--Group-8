@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -64,7 +64,7 @@
             <objects>
                 <viewController id="cU7-lo-Gmq" customClass="CourseDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2gN-J8-VEh">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFT-nb-dMu">
@@ -119,6 +119,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="U9r-yu-00z" kind="push" identifier="ReviewCreationSegue" id="NRL-wZ-2Dg"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30k-Vd-4K5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -194,7 +197,7 @@
             <objects>
                 <viewController id="U9r-yu-00z" customClass="ReviewViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JEs-xq-NC1">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d28-fK-EMo">
@@ -342,7 +345,6 @@
                                 </state>
                                 <connections>
                                     <action selector="create:" destination="U9r-yu-00z" eventType="touchUpInside" id="CUl-e5-c5a"/>
-                                    <segue destination="cU7-lo-Gmq" kind="push" id="g5V-2Y-Wmg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -720,12 +722,74 @@
         <image name="thumbs-down-smallicon.png" width="85" height="85"/>
         <image name="thumbs-up-smallicon.png" width="85" height="85"/>
     </resources>
+    <classes>
+        <class className="CourseDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+                <relationship kind="action" name="createReviewButton:"/>
+                <relationship kind="action" name="seeReviewButton:"/>
+                <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseIdLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="facultyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reviewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CoursesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="InstructorsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PostsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="postsTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ReviewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="create:"/>
+                <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TopRatedViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="g5V-2Y-Wmg"/>
+        <segue reference="NRL-wZ-2Dg"/>
     </inferredMetricsTieBreakers>
 </document>

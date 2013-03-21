@@ -164,7 +164,7 @@
             [self.cdvc.reviews addObject:self.review];
             
             //Then reload the reviewLists data to complete update on CourseDetailViewController
-            [self.cdvc.reviewList reloadData];
+            //[self.cdvc.reviewList reloadData];
         }
     }
     
@@ -198,19 +198,30 @@
 }
 
 - (IBAction)create:(id)sender {
-    //perform creating code
-    NSError* error;
+    if (self.cdvc != nil)
+    {
+        //perform creating code
+        NSError* error;
     
-    NSInteger scr = [self.scorePicker selectedRowInComponent:0] + 1;
+        NSString *cid = [NSString stringWithString:self.review.cid];
+        NSString *desc = [NSString stringWithString:self.descText.text];
+        NSNumber *scr = [NSNumber numberWithInt:[self.scorePicker selectedRowInComponent:0] + 1];
     
-    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:self.review.cid, @"cid", scr, @"rscr", self.descText.text, @"rdesc", 0, @"rvote", 0, "upvote", 0, "downvote", nil];
+        NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                                     [info setValue:cid forKey:@"cid"];
+                                     [info setValue:scr forKey:@"rscr"];
+                                     [info setValue:desc forKey:@"rdesc"];
+                                     [info setValue:[NSNull null] forKey:@"rvote"];
+                                     [info setValue:[NSNull null] forKey:@"upvote"];
+                                     [info setValue:[NSNull null] forKey:@"downvote"];
     
-    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+        NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     
-    NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_submit_review"];
-    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+        NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_submit_review"];
+        [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
-    [self.createButton setEnabled:NO];
+        [self.createButton setEnabled:NO];
+    }
 }
 
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url

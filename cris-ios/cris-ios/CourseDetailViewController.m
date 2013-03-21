@@ -72,6 +72,7 @@
         ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
         r.index = [NSString stringWithFormat:@"%d",row];
         rvc.review = r;
+        [rvc.createButton setEnabled:NO];
     }
     
     else if ([segue.identifier isEqualToString:@"ReviewCreationSegue"])

@@ -74,7 +74,16 @@
     self.dislikeLabel.text = self.review.downvote;
     self.createConn = nil;
     self.voteConn = nil;
-        
+    
+    if (self.cdvc == nil)
+    {
+        //should check if we are the user that wrote the review when
+        //users feature is completed
+        [self.createButton setHidden:YES];
+        [self.createButton setEnabled:NO];
+        [self.descText setEditable:NO];
+        [self.scorePicker setUserInteractionEnabled:NO];
+    }
 	// Do any additional setup after loading the view.
 }
 

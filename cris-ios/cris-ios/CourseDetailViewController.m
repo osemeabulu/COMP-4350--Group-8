@@ -59,6 +59,17 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_query_by_course?key=%@", appDel.baseURL, self.course.cid];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    [super viewDidAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -73,10 +84,12 @@
         NSIndexPath *ip = [self.reviewList indexPathForCell:cell];
         Review *r = [self.reviews objectAtIndex:ip.row];
         int row = ip.row;
+        
         ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
         r.index = [NSString stringWithFormat:@"%d",row];
+        
         rvc.review = r;
-        [rvc.createButton setEnabled:NO];
+        rvc.cdvc = nil;
     }
     
     else if ([segue.identifier isEqualToString:@"ReviewCreationSegue"])
@@ -224,6 +237,9 @@
 {
     NSLog(@"connectionDidFinishLoading");
     NSLog(@"Succeeded! Received %d bytes of data", [self.responseData length]);
+    
+    //empty the reviews in case we have any already in there
+    [self.reviews removeAllObjects];
     
     //convert to JSON
     NSError *myError = nil;

@@ -8,9 +8,27 @@ mod = Blueprint('posts', __name__, url_prefix='/posts')
 def query_user():
 	results = []
 	key = request.args.get('key', '')
-	user = User.query.filter_by(username=key).all()
+	user = User.query.filter_by(username=key).first()
 	if user is not None:
 		results = user.get_posts()
+	return jsonify(posts = [i.serialize for i in results])	
+
+@mod.route('/_query_user_followers')
+def query_user_followers():
+	results = []
+	key = request.args.get('key', '')
+	user = User.query.filter_by(username=key).first()
+	if user is not None:
+		results = user.get_followers_posts()
+	return jsonify(posts = [i.serialize for i in results])	
+
+@mod.route('/_query_user_following')
+def query_user_following():
+	results = []
+	key = request.args.get('key', '')
+	user = User.query.filter_by(username=key).first()
+	if user is not None:
+		results = user.get_following_posts()
 	return jsonify(posts = [i.serialize for i in results])	
 
 @mod.route('/_query_followers')

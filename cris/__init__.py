@@ -7,6 +7,7 @@ from cris.users.controller import mod as userModule
 from cris.instructors.controller import mod as instructorsModule
 from cris.posts.controller import mod as postsModule
 from cris.users.model import User
+from cris.posts.model import Post
 
 __all__ = ['create_app']
 
@@ -169,6 +170,10 @@ def reload_db():
 	chris = User('chris', 'c123') 
 	sam = User('sam', 's123')
 
+	post1 = Post("sam", "Just finished having some cookies and punch at the Comp Sci Staff Lounge!")
+	post2 = Post("chris", "@Sam - I prefer beer and pizza!!")	
+	post3 = Post("james", "Finally finished my SE2 project! I can finally relax!!")
+
 	db.session.add(oo)
 	db.session.add(aut)
 	db.session.add(aa)
@@ -191,9 +196,13 @@ def reload_db():
 	db.session.add(chris)
 	db.session.add(sam)
 	
+	db.session.add(post1)
+	db.session.add(post2)
+	db.session.add(post3)
+
 	db.session.commit()
 
-	prof1.teach(oo)
+ 	prof1.teach(oo)
 	prof1.teach(aut)
 	prof2.teach(aa)
 	prof2.teach(ai)

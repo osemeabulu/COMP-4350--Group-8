@@ -164,8 +164,11 @@ def reload_db():
         prof4 = Instructor('Christina Penner')
         
 	admin = User('admin', 'default', True)
-	test_user = User('test', 'password')
-	
+	test_user = User('test', 'password')	
+	james = User('james', 'j123')
+	chris = User('chris', 'c123') 
+	sam = User('sam', 's123')
+
 	db.session.add(oo)
 	db.session.add(aut)
 	db.session.add(aa)
@@ -184,7 +187,10 @@ def reload_db():
 
 	db.session.add(admin)
 	db.session.add(test_user)
-
+	db.session.add(james)
+	db.session.add(chris)
+	db.session.add(sam)
+	
 	db.session.commit()
 
 	prof1.teach(oo)
@@ -194,3 +200,6 @@ def reload_db():
 	prof3.teach(se1)
 	prof3.teach(os1)
 	prof4.teach(se2)
+	
+	sam.follow(james)
+	chris.follow(sam)

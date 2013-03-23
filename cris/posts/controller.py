@@ -1,7 +1,17 @@
 from flask import Blueprint, jsonify, session, flash, render_template, request, redirect, url_for, abort
 from cris.users.model import User
+from cris.posts.model import Post
 
 mod = Blueprint('posts', __name__, url_prefix='/posts')
+
+@mod.route('/_query_user')
+def query_user():
+	results = []
+	key = request.args.get('key', '')
+	user = User.query.filter_by(username=key).all()
+	if user is not None:
+		results = user.get_posts()
+	return jsonify(posts = [i.serialize for i in results])	
 
 @mod.route('/_query_followers')
 def query_followers():

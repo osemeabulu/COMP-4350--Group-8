@@ -34,6 +34,7 @@ def submit_review():
 @mod.route('/_query_by_course')
 def query_by_course():
 	results = []
+	following = []
 	temp_dict = {}
 
 	key = request.args.get('key', '')
@@ -41,7 +42,8 @@ def query_by_course():
 	
 	if 'username' in session:
 		curr_user = User.query.get(session['username'])
-		following = curr_user.get_followers()
+		if curr_user != None:
+			following = curr_user.get_followers()
 		
 		if len(reviews) > 0:
 			for review in reviews:

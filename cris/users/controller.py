@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, redirect, url_for, request, flash, session
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, request, flash, session, abort
 from cris import db
 from sqlalchemy.exc import IntegrityError
 from model import User
@@ -15,7 +15,7 @@ def register():
 	if 'username' in session:
 		flash("You can not register an account when you are logged in")
 		return redirect(url_for('index'))
-
+	
 	if request.method == 'POST':
 		if request.form['password'] == request.form['password_c']:
 			try:
@@ -106,17 +106,20 @@ def query_followers():
 
 @mod.route('/<string:user>')
 def show_user(user):
-  print user
-  result = User.query.filter_by(username=user).first()
+	result = User.query.filter_by(username=user).first()
   
-  if result:
-    return render_template('users/show_user.html', user=result)
-  else:
-    abort(404)
+	if result:
+		return render_template('users/show_user.html', user=result)
+  	else:
+    		abort(404)
+
+@mod.route('/_query_user')
+def query_user():
+	key = request.args.get('key', '')
+	results = User.query.filter_by(username=key).all()
+	return jsonify(users = [i.serialize for i in results])
 
 @mod.route('/_query')
 def query():
-	key = request.args.get('key', '')
-
 	results = User.query.all()
 	return jsonify(users = [i.serialize for i in results])

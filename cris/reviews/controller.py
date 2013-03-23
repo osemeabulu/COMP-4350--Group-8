@@ -31,6 +31,41 @@ def submit_review():
 
 		return jsonify(rdesc = rdesc, rscr = rscr, rvote=rvote, upvote = upvote, downvote = downvote)
 
+@mod.route('/_delete_review', methods=['POST'])
+def delete_review():
+        if request.method == 'POST':
+                
+                key = request.json['id']
+                target = Review.query.filter_by(id=key).first()
+
+                if target:
+                        db.session.delete(target)
+                        db.session.commit()
+                        flash('Review was deleted successfully', 'success')
+                        return jsonify(key = key)
+                else:
+                        return "Delete failed"
+
+@mod.route('/_update_review', methods=['POST'])
+def update_review():
+        if request.method == 'POST':
+
+                rID = request.json['id']
+
+                target = Review.query.filter_by(id=rID).first()
+
+                if target:
+                        target.rscr = request.json['rscr']
+                        target.rdesc = request.json['rdesc']
+                        target.rvote = request.json['rvote']
+                        target.upvote = request.json['upvote']
+                        target.downvote = request.json['downvote']
+                        db.session.commit()
+                        
+                        return jsonify(rID = rID)
+                else:
+                        return "Update Failed"
+        
 @mod.route('/_query_by_course')
 def query_by_course():
 	results = []

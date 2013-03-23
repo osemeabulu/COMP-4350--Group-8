@@ -17,10 +17,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                 <h3 id="modalLabel">Submitting a Review for {{ course.cname }}</h3>
+                <p id="warning" style="color:Red"></p>
             </div>
 
             <div class="modal-body">
-            <form id="review">
 				<fieldset>
 					<div>
 					    <p>Rating</p>
@@ -35,10 +35,11 @@
 					<div>
 						<label class="control-label" for="description">Description</label>
 						<textarea class="input-xlarge" data-jsonify-name="rdesc" id="description" rows="7"></textarea>
+                        <input type="hidden" id="review_id">
 					</div>
-                    <button type="submit" class="btn btn-inverse">Submit</button>
+                    <button id="submitButton" onclick="sendReview()" class="btn btn-inverse">Submit</button>
+                    <button id="updateButton" onclick="updateReview()"class="btn btn-inverse">Update</button>
 				</fieldset>
-			</form>
             </div>
             <div class="modal-footer">            	
                 <button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -94,8 +95,8 @@
 			    if (loggedInUser) {
 			        if (username == loggedInUser) {
 
-			            content += '<td><button class="btn btn-inverse btn-mini" onclick="update_review(\'' + loggedInUser + '\',\'' + item.username + '\',\'' + item.id + '\')" rel="tooltip" data-title="Edit this review"><i class="icon-white icon-pencil"></i></button></td>';
-			            content += '<td><button class="btn btn-inverse btn-mini" onclick="delete_review(\'' + loggedInUser + '\',\'' + item.username + '\',\'' + item.id + '\')" rel="tooltip" data-title="Delete this review"><i class="icon-white icon-trash"></i></button></td>';
+			            content += '<td><button class="btn btn-inverse btn-mini" onclick="update_modal(\'' + item.id + '\',\'' + item.rscr + '\',\'' + item.rdesc + '\')" rel="tooltip" data-title="Edit this review"><i class="icon-white icon-pencil"></i></button></td>';
+			            content += '<td><button class="btn btn-inverse btn-mini" onclick="delete_review(\'' + item.id + '\')" rel="tooltip" data-title="Delete this review"><i class="icon-white icon-trash"></i></button></td>';
 
 			        }
 			    }
@@ -128,26 +129,77 @@
 		}
 
 	
-		//grabs the review fields, creates and object and sends it with sendObjects.
-		function sendReview()
-		{
+		//grabs the review fields, creates and object and sends it with
+		function sendReview() {
+
 			var review = new Object();
 			review.cid = "{{ course.cid }}"
-		    	review.rscr = $('select[id="score"]').val()
-		    	review.rdesc = $('textarea[id="description"]').val()
-		    	review.rvote = 0
+		    review.rscr = $('select[id="score"]').val()
+		    review.rdesc = $('textarea[id="description"]').val()
+		    review.rvote = 0
 			review.upvote = 0
 			review.downvote = 0
 			
 			sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.submit_review') }}",
 						 review,
 						 update);
-						 
+
 			$('#submitReview').modal('hide');
 			
 			return false;
 
-		}    
+		}
+
+		function delete_review(id) {
+
+		    var review = new Object();
+		    review.id = id
+
+		    sendObjects( $SCRIPT_ROOT + "{{ url_for('reviews.delete_review') }}",
+						 review,
+						 update);
+
+		    return false;
+		}
+
+		function updateReview() 
+        {
+            //send review for updating
+            var review = new Object();
+
+            review.id = $('#review_id').val();
+            review.rscr = $('select[id="score"]').val()
+            review.rdesc = $('textarea[id="description"]').val()
+            review.rvote = 0
+            review.upvote = 0
+            review.downvote = 0
+
+            sendObjects($SCRIPT_ROOT + "{{ url_for('reviews.update_review') }}",
+						 review,
+						 update);
+
+            return false;
+		}
+
+		function update_modal(id, score, description) {
+
+		    $('#submitReview').modal('show');
+		    $('#modalLabel').empty().append("Editing a review for {{ course.cname }}");
+		    $('#warning').empty().append("Editing will remove all votes from this review!");
+
+   		    //populate fields
+		    $('textarea[id="description"]').val(description);
+		    $('select[id="score"]').val(score);
+
+		    //switch buttons
+		    $("#submitButton").hide();
+		    $("#updateButton").show();
+
+            //send id to hidden field to retrieve later when user clicks update
+		    $('#review_id').val(id);
+
+		    return false;
+		}
 		
 		function follow_user(username)
 		{	
@@ -163,17 +215,6 @@
 						 username,
 						 update);			
 			return false;
-		}
-
-		function delete_review(sessionUsername, reviewUsername, reviewID) 
-        {
-            alert(sessionUsername + " is trying to delete review made by " + reviewUsername + " with review ID: " + reviewID);
-		}
-
-		function update_review(sessionUsername, reviewUsername, reviewID) 
-        {
-
-		    alert(sessionUsername + " is trying to update review made by " + reviewUsername + " with review ID: " + reviewID);
 		}
 
 		function vote_reviews(i, upvote, downvote, pk)
@@ -195,8 +236,7 @@
 		//Get course reviews when page is loaded
 		$(window).load(getReviews);
 		
-		//Send a review when the review submit button is pressed
-		$('#review').submit(sendReview);
+		$("#updateButton").hide();
 
 		//trigger tooltips
 		$('body').tooltip({

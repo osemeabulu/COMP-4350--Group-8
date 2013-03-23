@@ -3,17 +3,49 @@
 {% block content %}
 	<div class= "hero-unit">
 		<h2>Login</h2>
-		{% if error %}
+		<!--{% if error %}
 			<div class="alert alert-error"><strong>Error: </strong>{{ error }}</div>
-		{% endif %}
-		<form action="{{ url_for('login') }}" method=post>
+		{% endif %}-->
+		<form id="login" action="{{ url_for('login') }}" method=post>
 			<dl>
       		<dt>Username:
-      			<dd><input type=text name=username>
+      			<!--dd><input type=text name=username-->
+      			<dd><input type=text id=username>
       		<dt>Password:
-      		<dd><input type=password name=password>
+      			<!--dd><input type=password name=password-->
+      			<dd><input type=password id=password>
       		<dd><input type=submit class="btn" value=Login>
     		</dl>
   		</form>
 	</div>
+	<script src="{{ url_for('static', filename="cris/utils.js") }}"></script>
+	<script>
+	
+		function loginSuccess(data)
+		{
+			if(data.session)
+			{
+				window.location.replace("{{ url_for('index') }}");
+			}
+			else
+			{
+				window.location.replace("{{ url_for('login') }}");
+			}
+		}
+		function loginUser()
+		{
+			var user = new Object();
+			user.name = $('input[id="username"]').val()
+			user.pass = $('input[id="password"]').val()
+			
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('users.user_logged_in') }}",
+						 user,
+						 loginSuccess);
+						 
+			return false;
+		}
+		
+		$('#login').submit(loginUser);
+		
+	</script>
 {% endblock %}

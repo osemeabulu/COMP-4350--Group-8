@@ -120,3 +120,32 @@ def query():
 
 	results = User.query.all()
 	return jsonify(users = [i.serialize for i in results])
+	
+@mod.route('/_check_session', methods = ['POST'])
+def user_logged_in():
+	logged_in = False
+	
+	if 'username' in session:
+		flash ("Already Logged In.")
+		#return redirect(url_for('index'))
+		logged_in = True
+	if request.method == 'POST':
+		data = request.json
+		print data
+		#username = request.form['username']
+		#password = request.form['password']
+		username = request.json['name']
+		password = request.json['pass']
+		result = User.query.filter_by(username=username).first()
+		if result and result.password == password:
+			session['username'] = username
+			flash('You were logged in')
+			#return redirect(url_for('index'))
+			logged_in = True
+		else:
+			#error = 'Unable to validate user'
+			flash('Unable to validate user')
+			logged_in = False
+		
+	return jsonify(session = logged_in)
+

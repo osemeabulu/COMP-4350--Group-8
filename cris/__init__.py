@@ -54,7 +54,7 @@ def configure_routes(application):
 
 	@application.route("/login", methods=['GET', 'POST'])
 	def login():
-		error = None
+		'''error = None
 		if 'username' in session:
 			flash ("Already Logged In.")
 			return redirect(url_for('index'))
@@ -66,9 +66,9 @@ def configure_routes(application):
 				session['username'] = username
 				flash('You were logged in')
 				return redirect(url_for('index'))
-			else:
-				error = 'Unable to validate user'
-		return render_template('login.html', error=error)
+			else:'''
+				#error = 'Unable to validate user'
+		return render_template('login.html')
 
 	@application.route('/logout')
 	def logout():

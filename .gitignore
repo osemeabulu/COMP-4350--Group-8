@@ -10,6 +10,7 @@ env/.DS_Store
 env/lib/.DS_Store
 static/.DS_Store
 static/bootstrap/.DS_Store
+venv/*
 venv/.Python
 venv/bin/activate
 venv/bin/activate.csh

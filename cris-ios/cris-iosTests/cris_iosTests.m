@@ -32,7 +32,7 @@
     //STFail(@"Unit tests are not implemented yet in cris-iosTests");
 }
 
--(void)testCourses
+-(void)testCourseGood
 {
     Course *c = [[Course alloc] initWithCid:@"test1010" cname:@"test name" cdesc:@"test description" cflty:@"test Faculty"];
     
@@ -49,17 +49,9 @@
     //print course
 }
 
--(void)testReviews
+-(void)testCourse
 {
-    Review *r = [[Review alloc] initWithCid:@"test1010" username:@"testUser" rdesc:@"i enjoyed taking this course as it was my first test course" rscr:@"3.5"];
-    
-    STAssertTrue([r.cid isEqualToString:@"test1010"], @"Error with Reviews cid");
-    STAssertTrue([r.username isEqualToString:@"testUser"], @"Error with Reviews username");
-    STAssertTrue([r.rscr isEqualToString:@"3.5"], @"Error with Reviews scr");
-    STAssertTrue([r.rdesc isEqualToString:@"i enjoyed taking this course ar it was my first test course"], @"Error with Reviews description");
-    
-    
-    assert(r);
+    //Course
 }
 
 -(void)testConnection

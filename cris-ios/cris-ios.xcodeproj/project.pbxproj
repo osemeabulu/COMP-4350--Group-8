@@ -61,6 +61,8 @@
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
+		AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2ADE16FF8280005C6B49 /* ReviewTests.m */; };
+		AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2AE116FF8B10005C6B49 /* CourseTests.m */; };
 		B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6838F2616F636A90095D56D /* ReviewViewController.m */; };
 		B687E2F816F5548F00BE2831 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = B687E2F716F5548F00BE2831 /* Review.m */; };
 		B68A5D1F16EBD9B50013EF57 /* CoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68A5D1E16EBD9B50013EF57 /* CoursesTableViewController.m */; };
@@ -144,6 +146,10 @@
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
 		47D672E016EC26830076FFE4 /* TopRatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRatedViewController.m; sourceTree = "<group>"; };
+		AECB2ADD16FF8280005C6B49 /* ReviewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewTests.h; sourceTree = "<group>"; };
+		AECB2ADE16FF8280005C6B49 /* ReviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewTests.m; sourceTree = "<group>"; };
+		AECB2AE016FF8B10005C6B49 /* CourseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTests.h; sourceTree = "<group>"; };
+		AECB2AE116FF8B10005C6B49 /* CourseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseTests.m; sourceTree = "<group>"; };
 		B6838F2516F636A90095D56D /* ReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
 		B6838F2616F636A90095D56D /* ReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
 		B687E2F616F5548F00BE2831 /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
@@ -264,6 +270,10 @@
 			children = (
 				026D282816EA8C3400BAFB8F /* cris_iosTests.h */,
 				026D282916EA8C3400BAFB8F /* cris_iosTests.m */,
+				AECB2AE016FF8B10005C6B49 /* CourseTests.h */,
+				AECB2AE116FF8B10005C6B49 /* CourseTests.m */,
+				AECB2ADD16FF8280005C6B49 /* ReviewTests.h */,
+				AECB2ADE16FF8280005C6B49 /* ReviewTests.m */,
 				026D282316EA8C3400BAFB8F /* Supporting Files */,
 			);
 			path = "cris-iosTests";
@@ -473,6 +483,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */,
+				AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */,
+				AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -159,6 +159,7 @@
         self.dislikeLabel.text = downvote;
     }
     
+    /* This isn't necessary anymore
     else if (connection != nil && connection == createConn)
     {
         //perform post request review creation processing
@@ -168,16 +169,16 @@
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.createResponseData options:NSJSONReadingMutableLeaves error:&err];
             
             //create a new review locally
-            self.review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [json objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [json objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [json objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [json objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]]];
+            //self.review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [json objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [json objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [json objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [json objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]]];
             
             //add the review to the CoureDetailViewController
-            [self.cdvc.reviews addObject:self.review];
+            //[self.cdvc.reviews addObject:self.review];
             
             //Then reload the reviewLists data to complete update on CourseDetailViewController
             //[self.cdvc.reviewList reloadData];
         }
     }
-    
+    */
 }
 
 

@@ -28,7 +28,6 @@
 		026D281E16EA8C3400BAFB8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EA16EA8C3300BAFB8F /* UIKit.framework */; };
 		026D281F16EA8C3400BAFB8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EC16EA8C3300BAFB8F /* Foundation.framework */; };
 		026D282716EA8C3400BAFB8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 026D282516EA8C3400BAFB8F /* InfoPlist.strings */; };
-		026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 026D282916EA8C3400BAFB8F /* cris_iosTests.m */; };
 		02D5390F16FA4F910088621D /* PostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5390E16FA4F910088621D /* PostsViewController.m */; };
 		02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5391116FA6FD30088621D /* NewPostViewController.m */; };
 		0419113316F404B3009E9E5A /* 1Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419111B16F404B3009E9E5A /* 1Star.png */; };
@@ -106,8 +105,6 @@
 		026D281C16EA8C3400BAFB8F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		026D282416EA8C3400BAFB8F /* cris-iosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cris-iosTests-Info.plist"; sourceTree = "<group>"; };
 		026D282616EA8C3400BAFB8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		026D282816EA8C3400BAFB8F /* cris_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cris_iosTests.h; sourceTree = "<group>"; };
-		026D282916EA8C3400BAFB8F /* cris_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cris_iosTests.m; sourceTree = "<group>"; };
 		02D5390D16FA4F910088621D /* PostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsViewController.h; sourceTree = "<group>"; };
 		02D5390E16FA4F910088621D /* PostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsViewController.m; sourceTree = "<group>"; };
 		02D5391016FA6FD30088621D /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
@@ -268,8 +265,6 @@
 		026D282216EA8C3400BAFB8F /* cris-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				026D282816EA8C3400BAFB8F /* cris_iosTests.h */,
-				026D282916EA8C3400BAFB8F /* cris_iosTests.m */,
 				AECB2AE016FF8B10005C6B49 /* CourseTests.h */,
 				AECB2AE116FF8B10005C6B49 /* CourseTests.m */,
 				AECB2ADD16FF8280005C6B49 /* ReviewTests.h */,
@@ -482,7 +477,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */,
 				AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */,
 				AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */,
 			);

@@ -9,25 +9,35 @@
 #import "ReviewTests.h"
 #import "Review.h"
 
+@interface ReviewTests ()
+    - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url;
+@end
+
 @implementation ReviewTests
 {
     //server address
     NSString* serverAddress;
     
     //response data from requests
-    NSMutableData *createResponseData;
-    NSMutableData *voteResponseData;
+    NSMutableData *responseData;
     
-    //connections for the different requests
-    NSURLConnection *createConn;
-    NSURLConnection *voteConn;
+    NSDictionary *submitResults;
+    NSDictionary *voteResults;
+    
+    //connections
+    NSURLConnection *connection;
+    
+    //connections finished
+    BOOL done;
 }
 
 - (void)setUp
 {
     [super setUp];
     
+    responseData = [NSMutableData data];
     serverAddress = @"http://grp8-env-t6urakw4up.elasticbeanstalk.com";
+    done = NO;
 }
 
 
@@ -41,12 +51,12 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     NSLog(@"didReceiveResponse");
-    [voteResponseData setLength:0];
+    [responseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [voteResponseData appendData:data];
+    [responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -57,22 +67,11 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    done = YES;
+    NSError *err = nil;
+    submitResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&err];
     
-    if (connection != nil && connection == voteConn)
-    {
-        
-    }
-    
-    else if (connection != nil && connection == createConn)
-    {
-        
-    }
-    
-}
-
-- (void)testExample
-{
-    //STFail(@"Unit tests are not implemented yet in cris-iosTests");
+    NSLog([NSString stringWithFormat:@"JSON conversion returns %@", [err description]]);
 }
 
 -(void)testReviewNormal
@@ -82,32 +81,52 @@
     STAssertTrue([r.cid isEqualToString:@"test1010"], @"Error with Reviews cid");
     STAssertTrue([r.username isEqualToString:@"testUser"], @"Error with Reviews username");
     STAssertTrue([r.rscr isEqualToString:@"3.5"], @"Error with Reviews scr");
-    STAssertTrue([r.rdesc isEqualToString:@"i enjoyed taking this course ar it was my first test course"], @"Error with Reviews description");
+    STAssertTrue([r.rdesc isEqualToString:@"i enjoyed taking this course as it was my first test course"], @"Error with Reviews description");
     
     assert(r);
 }
 
-- (void)testReviewRequest
+- (void)testReviewSubmitGood
 {
-    //test review server requests
+    NSError *error;
+    
+    //-------- create json object for review -------
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    [info setValue:@"Comp4350" forKey:@"cid"];
+    [info setValue:@"4" forKey:@"rscr"];
+    [info setValue:@"Test Review" forKey:@"rdesc"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"rvote"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"upvote"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"downvote"];
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    STAssertNotNil(jsonObj, @"Error jsonified review is nil");
+    
+    //------ set up review submit request ----------
     NSString *connectionAddress = @"_submit_review";
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
     NSURL *testURL = [NSURL URLWithString:urlString];
+    STAssertNotNil(testURL, @"Error testURL for review submission is nil");
     
-    //[self postJSONObjects:jsonObj connection:self.createConn url:url];
-
+    //------------- make the request ---------------
+    [self postJSONObjects:jsonObj connection:connection url:testURL];
+    
+    //wait for response data
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
 }
 
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    STAssertNotNil(request, @"postJSONObjects: Error request is nil");
     
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody: jsonRequest];
     
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 }
 
 @end

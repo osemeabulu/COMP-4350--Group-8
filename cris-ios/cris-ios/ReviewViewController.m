@@ -228,9 +228,9 @@
                                      [info setValue:cid forKey:@"cid"];
                                      [info setValue:scr forKey:@"rscr"];
                                      [info setValue:desc forKey:@"rdesc"];
-                                     [info setValue:[NSNull null] forKey:@"rvote"];
-                                     [info setValue:[NSNull null] forKey:@"upvote"];
-                                     [info setValue:[NSNull null] forKey:@"downvote"];
+                                     [info setValue:[NSNumber numberWithInt:(0)] forKey:@"rvote"];
+                                     [info setValue:[NSNumber numberWithInt:(0)] forKey:@"upvote"];
+                                     [info setValue:[NSNumber numberWithInt:(0)] forKey:@"downvote"];
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
     

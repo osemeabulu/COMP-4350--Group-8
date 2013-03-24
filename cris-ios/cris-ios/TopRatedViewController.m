@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "TopRatedViewController.h"
 #import "Course.h"
+#import "CoursesTableViewController.h"
 
 @interface TopRatedViewController ()
 
@@ -112,6 +113,18 @@
     [cell viewWithTag:102];
 	ratingImageView.image = [self imageForRating:c.cavg.intValue];
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"TrSegue"]) {
+        UITableViewCell *cell = (UITableViewCell *)sender;
+        NSIndexPath *ip = [self.tableView indexPathForCell:cell];
+        Course *c = [self.topRatedCourses objectAtIndex:ip.row];
+        
+        CourseDetailViewController *cdv = (CourseDetailViewController *) segue.destinationViewController;
+        cdv.course = c;
+    }
+    
 }
 
 /*

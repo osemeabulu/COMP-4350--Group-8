@@ -8,6 +8,7 @@
 
 #import "UserViewController.h"
 #import "AppDelegate.h"
+#import "LoginSession.h"
 
 @interface UserViewController ()
 
@@ -76,17 +77,20 @@
     //convert to JSON
     NSError *myError = nil;
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
-    BOOL logged_in = [[res objectForKey:@"session"] boolValue];
+    NSString *user = [res objectForKey:@"session"];
     
     UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Login Failed. Try again" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
     UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Login Success" message:@"You are now logged in" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     //[alert addButtonWithTitle:@"OK"];
-    
-    if(logged_in){
+    NSLog (@"%@", user);
+
+    if(![user isEqualToString:@"not logged in"]){
+        LoginSession *session = [LoginSession sharedInstance];
+        [session setUser:user];
+        
         [success show];
-    }
-    else{
+    } else{
         [fail show];
     }
 }
@@ -109,7 +113,7 @@
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
         
-        NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/users/_check_session"];
+        NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000//users/_check_session"];
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
         //NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
         //NSURL *url = [NSURL URLWithString:urlString];
@@ -122,7 +126,6 @@
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
 {
     //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
-    
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     //NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];

@@ -141,11 +141,11 @@ def user_logged_in():
 			session['username'] = username
 			flash('You were logged in')
 			#return redirect(url_for('index'))
-			logged_in = True
+			logged_in = username
 		else:
 			#error = 'Unable to validate user'
 			flash('Unable to validate user')
-			logged_in = False
+			logged_in = 'not logged in'
 		
 	return jsonify(session = logged_in)
 

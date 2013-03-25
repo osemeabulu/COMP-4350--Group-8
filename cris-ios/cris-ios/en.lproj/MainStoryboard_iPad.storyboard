@@ -356,25 +356,61 @@
                                     <action selector="create:" destination="U9r-yu-00z" eventType="touchUpInside" id="CUl-e5-c5a"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDN-YN-ntL">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="WUV-zt-ElG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save Changes">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="edit:" destination="U9r-yu-00z" eventType="touchUpInside" id="Jgq-5f-yPi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQT-qb-ldD">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="105" id="VR5-a0-vfH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="del:" destination="U9r-yu-00z" eventType="touchUpInside" id="tcP-G3-Eq9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="D0Y-BI-NM3" firstAttribute="bottom" secondItem="G5q-5Z-cAW" secondAttribute="bottom" type="default" id="27b-3I-mbe"/>
                             <constraint firstItem="phK-Dh-NvM" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="179" id="2sJ-CQ-1oB"/>
                             <constraint firstAttribute="bottom" secondItem="VHo-Rb-A4G" secondAttribute="bottom" constant="245" id="2uo-nQ-BYi"/>
-                            <constraint firstAttribute="trailing" secondItem="D0Y-BI-NM3" secondAttribute="trailing" constant="285" id="3UB-mm-UlE"/>
+                            <constraint firstAttribute="bottom" secondItem="VDN-YN-ntL" secondAttribute="bottom" constant="41" id="4gz-nJ-y5z"/>
                             <constraint firstItem="VHo-Rb-A4G" firstAttribute="baseline" secondItem="Okb-nT-cj0" secondAttribute="baseline" type="default" id="5db-Xd-7Kg"/>
+                            <constraint firstItem="uQT-qb-ldD" firstAttribute="baseline" secondItem="q5E-0c-7PE" secondAttribute="baseline" type="default" id="5m1-LX-tjV"/>
                             <constraint firstItem="q5E-0c-7PE" firstAttribute="trailing" secondItem="Aem-bx-xO1" secondAttribute="trailing" type="default" id="61G-8k-mBj"/>
                             <constraint firstItem="bwM-yB-oz0" firstAttribute="trailing" secondItem="phK-Dh-NvM" secondAttribute="trailing" type="default" id="6vo-s5-d35"/>
+                            <constraint firstItem="uQT-qb-ldD" firstAttribute="baseline" secondItem="VDN-YN-ntL" secondAttribute="baseline" type="default" id="8mq-go-mGq"/>
                             <constraint firstItem="C0v-wa-n3Q" firstAttribute="leading" secondItem="LCo-Lw-tug" secondAttribute="leading" type="default" id="9k9-Y1-Ea9"/>
                             <constraint firstItem="G5q-5Z-cAW" firstAttribute="leading" secondItem="VHo-Rb-A4G" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="BX9-Gz-ubo"/>
+                            <constraint firstAttribute="trailing" secondItem="D0Y-BI-NM3" secondAttribute="trailing" constant="285" id="DSX-tn-vbp"/>
                             <constraint firstItem="1Zk-By-axU" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Dvb-QW-3WG"/>
-                            <constraint firstAttribute="bottom" secondItem="q5E-0c-7PE" secondAttribute="bottom" constant="41" id="IEI-eE-P5S"/>
                             <constraint firstItem="G5q-5Z-cAW" firstAttribute="top" secondItem="Aem-bx-xO1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="IFN-xR-GRR"/>
                             <constraint firstItem="phK-Dh-NvM" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="JId-AN-Tfs"/>
                             <constraint firstItem="1Zk-By-axU" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="109" id="QpT-1A-4Nm"/>
                             <constraint firstItem="C0v-wa-n3Q" firstAttribute="baseline" secondItem="bwM-yB-oz0" secondAttribute="baseline" type="default" id="Rk4-cw-1s3"/>
                             <constraint firstItem="fEN-a4-tMm" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="SKJ-WK-eRR"/>
+                            <constraint firstItem="VDN-YN-ntL" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="207" id="XBb-ef-bdu"/>
+                            <constraint firstAttribute="trailing" secondItem="uQT-qb-ldD" secondAttribute="trailing" constant="273" id="XKK-Mh-rx2"/>
                             <constraint firstItem="bwM-yB-oz0" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="43" id="Xj5-zw-YAb"/>
                             <constraint firstItem="fEN-a4-tMm" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="445" id="YBp-IY-rct"/>
                             <constraint firstItem="VHo-Rb-A4G" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="166" id="YFB-SA-a46"/>
@@ -397,18 +433,20 @@
                     <connections>
                         <outlet property="courseLabel" destination="C0v-wa-n3Q" id="ops-h5-NNa"/>
                         <outlet property="createButton" destination="q5E-0c-7PE" id="Poc-tu-dJg"/>
+                        <outlet property="deleteButton" destination="uQT-qb-ldD" id="g2V-aC-2eu"/>
                         <outlet property="descText" destination="Aem-bx-xO1" id="RPP-P3-cd9"/>
                         <outlet property="dislikeButton" destination="D0Y-BI-NM3" id="0cI-5B-ipH"/>
                         <outlet property="dislikeLabel" destination="Okb-nT-cj0" id="0ch-Iw-sGa"/>
                         <outlet property="likeButton" destination="G5q-5Z-cAW" id="ikH-o6-C3A"/>
                         <outlet property="likeLabel" destination="VHo-Rb-A4G" id="4ij-sg-WQq"/>
+                        <outlet property="saveChanges" destination="VDN-YN-ntL" id="T8l-4Z-UfU"/>
                         <outlet property="scorePicker" destination="d28-fK-EMo" id="vHw-Tt-N7t"/>
                         <outlet property="userLabel" destination="LCo-Lw-tug" id="NBq-mM-9cA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8j3-FW-iih" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4277" y="-1537"/>
+            <point key="canvasLocation" x="4513" y="-1553"/>
         </scene>
         <!--Instructors View Controller - Instructors-->
         <scene sceneID="5aT-Xp-gLE">

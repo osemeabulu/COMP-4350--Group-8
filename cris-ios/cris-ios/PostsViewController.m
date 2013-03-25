@@ -38,8 +38,22 @@
 - (void)viewDidLoad
 {
     NSLog(@"viewdidload");
-    [self switchcontrol:(id)self];
+    //[self switchcontrol:(id)self];
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    if ([appDel.curr_user isEqualToString:@"N/A"]) {
+        [control setEnabled:NO];
+        [self switchcontrol:(id)self];
+    }
+    else {
+        [control setEnabled:YES];
+        control.selectedSegmentIndex = 0;
+        [self switchcontrol:(id)self];
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -136,7 +150,7 @@
         [self.myPosts addObject:post];
         [self.postTime addObject:thisTime];
     }
-    
+
     [self.postsTableView reloadData];
 }
 

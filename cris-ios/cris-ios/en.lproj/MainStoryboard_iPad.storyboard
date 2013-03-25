@@ -944,15 +944,19 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ReviewViewController.h"/>
             <relationships>
                 <relationship kind="action" name="create:"/>
+                <relationship kind="action" name="del:"/>
                 <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="edit:"/>
                 <relationship kind="action" name="like:"/>
                 <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="saveChanges" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
             </relationships>

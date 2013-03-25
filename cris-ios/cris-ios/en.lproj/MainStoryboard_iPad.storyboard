@@ -595,12 +595,13 @@
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pc9-5V-129">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="pc9-5V-129">
                                 <segments>
                                     <segment title="My Posts"/>
                                     <segment title="Following"/>
                                     <segment title="Followed"/>
                                 </segments>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="switchcontrol:" destination="rPI-jF-pa0" eventType="valueChanged" id="TC9-qb-61h"/>
                                 </connections>
@@ -621,9 +622,9 @@
                             <constraint firstItem="pc9-5V-129" firstAttribute="trailing" secondItem="izS-re-Ksq" secondAttribute="trailing" type="default" id="9vQ-Zh-ecn"/>
                             <constraint firstItem="Pmf-QH-X2x" firstAttribute="leading" secondItem="izS-re-Ksq" secondAttribute="leading" type="default" id="HJH-NQ-aDT"/>
                             <constraint firstItem="pc9-5V-129" firstAttribute="leading" secondItem="izS-re-Ksq" secondAttribute="leading" type="default" id="HmW-NG-5nb"/>
-                            <constraint firstItem="Pmf-QH-X2x" firstAttribute="bottom" secondItem="izS-re-Ksq" secondAttribute="bottom" type="default" id="ITN-tq-OLa"/>
-                            <constraint firstItem="pc9-5V-129" firstAttribute="top" secondItem="izS-re-Ksq" secondAttribute="top" type="default" id="Jqq-2d-lVJ"/>
                             <constraint firstItem="Pmf-QH-X2x" firstAttribute="trailing" secondItem="izS-re-Ksq" secondAttribute="trailing" type="default" id="Y4h-Hw-d5H"/>
+                            <constraint firstItem="Pmf-QH-X2x" firstAttribute="top" secondItem="izS-re-Ksq" secondAttribute="top" constant="25" id="hqV-IX-1aZ"/>
+                            <constraint firstItem="pc9-5V-129" firstAttribute="top" secondItem="izS-re-Ksq" secondAttribute="top" type="default" id="kZy-dv-dNa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Posts" id="ciS-gL-hus">
@@ -642,10 +643,10 @@
             </objects>
             <point key="canvasLocation" x="1997" y="3648"/>
         </scene>
-        <!--View Controller - Create a new post for your followers!-->
+        <!--New Post View Controller - Create a new post for your followers!-->
         <scene sceneID="6tS-Vq-3Tl">
             <objects>
-                <viewController id="tO5-Oy-Dfx" sceneMemberID="viewController">
+                <viewController id="tO5-Oy-Dfx" customClass="NewPostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dXr-u6-iCN">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -676,6 +677,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createPost:" destination="tO5-Oy-Dfx" eventType="touchUpInside" id="YP8-3v-spL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -689,6 +693,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create a new post for your followers!" id="NTy-Ct-wvJ"/>
+                    <connections>
+                        <outlet property="postText" destination="EG7-ag-iS9" id="Fv6-5A-Cfn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tvr-ti-G1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -850,6 +857,92 @@
         <image name="thumbs-down-smallicon.png" width="85" height="85"/>
         <image name="thumbs-up-smallicon.png" width="85" height="85"/>
     </resources>
+    <classes>
+        <class className="CourseDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:"/>
+                <relationship kind="action" name="createReviewButton:"/>
+                <relationship kind="action" name="seeReviewButton:"/>
+                <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseIdLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="facultyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reviewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CoursesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="InstructorsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NewPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createPost:"/>
+                <relationship kind="outlet" name="postText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="PostsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="postsTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ReviewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="create:"/>
+                <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TopRatedViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="UserViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButton:"/>
+                <relationship kind="action" name="logoutButton:"/>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="currUserLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="logoutBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="passLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="usersTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

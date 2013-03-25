@@ -235,10 +235,10 @@
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
         
-        NSURL *url = [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/users/_check_session"];
+        //NSURL *url = [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/users/_check_session"];
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        //NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
-        //NSURL *url = [NSURL URLWithString:urlString];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
+        NSURL *url = [NSURL URLWithString:urlString];
         self.loginConn = YES;
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
         

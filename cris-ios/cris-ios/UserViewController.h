@@ -14,10 +14,16 @@
 }
 
 -(IBAction)switchcontrol:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
+@property (weak, nonatomic) IBOutlet UILabel *currUserLbl;
 
+@property (weak, nonatomic) IBOutlet UILabel *userLbl;
+@property (weak, nonatomic) IBOutlet UILabel *passLbl;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (nonatomic,retain) IBOutlet UITableView *usersTableView;
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 - (IBAction)loginButton:(id)sender;
+- (IBAction)logoutButton:(id)sender;
 
 @end

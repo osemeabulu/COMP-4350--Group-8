@@ -32,6 +32,11 @@
 @synthesize responseData;
 @synthesize userField;
 @synthesize passwordField;
+@synthesize loginBtn;
+@synthesize passLbl;
+@synthesize userLbl;
+@synthesize currUserLbl;
+@synthesize logoutBtn;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -58,14 +63,14 @@
 -(IBAction)switchcontrol:(id)sender {
     self.usersTableData = [NSMutableArray array];
     self.responseData = [NSMutableData data];
-    NSString *username = @"test";
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     
     self.loginConn = NO;
     if (control.selectedSegmentIndex == 0) {
         //activity
         self.tableConn = @"reviews";
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@reviews/_query_by_user?key=%@", appDel.baseURL, username];
+        NSString *urlString = [NSString stringWithFormat:@"%@reviews/_query_by_user?key=%@", appDel.baseURL, appDel.curr_user];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
@@ -74,7 +79,7 @@
         //followers
         self.tableConn = @"followed";
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_followers?user=%@", appDel.baseURL, username];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_followers?user=%@", appDel.baseURL, appDel.curr_user];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
@@ -82,7 +87,7 @@
         //following
         self.tableConn = @"followed";
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_following?user=%@", appDel.baseURL, username];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_following?user=%@", appDel.baseURL, appDel.curr_user];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
@@ -102,12 +107,42 @@
     self.responseData = [NSMutableData data];
     self.createConn = nil;
     self.loginConn = NO;
+    
     /*AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    if ([appDel.curr_user isEqualToString:@"N/A"]) {
+        [self.userField setHidden:NO];
+        [self.passwordField setHidden:NO];
+        [self.loginBtn setHidden:NO];
+        [self.userLbl setHidden:NO];
+        [self.passLbl setHidden:NO];
+        [self.logoutBtn setHidden:YES];
+        [self.currUserLbl setHidden:YES];
+        [control setEnabled:NO];
+        [self switchcontrol:(id)self];
+    }
+    else {
+        [self.userField setHidden:YES];
+        [self.passwordField setHidden:YES];
+        [self.loginBtn setHidden:YES];
+        [self.userLbl setHidden:YES];
+        [self.passLbl setHidden:YES];
+        [control setEnabled:YES];
+        control.selectedSegmentIndex = 0;
+        [self switchcontrol:(id)self];
+        [self.logoutBtn setHidden:NO];
+        self.currUserLbl.text = [NSString stringWithFormat:@"Logged in as: %@", appDel.curr_user];
+        [self.currUserLbl setHidden:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,6 +170,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSLog(@"connectionDidFinishLoading");
     NSLog(@"Succeeded! Received %d bytes of data", [self.responseData length]);
     
@@ -143,7 +179,7 @@
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     NSString *user = [res objectForKey:@"session"];
     
-    if (self.loginConn == YES) {
+    if (self.loginConn == YES && [appDel.curr_user isEqualToString:@"N/A"]) {
         UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Login Failed. Try again" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
         UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Login Success" message:@"You are now logged in" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
@@ -153,11 +189,18 @@
         if(![user isEqualToString:@"not logged in"]){
             LoginSession *session = [LoginSession sharedInstance];
             [session setUser:user];
+
+            appDel.curr_user = user;
             
             [success show];
+            [self viewDidAppear:YES];
         } else {
             [fail show];
         }
+    }
+    else if (self.loginConn == YES && ![appDel.curr_user isEqualToString:@"N/A"]) {
+        appDel.curr_user = @"N/A";
+        [self viewDidAppear:YES];
     }
     else {
         //[self.createButton setEnabled:NO];
@@ -203,6 +246,17 @@
     }
 
 }
+
+- (IBAction)logoutButton:(id)sender {
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        
+    NSString *url = [NSString stringWithFormat:@"%@%@",appDel.baseURL, @"/logout"];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:url]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.loginConn = YES;
+    
+}
+
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
 {
     //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];

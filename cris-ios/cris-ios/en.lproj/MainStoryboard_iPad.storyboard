@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3104" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -43,6 +43,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <connections>
                                     <segue destination="cU7-lo-Gmq" kind="push" identifier="CourseDetailSegue" id="0NE-l2-f3Y"/>
                                 </connections>
@@ -150,6 +153,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <segue destination="U9r-yu-00z" kind="push" identifier="ReviewSelectionSegue" id="fSm-eF-4k2"/>
                                         </connections>
@@ -162,6 +168,9 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fkb-BF-Cew" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="1G0-a4-Mok"/>
                             <constraint firstItem="30k-Vd-4K5" firstAttribute="leading" secondItem="2gN-J8-VEh" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="7D7-OH-QEK"/>
@@ -418,6 +427,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -528,6 +540,9 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="Q9d-EZ-zyl" firstAttribute="leading" secondItem="9cK-9B-wlp" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="3G5-d8-h9h"/>
                             <constraint firstItem="sCC-9u-WqA" firstAttribute="bottom" secondItem="eaT-WF-93R" secondAttribute="bottom" type="default" id="9TD-a2-1GF"/>
@@ -919,7 +934,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="McY-60-4vN"/>
+        <segue reference="0NE-l2-f3Y"/>
         <segue reference="NRL-wZ-2Dg"/>
         <segue reference="fSm-eF-4k2"/>
     </inferredMetricsTieBreakers>

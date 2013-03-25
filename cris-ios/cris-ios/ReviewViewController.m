@@ -34,6 +34,7 @@
 @synthesize createButton;
 @synthesize likeButton;
 @synthesize dislikeButton;
+@synthesize followButton;
 @synthesize likeLabel;
 @synthesize dislikeLabel;
 
@@ -261,4 +262,21 @@
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
+- (IBAction)follow:(id)sender {
+    NSError* error;
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@users/_follow_user", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    
+    NSString *followed = [NSString stringWithString:self.review.username];
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                                [info setValue:followed forKey:@"key"];
+    
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    [self postJSONObjects:jsonObj connection:self.voteConn url:url];
+    
+    [self.followButton setEnabled:NO];
+
+}
 @end

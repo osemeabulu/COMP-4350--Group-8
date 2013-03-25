@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *dislikeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
+
 
 @property (strong) Review *review;
 
@@ -40,5 +42,6 @@
 
 - (IBAction)create:(id)sender;
 
+- (IBAction)follow:(id)sender;
 
 @end

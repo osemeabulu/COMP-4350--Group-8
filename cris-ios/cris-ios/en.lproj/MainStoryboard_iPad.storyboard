@@ -276,6 +276,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="follow:" destination="U9r-yu-00z" eventType="touchUpInside" id="RpQ-U1-Y89"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phK-Dh-NvM">
                                 <constraints>
@@ -400,6 +403,7 @@
                         <outlet property="descText" destination="Aem-bx-xO1" id="RPP-P3-cd9"/>
                         <outlet property="dislikeButton" destination="D0Y-BI-NM3" id="0cI-5B-ipH"/>
                         <outlet property="dislikeLabel" destination="Okb-nT-cj0" id="0ch-Iw-sGa"/>
+                        <outlet property="followButton" destination="eVZ-RH-EY3" id="Akq-UF-aLI"/>
                         <outlet property="likeButton" destination="G5q-5Z-cAW" id="ikH-o6-C3A"/>
                         <outlet property="likeLabel" destination="VHo-Rb-A4G" id="4ij-sg-WQq"/>
                         <outlet property="scorePicker" destination="d28-fK-EMo" id="vHw-Tt-N7t"/>
@@ -893,12 +897,14 @@
             <relationships>
                 <relationship kind="action" name="create:"/>
                 <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="follow:"/>
                 <relationship kind="action" name="like:"/>
                 <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>

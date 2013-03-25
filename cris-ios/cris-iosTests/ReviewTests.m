@@ -21,9 +21,6 @@
     //response data from requests
     NSMutableData *responseData;
     
-    NSDictionary *submitResults;
-    NSDictionary *voteResults;
-    
     //connections
     NSURLConnection *connection;
     
@@ -68,10 +65,12 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     done = YES;
-    NSError *err = nil;
-    submitResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&err];
+    //NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+    //NSLog(responseString);
+    //NSError *err = nil;
+    //submitResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&err];
     
-    NSLog([NSString stringWithFormat:@"JSON conversion returns %@", [err description]]);
+    //NSLog([NSString stringWithFormat:@"JSON conversion returns %@", [err description]]);
 }
 
 -(void)testReviewNormal
@@ -89,6 +88,7 @@
 - (void)testReviewSubmitGood
 {
     NSError *error;
+    NSDictionary *submitResults;
     
     //-------- create json object for review -------
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
@@ -102,7 +102,7 @@
     STAssertNotNil(jsonObj, @"Error jsonified review is nil");
     
     //------ set up review submit request ----------
-    NSString *connectionAddress = @"_submit_review";
+    NSString *connectionAddress = @"reviews/_submit_review";
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
     NSURL *testURL = [NSURL URLWithString:urlString];
     STAssertNotNil(testURL, @"Error testURL for review submission is nil");
@@ -114,6 +114,51 @@
     while (done == NO)
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
     STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ check our results ---------------
+    error = nil;
+    submitResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    //NSLog([NSString stringWithFormat:@"JSON serialization error = %@", [error description]]);
+    STAssertNil(error, @"Error submitResult wasn't a valid JSON object");
+    STAssertTrue([[submitResults objectForKey:@"rdesc"] isEqualToString:[info objectForKey:@"rdesc"]], @"Error review description don't match");
+    STAssertTrue([[submitResults objectForKey:@"rscr"] isEqualToString:[info objectForKey:@"rscr"]], @"Error review scores don't match");
+}
+
+- (void)testReviewSubmitBadAddress
+{
+    NSError *error;
+    NSDictionary *submitResults;
+    
+    //-------- create json object for review -------
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    [info setValue:@"Comp4350" forKey:@"cid"];
+    [info setValue:@"4" forKey:@"rscr"];
+    [info setValue:@"Test Review" forKey:@"rdesc"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"rvote"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"upvote"];
+    [info setValue:[NSNumber numberWithInt:(0)] forKey:@"downvote"];
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    STAssertNotNil(jsonObj, @"Error jsonified review is nil");
+    
+    //------ set up review submit request ----------
+    NSString *connectionAddress = @"review/_submit_review";     //invalid submission address
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
+    NSURL *testURL = [NSURL URLWithString:urlString];
+    STAssertNotNil(testURL, @"Error testURL for review submission is nil");
+    
+    //------------- make the request ---------------
+    [self postJSONObjects:jsonObj connection:connection url:testURL];
+    
+    //wait for response data
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ Make sure that our response isn't valid json (should be the 404 page) ---------------
+    error = nil;
+    submitResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    //NSLog([NSString stringWithFormat:@"JSON serialization error = %@", [error description]]);
+    STAssertNotNil(error, @"Error our invalid review submission worked when it wasn't suppose to.");
 }
 
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url

@@ -104,7 +104,7 @@
 {
     NSError *error;
     NSDictionary *queryResults;
-    NSString *invalidParam = @"eoihfoefeh";
+    NSString *invalidParam = @"eoihfoefeh";         //invalid query parameter
     NSString *connectionAddress = @"courses/_query";
     NSString *urlString = [NSString stringWithFormat:@"%@/%@?key=%@", serverAddress, connectionAddress, invalidParam];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
@@ -121,5 +121,65 @@
     NSArray *jsonCourses = [queryResults objectForKey:@"courses"];
     STAssertNotNil(jsonCourses, @"Error the courses list is nil");
     STAssertTrue([jsonCourses count] == 0, @"Error the courses list isn't empty");
+}
+
+- (void)testCourseQueryBadAddress
+{
+    NSError *error;
+    NSDictionary *queryResults;
+    NSString *connectionAddress = @"course/_query";     //invalid connectionAddress
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ check our results ---------------
+    error = nil;
+    queryResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    STAssertNotNil(error, @"Error the server is returning a valid json object instead of the 404 page");
+}
+
+- (void)testCourseTopRatedValidAddress
+{
+    NSError *error;
+    NSDictionary *queryResults;
+    NSString *connectionAddress = @"courses/_top_query";
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ check our results ---------------
+    error = nil;
+    queryResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    STAssertNil(error, @"Error responseData wasn't valid json");
+    NSArray *jsonCourses = [queryResults objectForKey:@"courses"];
+    STAssertNotNil(jsonCourses, @"Error the top rated courses list is nil");
+    STAssertTrue([jsonCourses count] > 0, @"Error there are no top rated courses");
+}
+
+- (void)testCourseTopRatedBadAddress
+{
+    NSError *error;
+    NSDictionary *queryResults;
+    NSString *connectionAddress = @"course/_top_query";     //invalid connectionAddress
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ check our results ---------------
+    error = nil;
+    queryResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    STAssertNotNil(error, @"Error the server is returning a valid json object instead of the 404 page");
 }
 @end

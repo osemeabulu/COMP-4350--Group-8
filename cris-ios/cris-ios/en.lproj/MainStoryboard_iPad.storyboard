@@ -431,36 +431,146 @@
             </objects>
             <point key="canvasLocation" x="2089" y="-245"/>
         </scene>
-        <!--View Controller-->
+        <!--User View Controller - Users-->
         <scene sceneID="OKS-QU-lTh">
             <objects>
-                <viewController id="KYZ-ZR-dGt" sceneMemberID="viewController">
+                <viewController id="KYZ-ZR-dGt" customClass="UserViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eaT-WF-93R">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Gnh-7u-Iwh">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cK-9B-wlp">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="595" id="zeB-Jo-Xq2"/>
+                                    <constraint firstAttribute="width" constant="81" id="Ota-cy-6ng"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5z-Ml-shr">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="86" id="KlD-gn-Nw6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q9d-EZ-zyl">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="KSG-T1-Psm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nT8-lc-YhR">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYt-6K-EgU">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="ab0-eN-H4f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButton:" destination="KYZ-ZR-dGt" eventType="touchDown" id="Vji-sb-UCb"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7eH-yP-LO1">
                                 <segments>
                                     <segment title="Activity"/>
                                     <segment title="Followers"/>
                                     <segment title="Following"/>
                                 </segments>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="switchcontrol:" destination="KYZ-ZR-dGt" eventType="valueChanged" id="w9W-rI-sfd"/>
+                                </connections>
                             </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sCC-9u-WqA">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="769" id="wa4-OG-bxq"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="KYZ-ZR-dGt" id="9MV-KQ-R53"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NvX-Nf-j5H">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="216" id="GyY-72-35E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buW-i2-hcZ">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="73" id="iNd-oa-Kbv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButton:" destination="KYZ-ZR-dGt" eventType="touchUpInside" id="z8t-nc-IJe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Gnh-7u-Iwh" firstAttribute="centerX" secondItem="eaT-WF-93R" secondAttribute="centerX" type="default" id="caw-fu-6Ih"/>
-                            <constraint firstItem="Gnh-7u-Iwh" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="216" id="lo0-U5-bZq"/>
+                            <constraint firstItem="Q9d-EZ-zyl" firstAttribute="leading" secondItem="9cK-9B-wlp" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="3G5-d8-h9h"/>
+                            <constraint firstItem="sCC-9u-WqA" firstAttribute="bottom" secondItem="eaT-WF-93R" secondAttribute="bottom" type="default" id="9TD-a2-1GF"/>
+                            <constraint firstItem="NvX-Nf-j5H" firstAttribute="baseline" secondItem="buW-i2-hcZ" secondAttribute="baseline" type="default" id="AHM-f9-lyG"/>
+                            <constraint firstItem="buW-i2-hcZ" firstAttribute="bottom" secondItem="NvX-Nf-j5H" secondAttribute="bottom" type="default" id="DV8-4S-My3"/>
+                            <constraint firstItem="NvX-Nf-j5H" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="20" symbolic="YES" type="default" id="EEx-ND-shf"/>
+                            <constraint firstItem="sCC-9u-WqA" firstAttribute="trailing" secondItem="eaT-WF-93R" secondAttribute="trailing" type="default" id="LoI-Fk-lMI"/>
+                            <constraint firstItem="9cK-9B-wlp" firstAttribute="leading" secondItem="eaT-WF-93R" secondAttribute="leading" constant="11" id="NGD-b6-jZb"/>
+                            <constraint firstItem="7eH-yP-LO1" firstAttribute="trailing" secondItem="eaT-WF-93R" secondAttribute="trailing" type="default" id="O0g-2x-NXJ"/>
+                            <constraint firstItem="YYt-6K-EgU" firstAttribute="baseline" secondItem="NvX-Nf-j5H" secondAttribute="baseline" type="default" id="OGK-yL-NV1"/>
+                            <constraint firstItem="NvX-Nf-j5H" firstAttribute="bottom" secondItem="YYt-6K-EgU" secondAttribute="bottom" type="default" id="Roc-f5-C2s"/>
+                            <constraint firstItem="YYt-6K-EgU" firstAttribute="leading" secondItem="nT8-lc-YhR" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="SLe-ia-h6c"/>
+                            <constraint firstItem="V5z-Ml-shr" firstAttribute="baseline" secondItem="nT8-lc-YhR" secondAttribute="baseline" type="default" id="Srb-hx-Rop"/>
+                            <constraint firstItem="sCC-9u-WqA" firstAttribute="leading" secondItem="eaT-WF-93R" secondAttribute="leading" type="default" id="TJc-EB-opZ"/>
+                            <constraint firstItem="YYt-6K-EgU" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="20" symbolic="YES" type="default" id="U0U-YX-Oel"/>
+                            <constraint firstItem="nT8-lc-YhR" firstAttribute="leading" secondItem="Q9d-EZ-zyl" secondAttribute="leading" type="default" id="WLs-oU-0Kc"/>
+                            <constraint firstItem="buW-i2-hcZ" firstAttribute="leading" secondItem="NvX-Nf-j5H" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ZLy-pN-VOQ"/>
+                            <constraint firstAttribute="trailing" secondItem="buW-i2-hcZ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="ahF-gm-xFH"/>
+                            <constraint firstItem="7eH-yP-LO1" firstAttribute="leading" secondItem="eaT-WF-93R" secondAttribute="leading" type="default" id="cGT-Nx-rPs"/>
+                            <constraint firstItem="7eH-yP-LO1" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="113" id="ezq-jS-1fO"/>
+                            <constraint firstItem="YYt-6K-EgU" firstAttribute="leading" secondItem="Q9d-EZ-zyl" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="jEX-wW-8Cg"/>
+                            <constraint firstItem="nT8-lc-YhR" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="51" id="naE-UF-W1k"/>
+                            <constraint firstItem="9cK-9B-wlp" firstAttribute="baseline" secondItem="Q9d-EZ-zyl" secondAttribute="baseline" type="default" id="pKe-3D-OCX"/>
+                            <constraint firstItem="Q9d-EZ-zyl" firstAttribute="top" secondItem="eaT-WF-93R" secondAttribute="top" constant="10" id="pa7-Cs-zsh"/>
+                            <constraint firstItem="V5z-Ml-shr" firstAttribute="leading" secondItem="9cK-9B-wlp" secondAttribute="leading" type="default" id="vxV-i2-Go5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xTz-Pk-d9S"/>
+                    <navigationItem key="navigationItem" title="Users" id="xTz-Pk-d9S"/>
+                    <connections>
+                        <outlet property="control" destination="7eH-yP-LO1" id="Ssg-zL-duj"/>
+                        <outlet property="currUserLbl" destination="NvX-Nf-j5H" id="OZm-Mo-g2w"/>
+                        <outlet property="loginBtn" destination="YYt-6K-EgU" id="xxi-ru-TEP"/>
+                        <outlet property="logoutBtn" destination="buW-i2-hcZ" id="QX4-zz-P44"/>
+                        <outlet property="passLbl" destination="V5z-Ml-shr" id="ubR-58-Ong"/>
+                        <outlet property="passwordField" destination="nT8-lc-YhR" id="jo2-jf-045"/>
+                        <outlet property="userField" destination="Q9d-EZ-zyl" id="Iof-im-dai"/>
+                        <outlet property="userLbl" destination="9cK-9B-wlp" id="AiQ-BM-j2L"/>
+                        <outlet property="usersTableView" destination="sCC-9u-WqA" id="695-xx-cYe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sC4-Bw-c5Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089" y="2359"/>
+            <point key="canvasLocation" x="2057" y="2351"/>
         </scene>
         <!--Posts View Controller - Posts-->
         <scene sceneID="MV4-7e-Zmd">
@@ -694,7 +804,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="KYZ-ZR-dGt" kind="relationship" relationship="rootViewController" id="dnj-db-x8M"/>
+                        <segue destination="KYZ-ZR-dGt" kind="relationship" relationship="rootViewController" id="Ffk-gD-bfv"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="je6-4M-Yya" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,6 +835,84 @@
         <image name="thumbs-down-smallicon.png" width="85" height="85"/>
         <image name="thumbs-up-smallicon.png" width="85" height="85"/>
     </resources>
+    <classes>
+        <class className="CourseDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createReviewButton:"/>
+                <relationship kind="action" name="seeReviewButton:"/>
+                <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseIdLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="facultyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reviewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CoursesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="InstructorsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PostsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="postsTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ReviewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="create:"/>
+                <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TopRatedViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="UserViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButton:"/>
+                <relationship kind="action" name="logoutButton:"/>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="currUserLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="logoutBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="passLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="usersTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -733,5 +921,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="McY-60-4vN"/>
         <segue reference="NRL-wZ-2Dg"/>
+        <segue reference="fSm-eF-4k2"/>
     </inferredMetricsTieBreakers>
 </document>

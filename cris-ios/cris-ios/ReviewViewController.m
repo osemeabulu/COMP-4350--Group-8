@@ -23,6 +23,7 @@
 
 @implementation ReviewViewController
 
+@synthesize navController;
 @synthesize createResponseData;
 @synthesize voteResponseData;
 @synthesize createConn;
@@ -268,6 +269,9 @@
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
         [self.createButton setEnabled:NO];
+        self.navController = self.navigationController;
+        //[[self retain] autorelease];
+        [navController popViewControllerAnimated:YES];
     }
 }
 
@@ -297,6 +301,9 @@
     [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
     [self.saveChanges setEnabled:NO];
+    self.navController = self.navigationController;
+    //[[self retain] autorelease];
+    [navController popViewControllerAnimated:YES];
     
 }
 
@@ -318,6 +325,9 @@
     [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
     [self.deleteButton setEnabled:NO];
+    self.navController = self.navigationController;
+    //[[self retain] autorelease];
+    [navController popViewControllerAnimated:YES];
 }
 
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url

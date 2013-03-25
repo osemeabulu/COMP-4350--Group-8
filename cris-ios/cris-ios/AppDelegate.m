@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginSession.h"
 
 @implementation AppDelegate
 @synthesize baseURL;
@@ -14,9 +15,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
-    curr_user = @"N/A";
     // Override point for customization after application launch.
+    LoginSession *session = [LoginSession sharedInstance];
+    baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
+    curr_user = [session user];
+    if (curr_user == nil)
+    {
+        curr_user = @"N/A";
+    }
     return YES;
 }
 							

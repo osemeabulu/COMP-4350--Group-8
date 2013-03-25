@@ -25,6 +25,7 @@
 @synthesize responseData;
 @synthesize createConn;
 @synthesize postText;
+@synthesize navController;
 
 - (IBAction)createPost:(id)sender {
     //perform creating code
@@ -109,7 +110,10 @@
     UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Post Success" message:@"Post was successfully created" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
         
     if(result){
-            [success show];
+        [success show];
+        self.navController = self.navigationController;
+        //[[self retain] autorelease];
+        [navController popViewControllerAnimated:YES];
     } else {
         [fail show];
     }

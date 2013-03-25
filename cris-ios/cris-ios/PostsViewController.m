@@ -12,8 +12,7 @@
 @interface PostsViewController ()
 
 @property (nonatomic, strong) NSMutableArray *myPosts;
-@property (nonatomic, strong) NSMutableArray *followers;
-@property (nonatomic, strong) NSMutableArray *following;
+@property (nonatomic, strong) NSMutableArray *postTime;
 @property (nonatomic, strong) NSMutableData *responseData;
 
 @end
@@ -23,6 +22,7 @@
 @synthesize postsTableView;
 @synthesize myPosts;
 @synthesize responseData = _responseData;
+@synthesize postTime;
 
 
 
@@ -57,8 +57,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MainCell"];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[myPosts objectAtIndex:indexPath.row],@"hello"];
-    cell.detailTextLabel.text = @"time";
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[myPosts objectAtIndex:indexPath.row]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [postTime objectAtIndex:indexPath.row]];
     cell.textLabel.textColor = [UIColor blueColor];
     
     return cell;
@@ -66,10 +66,11 @@
 
 -(IBAction)switchcontrol:(id)sender {
     self.myPosts = [NSMutableArray array];
+    self.postTime = [NSMutableArray array];
     self.responseData = [NSMutableData data];
     if (control.selectedSegmentIndex == 0) {
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSString *urlString = [NSString stringWithFormat:@"%@posts/_query", appDel.baseURL];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -77,14 +78,14 @@
     }
     if (control.selectedSegmentIndex == 1) {
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSString *urlString = [NSString stringWithFormat:@"%@posts/_query_following", appDel.baseURL];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
     }
     if (control.selectedSegmentIndex == 2) {
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        NSString *urlString = [NSString stringWithFormat:@"%@instructors/_query", appDel.baseURL];
+        NSString *urlString = [NSString stringWithFormat:@"%@posts/_query_followers", appDel.baseURL];
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
         //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://cris-release-env-przrapykha.elasticbeanstalk.com/instructors/_query"]];
         [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -123,14 +124,17 @@
     NSError *myError = nil;
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     
-    NSArray *jsonPosts = [res objectForKey:@"instructors"];
+    NSArray *jsonPosts = [res objectForKey:@"posts"];
     
     // get each instructors attributes and place them into the array of strings
     for (NSDictionary *result in jsonPosts)
     {
-        NSString *post = [NSString stringWithFormat:@"%@", [result objectForKey:@"pname"]];
+        NSString *post = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"owner"],  [result objectForKey:@"message"]];
+        NSString *thisTime = [NSString stringWithFormat:@"%@", [result objectForKey:@"time"]];
+        NSLog(thisTime);
         
         [self.myPosts addObject:post];
+        [self.postTime addObject:thisTime];
     }
     
     [self.postsTableView reloadData];

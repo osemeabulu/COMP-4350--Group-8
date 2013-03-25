@@ -832,6 +832,84 @@
         <image name="thumbs-down-smallicon.png" width="85" height="85"/>
         <image name="thumbs-up-smallicon.png" width="85" height="85"/>
     </resources>
+    <classes>
+        <class className="CourseDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createReviewButton:"/>
+                <relationship kind="action" name="seeReviewButton:"/>
+                <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseIdLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="courseNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="facultyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="reviewList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CoursesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoursesTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="courseList" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="InstructorsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InstructorsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructorsTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PostsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="postsTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ReviewViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ReviewViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="create:"/>
+                <relationship kind="action" name="dislike:"/>
+                <relationship kind="action" name="like:"/>
+                <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TopRatedViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopRatedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="topRatedTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="UserViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButton:"/>
+                <relationship kind="action" name="logoutButton:"/>
+                <relationship kind="action" name="switchcontrol:"/>
+                <relationship kind="outlet" name="control" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="currUserLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="logoutBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="passLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="usersTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

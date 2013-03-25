@@ -76,13 +76,13 @@
     STAssertTrue([c.cavg isEqualToString:@"4"], @"Error with Course average");
     
     assert(c);
-    
-    //print course
 }
 
 - (void)testCourseQueryEmpty
 {
-    NSString *connectionAddress = @"_query";
+    NSError *error;
+    NSDictionary *queryResults;
+    NSString *connectionAddress = @"courses/_query";
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverAddress, connectionAddress];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -91,6 +91,35 @@
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
     STAssertNotNil(responseData, @"Error we didn't get any data from the server");
     
+    //------------ check our results ---------------
+    error = nil;
+    queryResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    STAssertNil(error, @"Error responseData wasn't valid json");
+    NSArray *jsonCourses = [queryResults objectForKey:@"courses"];
+    STAssertNotNil(jsonCourses, @"Error the courses list is nil");
+    STAssertTrue([jsonCourses count] > 0, @"Error the courses list is empty");
 }
 
+- (void)testCourseQueryInvalid
+{
+    NSError *error;
+    NSDictionary *queryResults;
+    NSString *invalidParam = @"eoihfoefeh";
+    NSString *connectionAddress = @"courses/_query";
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?key=%@", serverAddress, connectionAddress, invalidParam];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+    while (done == NO)
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    STAssertNotNil(responseData, @"Error we didn't get any data from the server");
+    
+    //------------ check our results ---------------
+    error = nil;
+    queryResults = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&error];
+    STAssertNil(error, @"Error responseData wasn't valid json");
+    NSArray *jsonCourses = [queryResults objectForKey:@"courses"];
+    STAssertNotNil(jsonCourses, @"Error the courses list is nil");
+    STAssertTrue([jsonCourses count] == 0, @"Error the courses list isn't empty");
+}
 @end

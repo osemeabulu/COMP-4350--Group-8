@@ -10,10 +10,12 @@
 
 @implementation AppDelegate
 @synthesize baseURL;
+@synthesize curr_user;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    baseURL = @"http://cris-release-env-przrapykha.elasticbeanstalk.com/";
+    baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
+    curr_user = @"N/A";
     // Override point for customization after application launch.
     return YES;
 }

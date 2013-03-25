@@ -12,9 +12,11 @@
 {
     UIWindow *window;
     NSString *baseURL;
+    NSString *curr_user;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *baseURL;
+@property (strong, nonatomic) NSString *curr_user;
 
 @end

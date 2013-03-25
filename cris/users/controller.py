@@ -102,7 +102,18 @@ def query_followers():
 			for follower in followers:
 				result.append(follower.serialize)
 	return jsonify(followed = result)		
-	
+
+@mod.route('/_query_following')
+def query_following():
+	result = []
+	username = request.args.get('user', '')
+	if username is not None:
+		user = User.query.get(username)
+		if user is not None:
+			followers = user.get_followers()
+			for follower in followers:
+				result.append(follower.serialize)
+	return jsonify(followed = result)			
 
 @mod.route('/<string:user>')
 def show_user(user):
@@ -123,3 +134,32 @@ def query_user():
 def query():
 	results = User.query.all()
 	return jsonify(users = [i.serialize for i in results])
+	
+@mod.route('/_check_session', methods = ['GET', 'POST'])
+def user_logged_in():
+	logged_in = 'not logged in'
+	
+	if 'username' in session:
+		flash ("Already Logged In.")
+		#return redirect(url_for('index'))
+		logged_in = session['username']
+	if request.method == 'POST':
+		data = request.json
+		print data
+		#username = request.form['username']
+		#password = request.form['password']
+		username = request.json['name']
+		password = request.json['pass']
+		result = User.query.filter_by(username=username).first()
+		if result and result.password == password:
+			session['username'] = username
+			flash('You were logged in')
+			#return redirect(url_for('index'))
+			logged_in = username
+		else:
+			#error = 'Unable to validate user'
+			flash('Unable to validate user')
+			logged_in = 'not logged in'
+		
+	return jsonify(session = logged_in)
+

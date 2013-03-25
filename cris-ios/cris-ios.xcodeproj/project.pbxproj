@@ -56,6 +56,8 @@
 		0419114A16F404B3009E9E5A /* Players@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419113216F404B3009E9E5A /* Players@2x.png */; };
 		0419114D16F68BC9009E9E5A /* thumbs-down-smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419114B16F68BC8009E9E5A /* thumbs-down-smallicon.png */; };
 		0419114E16F68BC9009E9E5A /* thumbs-up-smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419114C16F68BC8009E9E5A /* thumbs-up-smallicon.png */; };
+		04DFDFEC16FBFE8400366FB2 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFDFEB16FBFE8400366FB2 /* UserViewController.m */; };
+		3C36147316FFA932000E4E19 /* LoginSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36147216FFA932000E4E19 /* LoginSession.m */; };
 		477FC6D316EE8A5500CCB2B2 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FC6D216EE8A5500CCB2B2 /* Course.m */; };
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
@@ -135,6 +137,10 @@
 		0419113216F404B3009E9E5A /* Players@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Players@2x.png"; sourceTree = "<group>"; };
 		0419114B16F68BC8009E9E5A /* thumbs-down-smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down-smallicon.png"; sourceTree = "<group>"; };
 		0419114C16F68BC8009E9E5A /* thumbs-up-smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up-smallicon.png"; sourceTree = "<group>"; };
+		04DFDFEA16FBFE8400366FB2 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		04DFDFEB16FBFE8400366FB2 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		3C36147116FFA932000E4E19 /* LoginSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSession.h; sourceTree = "<group>"; };
+		3C36147216FFA932000E4E19 /* LoginSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSession.m; sourceTree = "<group>"; };
 		477FC6D116EE8A5500CCB2B2 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		477FC6D216EE8A5500CCB2B2 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		479CD49D16ED21A900F31372 /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
@@ -224,6 +230,8 @@
 				47D672DF16EC26830076FFE4 /* TopRatedViewController.h */,
 				02D5390D16FA4F910088621D /* PostsViewController.h */,
 				02D5391016FA6FD30088621D /* NewPostViewController.h */,
+				04DFDFEA16FBFE8400366FB2 /* UserViewController.h */,
+				3C36147116FFA932000E4E19 /* LoginSession.h */,
 				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
 				477FC6D216EE8A5500CCB2B2 /* Course.m */,
 				479CD49E16ED21A900F31372 /* CourseDetailViewController.m */,
@@ -236,6 +244,8 @@
 				47D672E016EC26830076FFE4 /* TopRatedViewController.m */,
 				02D5390E16FA4F910088621D /* PostsViewController.m */,
 				02D5391116FA6FD30088621D /* NewPostViewController.m */,
+				04DFDFEB16FBFE8400366FB2 /* UserViewController.m */,
+				3C36147216FFA932000E4E19 /* LoginSession.m */,
 				026D280B16EA8C3400BAFB8F /* first.png */,
 				026D280D16EA8C3400BAFB8F /* first@2x.png */,
 				026D281216EA8C3400BAFB8F /* second.png */,
@@ -470,6 +480,8 @@
 				B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */,
 				02D5390F16FA4F910088621D /* PostsViewController.m in Sources */,
 				02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */,
+				04DFDFEC16FBFE8400366FB2 /* UserViewController.m in Sources */,
+				3C36147316FFA932000E4E19 /* LoginSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

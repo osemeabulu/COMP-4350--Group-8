@@ -12,8 +12,11 @@
 
 @interface UserViewController ()
 
+@property (nonatomic, strong) NSMutableArray *usersTableData;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSURLConnection *createConn;
+@property (nonatomic, strong) NSString *tableConn;
+@property BOOL loginConn;
 
 - (void)postJSONObjects:(NSData *)jsonRequest
              connection:(NSURLConnection *)connection
@@ -22,9 +25,68 @@
 
 @implementation UserViewController
 
+@synthesize usersTableView;
+@synthesize usersTableData;
+@synthesize createConn;
+@synthesize tableConn;
 @synthesize responseData;
 @synthesize userField;
 @synthesize passwordField;
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return usersTableData.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MainCell"];
+    }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[usersTableData objectAtIndex:indexPath.row],@"hello"];
+    cell.detailTextLabel.text = @"time";
+    cell.textLabel.textColor = [UIColor blueColor];
+    
+    return cell;
+}
+
+-(IBAction)switchcontrol:(id)sender {
+    self.usersTableData = [NSMutableArray array];
+    self.responseData = [NSMutableData data];
+    NSString *username = @"test";
+    
+    self.loginConn = NO;
+    if (control.selectedSegmentIndex == 0) {
+        //activity
+        self.tableConn = @"reviews";
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@reviews/_query_by_user?key=%@", appDel.baseURL, username];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+    }
+    if (control.selectedSegmentIndex == 1) {
+        //followers
+        self.tableConn = @"followed";
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_followers?user=%@", appDel.baseURL, username];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    }
+    if (control.selectedSegmentIndex == 2) {
+        //following
+        self.tableConn = @"followed";
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_query_following?user=%@", appDel.baseURL, username];
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +100,8 @@
 - (void)viewDidLoad
 {
     self.responseData = [NSMutableData data];
+    self.createConn = nil;
+    self.loginConn = NO;
     /*AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
@@ -79,19 +143,34 @@
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     NSString *user = [res objectForKey:@"session"];
     
-    UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Login Failed. Try again" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    if (self.loginConn == YES) {
+        UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Login Failed. Try again" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
-    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Login Success" message:@"You are now logged in" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-    //[alert addButtonWithTitle:@"OK"];
-    NSLog (@"%@", user);
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Login Success" message:@"You are now logged in" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        //[alert addButtonWithTitle:@"OK"];
+        //NSLog (@"%@", user);
 
-    if(![user isEqualToString:@"not logged in"]){
-        LoginSession *session = [LoginSession sharedInstance];
-        [session setUser:user];
+        if(![user isEqualToString:@"not logged in"]){
+            LoginSession *session = [LoginSession sharedInstance];
+            [session setUser:user];
+            
+            [success show];
+        } else {
+            [fail show];
+        }
+    }
+    else {
+        //[self.createButton setEnabled:NO];
+        NSArray *jsonTableData = [res objectForKey:tableConn];
         
-        [success show];
-    } else{
-        [fail show];
+        //get each instructors attributes and place them into the array of strings
+        for (NSDictionary *result in jsonTableData)
+        {
+            NSString *review = [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]];
+            [self.usersTableData addObject:review];
+        }
+        
+        [self.usersTableView reloadData];
     }
 }
 
@@ -113,10 +192,11 @@
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
         
-        NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000//users/_check_session"];
+        NSURL *url = [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/users/_check_session"];
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
         //NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
         //NSURL *url = [NSURL URLWithString:urlString];
+        self.loginConn = YES;
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
         
         //[self.loginButton setEnabled:NO];

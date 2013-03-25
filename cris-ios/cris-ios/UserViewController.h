@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserViewController : UIViewController
+@interface UserViewController : UIViewController <UITableViewDataSource,UITableViewDelegate> {
+    IBOutlet UITableView *usersTableView;
+    IBOutlet UISegmentedControl *control;
+}
+
+-(IBAction)switchcontrol:(id)sender;
+
+@property (nonatomic,retain) IBOutlet UITableView *usersTableView;
 @property (weak, nonatomic) IBOutlet UITextField *userField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 - (IBAction)loginButton:(id)sender;

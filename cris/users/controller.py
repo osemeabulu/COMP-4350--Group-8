@@ -102,7 +102,18 @@ def query_followers():
 			for follower in followers:
 				result.append(follower.serialize)
 	return jsonify(followed = result)		
-	
+
+@mod.route('/_query_following')
+def query_following():
+	result = []
+	username = request.args.get('user', '')
+	if username is not None:
+		user = User.query.get(username)
+		if user is not None:
+			followers = user.get_followers()
+			for follower in followers:
+				result.append(follower.serialize)
+	return jsonify(followed = result)			
 
 @mod.route('/<string:user>')
 def show_user(user):
@@ -121,14 +132,14 @@ def query():
 	results = User.query.all()
 	return jsonify(users = [i.serialize for i in results])
 	
-@mod.route('/_check_session', methods = ['POST'])
+@mod.route('/_check_session', methods = ['GET', 'POST'])
 def user_logged_in():
-	logged_in = False
+	logged_in = 'not logged in'
 	
 	if 'username' in session:
 		flash ("Already Logged In.")
 		#return redirect(url_for('index'))
-		logged_in = True
+		logged_in = session['username']
 	if request.method == 'POST':
 		data = request.json
 		print data

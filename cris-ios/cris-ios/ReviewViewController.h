@@ -32,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *saveChanges;
+
 @property (strong) Review *review;
 
 @property (strong) CourseDetailViewController *cdvc;
@@ -43,5 +47,11 @@
 - (IBAction)create:(id)sender;
 
 - (IBAction)follow:(id)sender;
+
+- (IBAction)edit:(id)sender;
+
+- (IBAction)del:(id)sender;
+
+
 
 @end

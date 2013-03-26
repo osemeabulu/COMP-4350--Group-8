@@ -15,14 +15,13 @@
 @property (nonatomic, strong) NSURLConnection *createConn;
 @property (nonatomic, strong) NSURLConnection *voteConn;
 @property (nonatomic, strong) NSURLConnection *checkfollowerConn;
+@property (nonatomic, strong) NSURLConnection *followConn;
 
-- (void)postJSONObjects:(NSData *)jsonRequest
+/*- (void)postJSONObjects:(NSData *)jsonRequest
                        connection:(NSURLConnection *)connection
-                       url:(NSURL *)url;
-
-//- (NSURLConnection *)postJSONObjects:(NSData *)jsonRequest
-//                       connection:(NSURLConnection *)connection
-//                       url:(NSURL *)url;
+                       url:(NSURL *)url;*/
+- (NSURLConnection* )postJSONObjects:(NSData *)jsonRequest
+                    url:(NSURL *)url;
 
 @end
 
@@ -33,6 +32,7 @@
 @synthesize createConn;
 @synthesize voteConn;
 @synthesize checkfollowerConn;
+@synthesize followConn;
 @synthesize courseLabel;
 @synthesize userLabel;
 @synthesize scorePicker;
@@ -44,8 +44,7 @@
 @synthesize unfollowButton;
 @synthesize likeLabel;
 @synthesize dislikeLabel;
-//connections finished
-BOOL done;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -85,20 +84,7 @@ BOOL done;
     self.voteConn = nil;
     self.checkfollowerConn = nil;
     
-    /*AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-    NSString *username = appDel.curr_user;
-    NSString *followed = [NSString stringWithString:self.userLabel.text];
     
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@users/_check_follower", appDel.baseURL];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-    [info setValue:followed forKey:@"key"];
-    
-    NSError* error;
-    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
-    [self postJSONObjects:jsonObj connection:self.checkfollowerConn url:url];*/
     
     if (self.cdvc == nil)
     {
@@ -111,22 +97,38 @@ BOOL done;
         
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
         
-        if([appDel.curr_user isEqualToString:@"N/A"])
+        if([appDel.curr_user isEqualToString:@"N/A"] || [self.userLabel.text isEqualToString:@"N/A"])
         {
             [self.followButton setHidden:YES];
             [self.unfollowButton setHidden: YES];
+            [self.followButton setEnabled:NO];
+            [self.unfollowButton setEnabled:NO];
         }
-        else if (![appDel.curr_user isEqualToString:self.review.username])
+        else if (![appDel.curr_user isEqualToString:self.userLabel.text])
         {
+                        
             //hide edit and delete buttons
             [self.saveChanges setHidden:YES];
             [self.saveChanges setEnabled:NO];
             [self.deleteButton setHidden:YES];
             [self.deleteButton setEnabled:NO];
-            //[self.followButton setHidden:YES];
-            //[self.unfollowButton setHidden: YES];
             
+            AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+            NSString *username = appDel.curr_user;
+            //NSString *followed = [NSString stringWithString:self.userLabel.text];
+            NSString *followed = self.review.username;
             
+            NSString *urlString = [NSString stringWithFormat:@"%@users/_check_follower", appDel.baseURL];
+            NSURL *url = [NSURL URLWithString:urlString];
+            
+            NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+            [info setValue:followed forKey:@"key"];
+            
+            NSError* error;
+            NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+            //self.checkfollowerConn = [self postJSONObjects:jsonObj connection:self.checkfollowerConn url:url];
+            self.checkfollowerConn = [self postJSONObjects:jsonObj url:url];
+
         }
         else
         {
@@ -206,7 +208,7 @@ BOOL done;
     NSLog(@"Received JSON votes! Received %d bytes of data", [self.responseData length]);
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     NSLog([NSString stringWithFormat:@"Response: %@", json]);
-
+    
     
     if (connection != nil && connection == voteConn)
     {
@@ -214,34 +216,25 @@ BOOL done;
         NSError *myError = nil;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
 
-        NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
+        //NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
         NSString *upvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"up"]];
         NSString *downvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"down"]];
-        NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
-        //BOOL follow = [[json objectForKey:@"followed"] boolValue];
+        //NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
         
         self.likeLabel.text = upvote;
         self.dislikeLabel.text = downvote;
         
-        /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to follow" message:@"Unable to follow user" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        
-        if(follow){
-            
-        }
-        else{
-            [alert show];
-        }*/
-        
         
     }
-    /*else if(connection != nil && connection == checkfollowerConn){
-        //NSError *myError = nil;
-        //NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+    else if(connection != nil && connection == checkfollowerConn){
+        NSError *myError = nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
         
                
         NSArray *jsonFollowed = [json objectForKey:@"followed"];
         //NSLog([NSString stringWithFormat:@"Response: %@", json]);
-        if([jsonFollowed count] == 1)
+        
+        if(jsonFollowed != nil && [jsonFollowed count] == 1)
         {
             [followButton setHidden: YES];
             
@@ -250,7 +243,30 @@ BOOL done;
             [unfollowButton setHidden: YES];
         }
 
-    }*/
+    }
+    else if(connection != nil && connection == followConn){
+        NSError *myError = nil;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+        
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You are now following this user." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        
+        UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Fail" message:@"You cannot follow N/A." delegate:self
+            cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        
+        BOOL jsonFollowed = [[json objectForKey:@"followed"] boolValue];
+        //NSLog([NSString stringWithFormat:@"Response: %@", json]);
+        
+        if(jsonFollowed)
+        {
+            [success show];
+        }
+        else{
+            [fail show];
+        }
+
+    }
+    
+
     /* This isn't necessary anymore
     else if (connection != nil && connection == createConn)
     {
@@ -285,25 +301,8 @@ BOOL done;
     NSString *urlString = [NSString stringWithFormat:@"%@reviews/_vote", appDel.baseURL];
     NSURL *url = [NSURL URLWithString:urlString];
 
-    /*NSURLConnection *connection =*/ [self postJSONObjects:jsonObj connection:self.voteConn url:url];
-    
-    /*if(connection)
-    {
-        NSError* myError;
-        //responseData = [[NSMutableData data] retain];
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
-        
-        NSString *score = [NSString stringWithFormat:@"%@",[json objectForKey:@"score"]];
-        NSString *upvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"up"]];
-        NSString *downvote = [NSString stringWithFormat:@"%@",[json objectForKey:@"down"]];
-        NSString *i = [NSString stringWithFormat:@"%@",[json objectForKey:@"i"]];
-        //BOOL follow = [[json objectForKey:@"followed"] boolValue];
-        
-        self.likeLabel.text = upvote;
-        self.dislikeLabel.text = downvote;
-        [self.likeButton setEnabled:NO];
-
-    }*/
+    //[self postJSONObjects:jsonObj connection:self.voteConn url:url];
+    self.voteConn = [self postJSONObjects:jsonObj url:url];
     [self.likeButton setEnabled:NO];
     
     
@@ -319,8 +318,9 @@ BOOL done;
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@reviews/_vote", appDel.baseURL];
     NSURL *url = [NSURL URLWithString:urlString];
-    [self postJSONObjects:jsonObj connection:self.voteConn url:url];
+    //[self postJSONObjects:jsonObj connection:self.voteConn url:url];
     
+    self.voteConn = [self postJSONObjects:jsonObj url:url];
     [self.dislikeButton setEnabled:NO];
 
 }
@@ -349,9 +349,10 @@ BOOL done;
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
         NSString *urlString = [NSString stringWithFormat:@"%@reviews/_submit_review", appDel.baseURL];
         NSURL *url = [NSURL URLWithString:urlString];
-        [self postJSONObjects:jsonObj connection:self.createConn url:url];
-    
-        [self.createButton setEnabled:NO];
+        //[self postJSONObjects:jsonObj connection:self.createConn url:url];
+        
+        self.createConn = [self postJSONObjects:jsonObj url:url];
+        //[self.createButton setEnabled:NO];
     }
 }
 
@@ -378,9 +379,10 @@ BOOL done;
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@reviews/_update_review", appDel.baseURL];
     NSURL *url = [NSURL URLWithString:urlString];
-    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+    //[self postJSONObjects:jsonObj connection:self.createConn url:url];
     
-    [self.saveChanges setEnabled:NO];
+    self.createConn = [self postJSONObjects:jsonObj url:url];
+    //[self.saveChanges setEnabled:NO];
     
 }
 
@@ -399,12 +401,13 @@ BOOL done;
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@reviews/_delete_review", appDel.baseURL];
     NSURL *url = [NSURL URLWithString:urlString];
-    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+    //[self postJSONObjects:jsonObj connection:self.createConn url:url];
     
-    [self.deleteButton setEnabled:NO];
+    self.createConn = [self postJSONObjects:jsonObj url:url];
+    //[self.deleteButton setEnabled:NO];
 }
 
-- (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
+/*- (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
 {
     //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
     
@@ -418,30 +421,31 @@ BOOL done;
     [request setHTTPBody: jsonRequest];
     
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}*/
+
+- (NSURLConnection *)postJSONObjects:(NSData *)jsonRequest url:(NSURL *)url
+{
+    //NSURL *url = [NSURL URLWithString:@"http://0.0.0.0:5000/reviews/_vote"];
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    //NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody: jsonRequest];
+    
+    return [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
-/*- (NSURLConnection *)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url
- {
 
-     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-     //NSData *requestData = [NSData dataWithBytes:[jsonRequest UTF8String] length:[jsonRequest length]];
-     
-     [request setHTTPMethod:@"POST"];
-     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-     [request setHTTPBody: jsonRequest];
-     
-     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-     
-     return connection;
- }
-*/
 - (IBAction)follow:(id)sender {
-    /*NSError* error;
+    NSError* error;
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *username = appDel.curr_user;
-    NSString *followed = [NSString stringWithString:self.userLabel.text];
-    UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Unable to follow" message:@"You need to be logged in to follow users." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    NSString *followed = [NSString stringWithString:self.review.username];
+    /*UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Unable to follow" message:@"You need to be logged in to follow users." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
     UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"Unable to follow" message:@"You cannot follow N/A." delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
@@ -451,20 +455,20 @@ BOOL done;
     }
     else if([followed isEqualToString:@"N/A"]){
         [alert2 show];
-    }
-    else{
-        NSString *urlString = [NSString stringWithFormat:@"%@users/_follow_user", appDel.baseURL];
-        NSURL *url = [NSURL URLWithString:urlString];
-        
-        NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-                                    [info setValue:followed forKey:@"key"];
-        
-        NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
-        [self postJSONObjects:jsonObj connection:self.voteConn url:url];
-        
-        //[self.followButton setEnabled:NO];
-        [self.followButton setHidden:YES];
     }*/
+    //else{
+    NSString *urlString = [NSString stringWithFormat:@"%@users/_follow_user", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                                [info setValue:self.userLabel.text forKey:@"key"];
+    
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    //[self postJSONObjects:jsonObj connection:self.voteConn url:url];
+    NSLog([NSString stringWithFormat:@"follower: %@", followed]);
+    self.followConn = [self postJSONObjects:jsonObj url:url];
+    
+    //}
 
 }
 

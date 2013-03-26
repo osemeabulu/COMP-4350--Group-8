@@ -55,7 +55,7 @@ def query():
 		results = Course.query.filter("cid like :value or cname like :value").params(value = '%' + key + '%').all()
 		return jsonify(courses = [i.serialize for i in results])
 
-@mod.route('_query_by_instructor')
+@mod.route('/_query_by_instructor')
 def query_by_instructor():
         key = request.args.get('key', '')
 

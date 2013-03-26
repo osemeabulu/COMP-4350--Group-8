@@ -145,8 +145,7 @@
     {
         NSString *post = [NSString stringWithFormat:@"%@ - %@", [result objectForKey:@"owner"],  [result objectForKey:@"message"]];
         NSString *thisTime = [NSString stringWithFormat:@"%@", [result objectForKey:@"time"]];
-        NSLog(thisTime);
-        
+
         [self.myPosts addObject:post];
         [self.postTime addObject:thisTime];
     }

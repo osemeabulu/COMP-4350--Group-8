@@ -99,6 +99,7 @@
         ReviewViewController *rvc = (ReviewViewController *) segue.destinationViewController;
         rvc.review = r;
         rvc.cdvc = self;
+    
     }
     
 }

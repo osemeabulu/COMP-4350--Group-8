@@ -45,7 +45,55 @@ asyncTest("getAll", 1,
 					cid,
 					function(data)
 					{
-						equal(data.courses.length, num, "We have received all courses successfull");
+						equal(data.courses.length, num, "We have received all courses successfully");
+						start();
+					});
+	}
+);
+
+asyncTest("getFall", 1,
+	function()
+	{	
+		var cid = "";
+		var num = 4;
+		//I don't know why the url_for doesn't work here
+		getObjects(	$SCRIPT_ROOT + "/courses/_semester/Fall",
+					cid,
+					function(data)
+					{
+						equal(data.courses.length, num, "We have received all fall courses successfully");
+						start();
+					});
+	}
+);
+
+asyncTest("getWinter", 1,
+	function()
+	{	
+		var cid = "";
+		var num = 3;
+		//I don't know why the url_for doesn't work here
+		getObjects(	$SCRIPT_ROOT + "/courses/_semester/Winter",
+					cid,
+					function(data)
+					{
+						equal(data.courses.length, num, "We have received all winter courses successfully");
+						start();
+					});
+	}
+);
+
+asyncTest("getTop", 1,
+	function()
+	{	
+		var cid = "";
+		var num = 7;
+		//I don't know why the url_for doesn't work here
+		getObjects(	$SCRIPT_ROOT + "/courses/_top_query",
+					cid,
+					function(data)
+					{
+						equal(data.courses.length, num, "We have received all Top Rated courses successfully");
 						start();
 					});
 	}

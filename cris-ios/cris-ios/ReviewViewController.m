@@ -96,9 +96,14 @@
         [self.createButton setEnabled:NO];
         [self.descText setEditable:NO];
         [self.scorePicker setUserInteractionEnabled:NO];
+        [self.saveChanges setHidden:YES];
+        [self.saveChanges setEnabled:NO];
+        [self.deleteButton setHidden:YES];
+        [self.deleteButton setEnabled:NO];
         
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
         
+        //if user is not logged in hide the follow/unfollow buttons
         if([appDel.curr_user isEqualToString:@"N/A"] || [self.userLabel.text isEqualToString:@"N/A"])
         {
             [self.followButton setHidden:YES];
@@ -106,16 +111,16 @@
             [self.followButton setEnabled:NO];
             [self.unfollowButton setEnabled:NO];
         }
-        else if (![appDel.curr_user isEqualToString:self.userLabel.text])
+        else if (![appDel.curr_user isEqualToString:self.review.username])
         {
                         
             //hide edit and delete buttons
-            [self.saveChanges setHidden:YES];
-            [self.saveChanges setEnabled:NO];
-            [self.deleteButton setHidden:YES];
-            [self.deleteButton setEnabled:NO];
+            //[self.saveChanges setHidden:YES];
+            //[self.saveChanges setEnabled:NO];
+            //[self.deleteButton setHidden:YES];
+            //[self.deleteButton setEnabled:NO];
             
-            AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+            //AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
             NSString *username = appDel.curr_user;
             NSString *followed = self.review.username;
             
@@ -129,6 +134,12 @@
             //set description and score picker available for editing
             [self.descText setEditable:YES];
             [self.scorePicker setUserInteractionEnabled:YES];
+            
+            [self.saveChanges setHidden:NO];
+            [self.saveChanges setEnabled:YES];
+            [self.deleteButton setHidden:NO];
+            [self.deleteButton setEnabled:YES];
+            
         }
     }
     else
@@ -138,6 +149,11 @@
         [self.saveChanges setEnabled:NO];
         [self.deleteButton setHidden:YES];
         [self.deleteButton setEnabled:NO];
+        [self.followButton setHidden:YES];
+        [self.unfollowButton setHidden: YES];
+        [self.followButton setEnabled:NO];
+        [self.unfollowButton setEnabled:NO];
+        
     }
     
 	// Do any additional setup after loading the view.
@@ -399,7 +415,7 @@
     NSURL *url = [NSURL URLWithString:urlString];
     
     self.createConn = [self postJSONObjects:jsonObj url:url];
-    //[self.saveChanges setEnabled:NO];
+    [self.saveChanges setEnabled:NO];
     
 }
 
@@ -421,7 +437,7 @@
     //[self postJSONObjects:jsonObj connection:self.createConn url:url];
     
     self.createConn = [self postJSONObjects:jsonObj url:url];
-    //[self.deleteButton setEnabled:NO];
+    [self.deleteButton setEnabled:NO];
 }
 
 /*- (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3104" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -532,14 +531,17 @@
                                     <constraint firstAttribute="height" constant="776" id="gHD-qK-n0U"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="InstructorCourseCell" id="kqC-kR-U1T">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InstructorCourseCell" id="kqC-kR-U1T">
                                         <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="748" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="cU7-lo-Gmq" kind="push" id="hOV-EE-dOQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -995,7 +997,6 @@
         <class className="CourseDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="createReviewButton:"/>
                 <relationship kind="action" name="seeReviewButton:"/>
                 <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>
@@ -1050,7 +1051,6 @@
                 <relationship kind="action" name="del:"/>
                 <relationship kind="action" name="dislike:"/>
                 <relationship kind="action" name="edit:"/>
-
                 <relationship kind="action" name="follow:"/>
                 <relationship kind="action" name="like:"/>
                 <relationship kind="action" name="unfollow:"/>
@@ -1060,14 +1060,11 @@
                 <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
-
                 <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
-
                 <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="saveChanges" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
-
                 <relationship kind="outlet" name="unfollowButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
             </relationships>
@@ -1102,7 +1099,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="McY-60-4vN"/>
+        <segue reference="hOV-EE-dOQ"/>
         <segue reference="fSm-eF-4k2"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,7 @@
 #import "InstructorDetailViewController.h"
 #import "AppDelegate.h"
 #import "Course.h"
+#import "CourseDetailViewController.h"
 
 @interface InstructorDetailViewController ()
 
@@ -65,6 +66,16 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *)sender;
+    NSIndexPath *ip = [self.instructorsTableView indexPathForCell:cell];
+    Course *c = [self.courses objectAtIndex:ip.row];
+    
+    CourseDetailViewController *cdv = (CourseDetailViewController *) segue.destinationViewController;
+    cdv.course = c;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

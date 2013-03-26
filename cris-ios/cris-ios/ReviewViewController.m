@@ -146,11 +146,17 @@
             [self.deleteButton setHidden:NO];
             [self.deleteButton setEnabled:YES];
             
+            //hide follow buttons so user doesn't follow themselves
+            [self.followButton setHidden:YES];
+            [self.unfollowButton setHidden: YES];
+            [self.followButton setEnabled:NO];
+            [self.unfollowButton setEnabled:NO];
+            
         }
     }
     else
     {
-        //User is creating review, hide edit + delete buttons
+        //User is creating review, hide edit, delete and follow buttons
         [self.saveChanges setHidden:YES];
         [self.saveChanges setEnabled:NO];
         [self.deleteButton setHidden:YES];

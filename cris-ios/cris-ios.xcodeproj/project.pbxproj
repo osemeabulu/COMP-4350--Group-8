@@ -71,6 +71,7 @@
 		AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA54E1700FB0400F0C962 /* UserTests.m */; };
 		AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5511700FB3700F0C962 /* PostTests.m */; };
 		AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5541700FB5F00F0C962 /* InstructorTests.m */; };
+		AE2DA6FC17024B24007DB5FB /* FollowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2DA6FB17024B24007DB5FB /* FollowerTests.m */; };
 		AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2ADE16FF8280005C6B49 /* ReviewTests.m */; };
 		AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2AE116FF8B10005C6B49 /* CourseTests.m */; };
 		B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6838F2616F636A90095D56D /* ReviewViewController.m */; };
@@ -171,6 +172,8 @@
 		AE0BA5511700FB3700F0C962 /* PostTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTests.m; sourceTree = "<group>"; };
 		AE0BA5531700FB5F00F0C962 /* InstructorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorTests.h; sourceTree = "<group>"; };
 		AE0BA5541700FB5F00F0C962 /* InstructorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorTests.m; sourceTree = "<group>"; };
+		AE2DA6FA17024B24007DB5FB /* FollowerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowerTests.h; sourceTree = "<group>"; };
+		AE2DA6FB17024B24007DB5FB /* FollowerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowerTests.m; sourceTree = "<group>"; };
 		AECB2ADD16FF8280005C6B49 /* ReviewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewTests.h; sourceTree = "<group>"; };
 		AECB2ADE16FF8280005C6B49 /* ReviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewTests.m; sourceTree = "<group>"; };
 		AECB2AE016FF8B10005C6B49 /* CourseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTests.h; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 			children = (
 				AECB2AE016FF8B10005C6B49 /* CourseTests.h */,
 				AECB2AE116FF8B10005C6B49 /* CourseTests.m */,
+				AE2DA6FA17024B24007DB5FB /* FollowerTests.h */,
+				AE2DA6FB17024B24007DB5FB /* FollowerTests.m */,
 				AE0BA5531700FB5F00F0C962 /* InstructorTests.h */,
 				AE0BA5541700FB5F00F0C962 /* InstructorTests.m */,
 				AE0BA5501700FB3700F0C962 /* PostTests.h */,
@@ -543,6 +548,7 @@
 				AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */,
 				AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */,
 				AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */,
+				AE2DA6FC17024B24007DB5FB /* FollowerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

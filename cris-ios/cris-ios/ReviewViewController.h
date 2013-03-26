@@ -12,6 +12,8 @@
 
 @interface ReviewViewController : UIViewController <UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic, retain) UINavigationController *navController;
+
 @property (weak, nonatomic) IBOutlet UILabel *courseLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;

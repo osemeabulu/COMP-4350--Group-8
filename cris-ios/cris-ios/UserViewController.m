@@ -9,10 +9,13 @@
 #import "UserViewController.h"
 #import "AppDelegate.h"
 #import "LoginSession.h"
+#import "Review.h"
+#import "ReviewViewController.h"
 
 @interface UserViewController ()
 
 @property (nonatomic, strong) NSMutableArray *usersTableData;
+@property (nonatomic, strong) NSMutableArray *usersTableCourse;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) NSURLConnection *createConn;
 @property (nonatomic, strong) NSString *tableConn;
@@ -27,6 +30,7 @@
 
 @synthesize usersTableView;
 @synthesize usersTableData;
+@synthesize usersTableCourse;
 @synthesize createConn;
 @synthesize tableConn;
 @synthesize responseData;
@@ -52,16 +56,39 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MainCell"];
     }
+
+    if ([tableConn isEqualToString:@"reviews"]) {
+        Review *r = [self.usersTableCourse objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"\"%@\"",r.rdesc];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Review submitted for %@",r.cid];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[usersTableData objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text = @"";
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[usersTableData objectAtIndex:indexPath.row],@"hello"];
-    cell.detailTextLabel.text = @"time";
     cell.textLabel.textColor = [UIColor blueColor];
     
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (control.selectedSegmentIndex == 0) {
+        Review *r = [self.usersTableCourse objectAtIndex:indexPath.row];
+        //ReviewViewController *rvc = [[ReviewViewController alloc] init];
+        ReviewViewController *rvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ReviewViewController"];
+        
+        rvc.review = r;
+        //rvc.cdvc = nil;
+        [self.navigationController pushViewController:rvc animated:YES];
+    }
+}
+
 -(IBAction)switchcontrol:(id)sender {
     self.usersTableData = [NSMutableArray array];
+    self.usersTableCourse = [NSMutableArray array];
     self.responseData = [NSMutableData data];
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     
@@ -113,6 +140,9 @@
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];*/
     [super viewDidLoad];
+    self.usersTableView.delegate = self;
+    self.usersTableView.dataSource = self;
+    [self.usersTableView reloadData];
 	// Do any additional setup after loading the view.
 }
 
@@ -209,8 +239,16 @@
         //get each instructors attributes and place them into the array of strings
         for (NSDictionary *result in jsonTableData)
         {
-            NSString *review = [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]];
-            [self.usersTableData addObject:review];
+            NSString *username = [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]];
+            if ([tableConn isEqualToString:@"reviews"]){
+                //NSString *course = [NSString stringWithFormat:@"%@", [result objectForKey:@"cid"]];
+                //[self.usersTableCourse addObject:course];
+                Review *review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [result objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [result objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [result objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [result objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [result objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [result objectForKey:@"id"]]];
+                [self.usersTableCourse addObject:review];
+            }
+            
+            [self.usersTableData addObject:username];
+            
         }
         
         [self.usersTableView reloadData];
@@ -235,10 +273,10 @@
     
         NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
         
-        NSURL *url = [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/users/_check_session"];
+        //NSURL *url = [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/users/_check_session"];
         AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-        //NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
-        //NSURL *url = [NSURL URLWithString:urlString];
+        NSString *urlString = [NSString stringWithFormat:@"%@users/_check_session", appDel.baseURL];
+        NSURL *url = [NSURL URLWithString:urlString];
         self.loginConn = YES;
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
         

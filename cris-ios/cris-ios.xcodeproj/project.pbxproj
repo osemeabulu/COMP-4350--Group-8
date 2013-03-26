@@ -62,6 +62,14 @@
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
+		AE0BA5481700E40100F0C962 /* SelectCourse.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5431700E40100F0C962 /* SelectCourse.js */; };
+		AE0BA5491700E40100F0C962 /* Instructors.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5441700E40100F0C962 /* Instructors.js */; };
+		AE0BA54A1700E40100F0C962 /* TopRatedCourses.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5451700E40100F0C962 /* TopRatedCourses.js */; };
+		AE0BA54B1700E40100F0C962 /* UserLogin.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5461700E40100F0C962 /* UserLogin.js */; };
+		AE0BA54C1700E40100F0C962 /* CreateReview.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5471700E40100F0C962 /* CreateReview.js */; };
+		AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA54E1700FB0400F0C962 /* UserTests.m */; };
+		AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5511700FB3700F0C962 /* PostTests.m */; };
+		AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5541700FB5F00F0C962 /* InstructorTests.m */; };
 		AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2ADE16FF8280005C6B49 /* ReviewTests.m */; };
 		AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2AE116FF8B10005C6B49 /* CourseTests.m */; };
 		B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6838F2616F636A90095D56D /* ReviewViewController.m */; };
@@ -149,6 +157,17 @@
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
 		47D672E016EC26830076FFE4 /* TopRatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRatedViewController.m; sourceTree = "<group>"; };
+		AE0BA5431700E40100F0C962 /* SelectCourse.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SelectCourse.js; sourceTree = "<group>"; };
+		AE0BA5441700E40100F0C962 /* Instructors.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Instructors.js; sourceTree = "<group>"; };
+		AE0BA5451700E40100F0C962 /* TopRatedCourses.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TopRatedCourses.js; sourceTree = "<group>"; };
+		AE0BA5461700E40100F0C962 /* UserLogin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = UserLogin.js; sourceTree = "<group>"; };
+		AE0BA5471700E40100F0C962 /* CreateReview.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CreateReview.js; sourceTree = "<group>"; };
+		AE0BA54D1700FB0400F0C962 /* UserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTests.h; sourceTree = "<group>"; };
+		AE0BA54E1700FB0400F0C962 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
+		AE0BA5501700FB3700F0C962 /* PostTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTests.h; sourceTree = "<group>"; };
+		AE0BA5511700FB3700F0C962 /* PostTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTests.m; sourceTree = "<group>"; };
+		AE0BA5531700FB5F00F0C962 /* InstructorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorTests.h; sourceTree = "<group>"; };
+		AE0BA5541700FB5F00F0C962 /* InstructorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorTests.m; sourceTree = "<group>"; };
 		AECB2ADD16FF8280005C6B49 /* ReviewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewTests.h; sourceTree = "<group>"; };
 		AECB2ADE16FF8280005C6B49 /* ReviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewTests.m; sourceTree = "<group>"; };
 		AECB2AE016FF8B10005C6B49 /* CourseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTests.h; sourceTree = "<group>"; };
@@ -190,6 +209,7 @@
 			children = (
 				026D27F016EA8C3300BAFB8F /* cris-ios */,
 				026D282216EA8C3400BAFB8F /* cris-iosTests */,
+				AE0BA5421700E40100F0C962 /* cris-iosUITests */,
 				026D27E916EA8C3300BAFB8F /* Frameworks */,
 				026D27E816EA8C3300BAFB8F /* Products */,
 			);
@@ -277,8 +297,14 @@
 			children = (
 				AECB2AE016FF8B10005C6B49 /* CourseTests.h */,
 				AECB2AE116FF8B10005C6B49 /* CourseTests.m */,
+				AE0BA5531700FB5F00F0C962 /* InstructorTests.h */,
+				AE0BA5541700FB5F00F0C962 /* InstructorTests.m */,
+				AE0BA5501700FB3700F0C962 /* PostTests.h */,
+				AE0BA5511700FB3700F0C962 /* PostTests.m */,
 				AECB2ADD16FF8280005C6B49 /* ReviewTests.h */,
 				AECB2ADE16FF8280005C6B49 /* ReviewTests.m */,
+				AE0BA54D1700FB0400F0C962 /* UserTests.h */,
+				AE0BA54E1700FB0400F0C962 /* UserTests.m */,
 				026D282316EA8C3400BAFB8F /* Supporting Files */,
 			);
 			path = "cris-iosTests";
@@ -324,6 +350,18 @@
 				0419113216F404B3009E9E5A /* Players@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		AE0BA5421700E40100F0C962 /* cris-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BA5431700E40100F0C962 /* SelectCourse.js */,
+				AE0BA5441700E40100F0C962 /* Instructors.js */,
+				AE0BA5451700E40100F0C962 /* TopRatedCourses.js */,
+				AE0BA5461700E40100F0C962 /* UserLogin.js */,
+				AE0BA5471700E40100F0C962 /* CreateReview.js */,
+			);
+			path = "cris-iosUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +520,11 @@
 				02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */,
 				04DFDFEC16FBFE8400366FB2 /* UserViewController.m in Sources */,
 				3C36147316FFA932000E4E19 /* LoginSession.m in Sources */,
+				AE0BA5481700E40100F0C962 /* SelectCourse.js in Sources */,
+				AE0BA5491700E40100F0C962 /* Instructors.js in Sources */,
+				AE0BA54A1700E40100F0C962 /* TopRatedCourses.js in Sources */,
+				AE0BA54B1700E40100F0C962 /* UserLogin.js in Sources */,
+				AE0BA54C1700E40100F0C962 /* CreateReview.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +534,9 @@
 			files = (
 				AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */,
 				AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */,
+				AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */,
+				AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */,
+				AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

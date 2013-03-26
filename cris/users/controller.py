@@ -30,8 +30,6 @@ def register():
 			error = "Passwords don't match"
 
 	return render_template('users/register.html', error=error)
-   
-
 
 @mod.route('/_check_follower', methods = ['GET'])
 def check_follower():
@@ -136,7 +134,7 @@ def query():
 	return jsonify(users = [i.serialize for i in results])
 	
 @mod.route('/_check_session', methods = ['GET', 'POST'])
-def user_logged_in():
+def check_session():
 	logged_in = 'not logged in'
 	
 	if 'username' in session:
@@ -145,7 +143,6 @@ def user_logged_in():
 		logged_in = session['username']
 	if request.method == 'POST':
 		data = request.json
-		print data
 		#username = request.form['username']
 		#password = request.form['password']
 		username = request.json['name']

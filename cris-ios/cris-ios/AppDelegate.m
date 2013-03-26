@@ -17,7 +17,7 @@
 {
     // Override point for customization after application launch.
     LoginSession *session = [LoginSession sharedInstance];
-    baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
+    baseURL = @"http://127.0.0.1:5000/";
     curr_user = [session user];
     if (curr_user == nil)
     {

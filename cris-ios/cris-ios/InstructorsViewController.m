@@ -7,6 +7,7 @@
 //
 
 #import "InstructorsViewController.h"
+#import "InstructorDetailViewController.h"
 #import "AppDelegate.h"
 
 @interface InstructorsViewController ()
@@ -32,7 +33,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    
     
     self.instructors = [NSMutableArray array];//initWithObjects:@"Michael Zapp", @"JOhn Braico", @"C Penner", nil];
     self.responseData = [NSMutableData data];
@@ -47,6 +48,17 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [super viewDidLoad];
+    [self.instructorsTable reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"HELLO HERE");
+    //UITableViewCell *cell = (UITableViewCell *)sender;
+    NSIndexPath *ip = (NSIndexPath *)sender;
+    NSString *instructor = [self.instructors objectAtIndex:ip.row];
+    InstructorDetailViewController *idv = (InstructorDetailViewController *) segue.destinationViewController;
+    idv.instructor = instructor;
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,8 +94,10 @@
     
     // Configure the cell...
     cell.textLabel.text = [instructors objectAtIndex:indexPath.row];
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = [UIColor redColor];
+    //cell.textLabel.textColor = [UIColor redColor];
     return cell;
 }
 
@@ -131,12 +145,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+
+    
+    InstructorDetailViewController *idv = [self.storyboard instantiateViewControllerWithIdentifier:@"InstructorDetailViewController"];
+    [self performSegueWithIdentifier:@"instructorSegue" sender:indexPath];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -160,18 +172,17 @@
 {
     NSLog(@"connectionDidFinishLoading");
     NSLog(@"Succeeded! Received %d bytes of data", [self.responseData length]);
-    
     //convert to JSON
     NSError *myError = nil;
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     
     NSArray *jsonInstructors = [res objectForKey:@"instructors"];
-    
+   
     // get each instructors attributes and place them into the array of strings
     for (NSDictionary *result in jsonInstructors)
     {
         NSString *instructor = [NSString stringWithFormat:@"%@", [result objectForKey:@"pname"]];
-        
+        NSString *courses = [NSString stringWithFormat:@"%@", [result objectForKey:@"courses"]];
         [self.instructors addObject:instructor];
         
     }

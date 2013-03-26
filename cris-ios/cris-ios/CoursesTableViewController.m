@@ -63,6 +63,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    NSLog(@"HERE");
     if ([segue.identifier isEqualToString:@"CourseDetailSegue"]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *ip = [self.tableView indexPathForCell:cell];

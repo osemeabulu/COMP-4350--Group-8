@@ -23,6 +23,7 @@
 
 @implementation ReviewViewController
 
+@synthesize navController;
 @synthesize createResponseData;
 @synthesize voteResponseData;
 @synthesize createConn;
@@ -43,6 +44,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self viewDidLoad];
     }
     return self;
 }
@@ -83,7 +85,33 @@
         [self.createButton setEnabled:NO];
         [self.descText setEditable:NO];
         [self.scorePicker setUserInteractionEnabled:NO];
+        
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        
+        if (![appDel.curr_user isEqualToString:self.review.username])
+        {
+            //hide edit and delete buttons
+            [self.saveChanges setHidden:YES];
+            [self.saveChanges setEnabled:NO];
+            [self.deleteButton setHidden:YES];
+            [self.deleteButton setEnabled:NO];
+        }
+        else
+        {
+            //set description and score picker available for editing
+            [self.descText setEditable:YES];
+            [self.scorePicker setUserInteractionEnabled:YES];
+        }
     }
+    else
+    {
+        //User is creating review, hide edit + delete buttons
+        [self.saveChanges setHidden:YES];
+        [self.saveChanges setEnabled:NO];
+        [self.deleteButton setHidden:YES];
+        [self.deleteButton setEnabled:NO];
+    }
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -159,6 +187,7 @@
         self.dislikeLabel.text = downvote;
     }
     
+    /* This isn't necessary anymore
     else if (connection != nil && connection == createConn)
     {
         //perform post request review creation processing
@@ -168,16 +197,16 @@
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.createResponseData options:NSJSONReadingMutableLeaves error:&err];
             
             //create a new review locally
-            self.review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [json objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [json objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [json objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [json objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]]];
+            //self.review = [[Review alloc] initWithCid: [NSString stringWithFormat:@"%@", [json objectForKey:@"cid"]] username: [NSString stringWithFormat:@"%@", [json objectForKey:@"username"]] rdesc: [NSString stringWithFormat:@"%@", [json objectForKey:@"rdesc"]] rscr: [NSString stringWithFormat:@"%@", [json objectForKey:@"rscr"]] upvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"upvote"]] downvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"downvote"]] rvote: [NSString stringWithFormat:@"%@", [json objectForKey:@"rvote"]] pk: [NSString stringWithFormat:@"%@", [json objectForKey:@"id"]]];
             
             //add the review to the CoureDetailViewController
-            [self.cdvc.reviews addObject:self.review];
+            //[self.cdvc.reviews addObject:self.review];
             
             //Then reload the reviewLists data to complete update on CourseDetailViewController
             //[self.cdvc.reviewList reloadData];
         }
     }
-    
+    */
 }
 
 
@@ -241,7 +270,65 @@
         [self postJSONObjects:jsonObj connection:self.createConn url:url];
     
         [self.createButton setEnabled:NO];
+        self.navController = self.navigationController;
+        //[[self retain] autorelease];
+        [navController popViewControllerAnimated:YES];
     }
+}
+
+- (IBAction)edit:(id)sender
+{
+    //perform deletion code
+    NSError* error;
+    
+    NSString *pk = [NSString stringWithString:self.review.pk];
+    NSString *desc = [NSString stringWithString:self.descText.text];
+    NSNumber *scr = [NSNumber numberWithInt:[self.scorePicker selectedRowInComponent:0] + 1];
+    
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                                [info setValue:pk forKey:@"id"];
+                                [info setValue:scr forKey:@"rscr"];
+                                [info setValue:desc forKey:@"rdesc"];
+                                [info setValue:[NSNumber numberWithInt:(0)] forKey:@"rvote"];
+                                [info setValue:[NSNumber numberWithInt:(0)] forKey:@"upvote"];
+                                [info setValue:[NSNumber numberWithInt:(0)] forKey:@"downvote"];
+    
+    
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_update_review", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
+    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+    
+    [self.saveChanges setEnabled:NO];
+    self.navController = self.navigationController;
+    //[[self retain] autorelease];
+    [navController popViewControllerAnimated:YES];
+    
+}
+
+- (IBAction)del:(id)sender
+{
+    //perform deletion code
+    NSError* error;
+    
+    NSString *pk = [NSString stringWithString:self.review.pk];
+    
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                                [info setValue:pk forKey:@"id"];
+    
+    NSData *jsonObj = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
+    
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@reviews/_delete_review", appDel.baseURL];
+    NSURL *url = [NSURL URLWithString:urlString];
+    [self postJSONObjects:jsonObj connection:self.createConn url:url];
+    
+    [self.deleteButton setEnabled:NO];
+    self.navController = self.navigationController;
+    //[[self retain] autorelease];
+    [navController popViewControllerAnimated:YES];
 }
 
 - (void)postJSONObjects:(NSData *)jsonRequest connection:(NSURLConnection *)connection url:(NSURL *)url

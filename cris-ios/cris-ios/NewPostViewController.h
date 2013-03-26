@@ -10,6 +10,8 @@
 
 @interface NewPostViewController : UIViewController
 
+@property (nonatomic, retain) UINavigationController *navController;
 @property (weak, nonatomic) IBOutlet UITextView *postText;
+- (IBAction)createPost:(id)sender;
 
 @end

@@ -28,7 +28,6 @@
 		026D281E16EA8C3400BAFB8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EA16EA8C3300BAFB8F /* UIKit.framework */; };
 		026D281F16EA8C3400BAFB8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D27EC16EA8C3300BAFB8F /* Foundation.framework */; };
 		026D282716EA8C3400BAFB8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 026D282516EA8C3400BAFB8F /* InfoPlist.strings */; };
-		026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 026D282916EA8C3400BAFB8F /* cris_iosTests.m */; };
 		02D5390F16FA4F910088621D /* PostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5390E16FA4F910088621D /* PostsViewController.m */; };
 		02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D5391116FA6FD30088621D /* NewPostViewController.m */; };
 		0419113316F404B3009E9E5A /* 1Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419111B16F404B3009E9E5A /* 1Star.png */; };
@@ -57,10 +56,20 @@
 		0419114A16F404B3009E9E5A /* Players@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419113216F404B3009E9E5A /* Players@2x.png */; };
 		0419114D16F68BC9009E9E5A /* thumbs-down-smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419114B16F68BC8009E9E5A /* thumbs-down-smallicon.png */; };
 		0419114E16F68BC9009E9E5A /* thumbs-up-smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0419114C16F68BC8009E9E5A /* thumbs-up-smallicon.png */; };
+		04DFDFEC16FBFE8400366FB2 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DFDFEB16FBFE8400366FB2 /* UserViewController.m */; };
+		3C36147316FFA932000E4E19 /* LoginSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C36147216FFA932000E4E19 /* LoginSession.m */; };
 		477FC6D316EE8A5500CCB2B2 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 477FC6D216EE8A5500CCB2B2 /* Course.m */; };
 		479CD49F16ED21A900F31372 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CD49E16ED21A900F31372 /* CourseDetailViewController.m */; };
 		47D672DE16EC26640076FFE4 /* InstructorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672DD16EC26640076FFE4 /* InstructorsViewController.m */; };
 		47D672E116EC26830076FFE4 /* TopRatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D672E016EC26830076FFE4 /* TopRatedViewController.m */; };
+		AE0BA5481700E40100F0C962 /* SelectCourse.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5431700E40100F0C962 /* SelectCourse.js */; };
+		AE0BA5491700E40100F0C962 /* Instructors.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5441700E40100F0C962 /* Instructors.js */; };
+		AE0BA54A1700E40100F0C962 /* TopRatedCourses.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5451700E40100F0C962 /* TopRatedCourses.js */; };
+		AE0BA54B1700E40100F0C962 /* UserLogin.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5461700E40100F0C962 /* UserLogin.js */; };
+		AE0BA54C1700E40100F0C962 /* CreateReview.js in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5471700E40100F0C962 /* CreateReview.js */; };
+		AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA54E1700FB0400F0C962 /* UserTests.m */; };
+		AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5511700FB3700F0C962 /* PostTests.m */; };
+		AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0BA5541700FB5F00F0C962 /* InstructorTests.m */; };
 		AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2ADE16FF8280005C6B49 /* ReviewTests.m */; };
 		AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AECB2AE116FF8B10005C6B49 /* CourseTests.m */; };
 		B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6838F2616F636A90095D56D /* ReviewViewController.m */; };
@@ -106,8 +115,6 @@
 		026D281C16EA8C3400BAFB8F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		026D282416EA8C3400BAFB8F /* cris-iosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cris-iosTests-Info.plist"; sourceTree = "<group>"; };
 		026D282616EA8C3400BAFB8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		026D282816EA8C3400BAFB8F /* cris_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cris_iosTests.h; sourceTree = "<group>"; };
-		026D282916EA8C3400BAFB8F /* cris_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cris_iosTests.m; sourceTree = "<group>"; };
 		02D5390D16FA4F910088621D /* PostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsViewController.h; sourceTree = "<group>"; };
 		02D5390E16FA4F910088621D /* PostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsViewController.m; sourceTree = "<group>"; };
 		02D5391016FA6FD30088621D /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
@@ -138,6 +145,10 @@
 		0419113216F404B3009E9E5A /* Players@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Players@2x.png"; sourceTree = "<group>"; };
 		0419114B16F68BC8009E9E5A /* thumbs-down-smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down-smallicon.png"; sourceTree = "<group>"; };
 		0419114C16F68BC8009E9E5A /* thumbs-up-smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up-smallicon.png"; sourceTree = "<group>"; };
+		04DFDFEA16FBFE8400366FB2 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		04DFDFEB16FBFE8400366FB2 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		3C36147116FFA932000E4E19 /* LoginSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSession.h; sourceTree = "<group>"; };
+		3C36147216FFA932000E4E19 /* LoginSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSession.m; sourceTree = "<group>"; };
 		477FC6D116EE8A5500CCB2B2 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		477FC6D216EE8A5500CCB2B2 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		479CD49D16ED21A900F31372 /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
@@ -146,6 +157,17 @@
 		47D672DD16EC26640076FFE4 /* InstructorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorsViewController.m; sourceTree = "<group>"; };
 		47D672DF16EC26830076FFE4 /* TopRatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopRatedViewController.h; sourceTree = "<group>"; };
 		47D672E016EC26830076FFE4 /* TopRatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRatedViewController.m; sourceTree = "<group>"; };
+		AE0BA5431700E40100F0C962 /* SelectCourse.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SelectCourse.js; sourceTree = "<group>"; };
+		AE0BA5441700E40100F0C962 /* Instructors.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Instructors.js; sourceTree = "<group>"; };
+		AE0BA5451700E40100F0C962 /* TopRatedCourses.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TopRatedCourses.js; sourceTree = "<group>"; };
+		AE0BA5461700E40100F0C962 /* UserLogin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = UserLogin.js; sourceTree = "<group>"; };
+		AE0BA5471700E40100F0C962 /* CreateReview.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CreateReview.js; sourceTree = "<group>"; };
+		AE0BA54D1700FB0400F0C962 /* UserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTests.h; sourceTree = "<group>"; };
+		AE0BA54E1700FB0400F0C962 /* UserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTests.m; sourceTree = "<group>"; };
+		AE0BA5501700FB3700F0C962 /* PostTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTests.h; sourceTree = "<group>"; };
+		AE0BA5511700FB3700F0C962 /* PostTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTests.m; sourceTree = "<group>"; };
+		AE0BA5531700FB5F00F0C962 /* InstructorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructorTests.h; sourceTree = "<group>"; };
+		AE0BA5541700FB5F00F0C962 /* InstructorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructorTests.m; sourceTree = "<group>"; };
 		AECB2ADD16FF8280005C6B49 /* ReviewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewTests.h; sourceTree = "<group>"; };
 		AECB2ADE16FF8280005C6B49 /* ReviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewTests.m; sourceTree = "<group>"; };
 		AECB2AE016FF8B10005C6B49 /* CourseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseTests.h; sourceTree = "<group>"; };
@@ -187,6 +209,7 @@
 			children = (
 				026D27F016EA8C3300BAFB8F /* cris-ios */,
 				026D282216EA8C3400BAFB8F /* cris-iosTests */,
+				AE0BA5421700E40100F0C962 /* cris-iosUITests */,
 				026D27E916EA8C3300BAFB8F /* Frameworks */,
 				026D27E816EA8C3300BAFB8F /* Products */,
 			);
@@ -227,6 +250,8 @@
 				47D672DF16EC26830076FFE4 /* TopRatedViewController.h */,
 				02D5390D16FA4F910088621D /* PostsViewController.h */,
 				02D5391016FA6FD30088621D /* NewPostViewController.h */,
+				04DFDFEA16FBFE8400366FB2 /* UserViewController.h */,
+				3C36147116FFA932000E4E19 /* LoginSession.h */,
 				026D27FA16EA8C3300BAFB8F /* AppDelegate.m */,
 				477FC6D216EE8A5500CCB2B2 /* Course.m */,
 				479CD49E16ED21A900F31372 /* CourseDetailViewController.m */,
@@ -239,6 +264,8 @@
 				47D672E016EC26830076FFE4 /* TopRatedViewController.m */,
 				02D5390E16FA4F910088621D /* PostsViewController.m */,
 				02D5391116FA6FD30088621D /* NewPostViewController.m */,
+				04DFDFEB16FBFE8400366FB2 /* UserViewController.m */,
+				3C36147216FFA932000E4E19 /* LoginSession.m */,
 				026D280B16EA8C3400BAFB8F /* first.png */,
 				026D280D16EA8C3400BAFB8F /* first@2x.png */,
 				026D281216EA8C3400BAFB8F /* second.png */,
@@ -268,12 +295,16 @@
 		026D282216EA8C3400BAFB8F /* cris-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				026D282816EA8C3400BAFB8F /* cris_iosTests.h */,
-				026D282916EA8C3400BAFB8F /* cris_iosTests.m */,
 				AECB2AE016FF8B10005C6B49 /* CourseTests.h */,
 				AECB2AE116FF8B10005C6B49 /* CourseTests.m */,
+				AE0BA5531700FB5F00F0C962 /* InstructorTests.h */,
+				AE0BA5541700FB5F00F0C962 /* InstructorTests.m */,
+				AE0BA5501700FB3700F0C962 /* PostTests.h */,
+				AE0BA5511700FB3700F0C962 /* PostTests.m */,
 				AECB2ADD16FF8280005C6B49 /* ReviewTests.h */,
 				AECB2ADE16FF8280005C6B49 /* ReviewTests.m */,
+				AE0BA54D1700FB0400F0C962 /* UserTests.h */,
+				AE0BA54E1700FB0400F0C962 /* UserTests.m */,
 				026D282316EA8C3400BAFB8F /* Supporting Files */,
 			);
 			path = "cris-iosTests";
@@ -319,6 +350,18 @@
 				0419113216F404B3009E9E5A /* Players@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		AE0BA5421700E40100F0C962 /* cris-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AE0BA5431700E40100F0C962 /* SelectCourse.js */,
+				AE0BA5441700E40100F0C962 /* Instructors.js */,
+				AE0BA5451700E40100F0C962 /* TopRatedCourses.js */,
+				AE0BA5461700E40100F0C962 /* UserLogin.js */,
+				AE0BA5471700E40100F0C962 /* CreateReview.js */,
+			);
+			path = "cris-iosUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,6 +518,13 @@
 				B6838F2716F636A90095D56D /* ReviewViewController.m in Sources */,
 				02D5390F16FA4F910088621D /* PostsViewController.m in Sources */,
 				02D5391216FA6FD30088621D /* NewPostViewController.m in Sources */,
+				04DFDFEC16FBFE8400366FB2 /* UserViewController.m in Sources */,
+				3C36147316FFA932000E4E19 /* LoginSession.m in Sources */,
+				AE0BA5481700E40100F0C962 /* SelectCourse.js in Sources */,
+				AE0BA5491700E40100F0C962 /* Instructors.js in Sources */,
+				AE0BA54A1700E40100F0C962 /* TopRatedCourses.js in Sources */,
+				AE0BA54B1700E40100F0C962 /* UserLogin.js in Sources */,
+				AE0BA54C1700E40100F0C962 /* CreateReview.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,9 +532,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				026D282A16EA8C3400BAFB8F /* cris_iosTests.m in Sources */,
 				AECB2ADF16FF8280005C6B49 /* ReviewTests.m in Sources */,
 				AECB2AE216FF8B10005C6B49 /* CourseTests.m in Sources */,
+				AE0BA54F1700FB0400F0C962 /* UserTests.m in Sources */,
+				AE0BA5521700FB3700F0C962 /* PostTests.m in Sources */,
+				AE0BA5551700FB5F00F0C962 /* InstructorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

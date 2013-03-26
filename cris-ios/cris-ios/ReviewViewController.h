@@ -12,6 +12,8 @@
 
 @interface ReviewViewController : UIViewController <UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic, retain) UINavigationController *navController;
+
 @property (weak, nonatomic) IBOutlet UILabel *courseLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
@@ -30,6 +32,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dislikeLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *saveChanges;
+
 @property (strong) Review *review;
 
 @property (strong) CourseDetailViewController *cdvc;
@@ -39,6 +45,12 @@
 - (IBAction)dislike:(id)sender;
 
 - (IBAction)create:(id)sender;
+
+- (IBAction)edit:(id)sender;
+
+- (IBAction)del:(id)sender;
+
+
 
 
 @end

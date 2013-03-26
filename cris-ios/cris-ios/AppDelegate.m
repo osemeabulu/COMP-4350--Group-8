@@ -14,7 +14,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
+    //baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";
+    baseURL = @"http://0.0.0.0:5000/";
     curr_user = @"N/A";
     // Override point for customization after application launch.
     return YES;

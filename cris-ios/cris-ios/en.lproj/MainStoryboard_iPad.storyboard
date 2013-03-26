@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3104" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -276,6 +277,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="follow:" destination="U9r-yu-00z" eventType="touchUpInside" id="RpQ-U1-Y89"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phK-Dh-NvM">
                                 <constraints>
@@ -388,10 +392,29 @@
                                     <action selector="del:" destination="U9r-yu-00z" eventType="touchUpInside" id="tcP-G3-Eq9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGN-gS-nFu">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="RIg-lh-2yv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Unfollow">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="follow:" destination="U9r-yu-00z" eventType="touchUpInside" id="fT5-JB-3Ln"/>
+                                    <action selector="unfollow:" destination="U9r-yu-00z" eventType="touchDown" id="0G4-Mz-H5Q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kGN-gS-nFu" firstAttribute="top" secondItem="eVZ-RH-EY3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0XD-mL-nnF"/>
                             <constraint firstItem="D0Y-BI-NM3" firstAttribute="bottom" secondItem="G5q-5Z-cAW" secondAttribute="bottom" type="default" id="27b-3I-mbe"/>
+                            <constraint firstItem="kGN-gS-nFu" firstAttribute="leading" secondItem="eVZ-RH-EY3" secondAttribute="leading" type="default" id="2cJ-9z-J2p"/>
                             <constraint firstItem="phK-Dh-NvM" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="179" id="2sJ-CQ-1oB"/>
                             <constraint firstAttribute="bottom" secondItem="VHo-Rb-A4G" secondAttribute="bottom" constant="245" id="2uo-nQ-BYi"/>
                             <constraint firstAttribute="bottom" secondItem="VDN-YN-ntL" secondAttribute="bottom" constant="41" id="4gz-nJ-y5z"/>
@@ -404,6 +427,7 @@
                             <constraint firstItem="G5q-5Z-cAW" firstAttribute="leading" secondItem="VHo-Rb-A4G" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="BX9-Gz-ubo"/>
                             <constraint firstAttribute="trailing" secondItem="D0Y-BI-NM3" secondAttribute="trailing" constant="285" id="DSX-tn-vbp"/>
                             <constraint firstItem="1Zk-By-axU" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Dvb-QW-3WG"/>
+                            <constraint firstItem="kGN-gS-nFu" firstAttribute="leading" secondItem="q5E-0c-7PE" secondAttribute="leading" type="default" id="FBp-RN-a8C"/>
                             <constraint firstItem="G5q-5Z-cAW" firstAttribute="top" secondItem="Aem-bx-xO1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="IFN-xR-GRR"/>
                             <constraint firstItem="phK-Dh-NvM" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="JId-AN-Tfs"/>
                             <constraint firstItem="1Zk-By-axU" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="109" id="QpT-1A-4Nm"/>
@@ -417,16 +441,16 @@
                             <constraint firstItem="Okb-nT-cj0" firstAttribute="centerX" secondItem="JEs-xq-NC1" secondAttribute="centerX" type="default" id="ZrE-mO-5gW"/>
                             <constraint firstItem="eVZ-RH-EY3" firstAttribute="top" secondItem="JEs-xq-NC1" secondAttribute="top" constant="100" id="cOD-eL-3ic"/>
                             <constraint firstItem="C0v-wa-n3Q" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="132" id="e3K-Gg-SGb"/>
-                            <constraint firstItem="q5E-0c-7PE" firstAttribute="leading" secondItem="eVZ-RH-EY3" secondAttribute="leading" type="default" id="f6W-wR-w5f"/>
                             <constraint firstItem="d28-fK-EMo" firstAttribute="top" secondItem="phK-Dh-NvM" secondAttribute="top" type="default" id="fZO-sn-99W"/>
+                            <constraint firstItem="kGN-gS-nFu" firstAttribute="trailing" secondItem="eVZ-RH-EY3" secondAttribute="trailing" type="default" id="gtL-Is-KVC"/>
                             <constraint firstItem="LCo-Lw-tug" firstAttribute="baseline" secondItem="1Zk-By-axU" secondAttribute="baseline" type="default" id="kRA-Pr-N0o"/>
+                            <constraint firstItem="kGN-gS-nFu" firstAttribute="trailing" secondItem="Aem-bx-xO1" secondAttribute="trailing" type="default" id="lZ2-1o-1fU"/>
                             <constraint firstItem="eVZ-RH-EY3" firstAttribute="baseline" secondItem="LCo-Lw-tug" secondAttribute="baseline" type="default" id="mhj-bp-fwL"/>
                             <constraint firstItem="bwM-yB-oz0" firstAttribute="leading" secondItem="JEs-xq-NC1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="oYl-se-AAI"/>
                             <constraint firstItem="Aem-bx-xO1" firstAttribute="top" secondItem="fEN-a4-tMm" secondAttribute="top" type="default" id="vAi-6F-fWa"/>
                             <constraint firstItem="D0Y-BI-NM3" firstAttribute="top" secondItem="Aem-bx-xO1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="wUy-Ud-A5L"/>
                             <constraint firstItem="Aem-bx-xO1" firstAttribute="leading" secondItem="d28-fK-EMo" secondAttribute="leading" type="default" id="xUN-vG-xFt"/>
                             <constraint firstItem="LCo-Lw-tug" firstAttribute="leading" secondItem="d28-fK-EMo" secondAttribute="leading" type="default" id="xWF-T8-amA"/>
-                            <constraint firstItem="eVZ-RH-EY3" firstAttribute="trailing" secondItem="Aem-bx-xO1" secondAttribute="trailing" type="default" id="yX4-dO-Bga"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IrW-Nh-PGu"/>
@@ -437,10 +461,12 @@
                         <outlet property="descText" destination="Aem-bx-xO1" id="RPP-P3-cd9"/>
                         <outlet property="dislikeButton" destination="D0Y-BI-NM3" id="0cI-5B-ipH"/>
                         <outlet property="dislikeLabel" destination="Okb-nT-cj0" id="0ch-Iw-sGa"/>
+                        <outlet property="followButton" destination="eVZ-RH-EY3" id="Akq-UF-aLI"/>
                         <outlet property="likeButton" destination="G5q-5Z-cAW" id="ikH-o6-C3A"/>
                         <outlet property="likeLabel" destination="VHo-Rb-A4G" id="4ij-sg-WQq"/>
                         <outlet property="saveChanges" destination="VDN-YN-ntL" id="T8l-4Z-UfU"/>
                         <outlet property="scorePicker" destination="d28-fK-EMo" id="vHw-Tt-N7t"/>
+                        <outlet property="unfollowButton" destination="kGN-gS-nFu" id="0Y9-wa-R9h"/>
                         <outlet property="userLabel" destination="LCo-Lw-tug" id="NBq-mM-9cA"/>
                     </connections>
                 </viewController>
@@ -1024,17 +1050,25 @@
                 <relationship kind="action" name="del:"/>
                 <relationship kind="action" name="dislike:"/>
                 <relationship kind="action" name="edit:"/>
+
+                <relationship kind="action" name="follow:"/>
                 <relationship kind="action" name="like:"/>
+                <relationship kind="action" name="unfollow:"/>
                 <relationship kind="outlet" name="courseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="createButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descText" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="dislikeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dislikeLabel" candidateClass="UILabel"/>
+
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
+
                 <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="saveChanges" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scorePicker" candidateClass="UIPickerView"/>
+
+                <relationship kind="outlet" name="unfollowButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

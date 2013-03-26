@@ -15,6 +15,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    curr_user = @"N/A";
+
     // Override point for customization after application launch.
     LoginSession *session = [LoginSession sharedInstance];
     baseURL = @"http://127.0.0.1:5000/";

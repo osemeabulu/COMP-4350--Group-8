@@ -42,7 +42,7 @@
 				</fieldset>
             </div>
             <div class="modal-footer">            	
-                <button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-inverse" onclick="submit_modal()" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
         </div>
 
@@ -199,6 +199,20 @@
 		    $('#review_id').val(id);
 
 		    return false;
+		}
+
+		function submit_modal() {
+
+		    $('#modalLabel').empty().append("Submitting a review for {{ course.cname }}");
+		    $('#warning').empty();
+
+		    //populate fields
+		    $('textarea[id="description"]').empty();
+		    $('select[id="score"]').val("1");
+
+		    //switch buttons
+		    $("#submitButton").show();
+		    $("#updateButton").hide();
 		}
 		
 		function follow_user(username)

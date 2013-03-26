@@ -925,7 +925,6 @@
         <class className="CourseDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CourseDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButton:"/>
                 <relationship kind="action" name="createReviewButton:"/>
                 <relationship kind="action" name="seeReviewButton:"/>
                 <relationship kind="outlet" name="averageRatingLabel" candidateClass="UILabel"/>

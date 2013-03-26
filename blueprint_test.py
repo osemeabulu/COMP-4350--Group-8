@@ -7,6 +7,7 @@ from cris.extensions import db
 from cris.courses.model import Course
 from cris.reviews.model import Review 
 from cris.users.model import User
+from cris.instructors.model import Instructor
 import json
 from flask import jsonify
 
@@ -598,6 +599,64 @@ class BlueprintTestCase(unittest.TestCase):
 		self.assertEquals(rv.status_code, 200) #testing we don't get errors
 		self.assertEquals(len(d['posts']), 1)
 		self.assertEquals(d['posts'][0]['message'], 'test! this post should work!')
-				
+
+    #Testing Instructors Blueprint
+    def test_instructors_bp(self):
+		prof1 = Instructor('Test Zapp')
+		prof2 = Instructor('Test Braico')
+		prof3 = Instructor('Test Marshall')
+		prof4 = Instructor('Test Penner')
+
+		db.session.add(prof1)
+		db.session.add(prof2)
+		db.session.add(prof3)
+		db.session.add(prof4)
+		db.session.commit()
+
+		#test index route
+		rv = self.app.get('instructors/')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		
+		#test fetching instructor pages	
+		rv = self.app.get('instructors/Test Zapp')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		rv = self.app.get('instructors/Test Braico')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		rv = self.app.get('instructors/Test Marshall')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		rv = self.app.get('instructors/Test Penner')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		#testing fetching an instructor page that doesn't exist
+		rv = self.app.get('instructors/Test')
+		self.assertEquals(rv.status_code, 404) #testing we don't get errors
+		
+		#testing partial query
+		rv = self.app.get('instructors/_query?key=Test')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		d = json.loads(rv.data)
+		self.assertEquals(len(d['instructors']), 4) #testing we don't get errors
+		#testing specific query
+		rv = self.app.get('instructors/_query?key=Test Zapp')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		d = json.loads(rv.data)
+		self.assertEquals(len(d['instructors']), 1) #testing we don't get errors
+		self.assertEquals(d['instructors'][0]['pname'], 'Test Zapp') #testing we don't get errors
+		rv = self.app.get('instructors/_query?key=Test Braico')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		d = json.loads(rv.data)
+		self.assertEquals(len(d['instructors']), 1) #testing we don't get errors
+		self.assertEquals(d['instructors'][0]['pname'], 'Test Braico') #testing we don't get errors
+		rv = self.app.get('instructors/_query?key=Test Marshall')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		d = json.loads(rv.data)
+		self.assertEquals(len(d['instructors']), 1) #testing we don't get errors
+		self.assertEquals(d['instructors'][0]['pname'], 'Test Marshall') #testing we don't get errors
+		rv = self.app.get('instructors/_query?key=Test Penner')
+		self.assertEquals(rv.status_code, 200) #testing we don't get errors
+		d = json.loads(rv.data)
+		self.assertEquals(len(d['instructors']), 1) #testing we don't get errors
+		self.assertEquals(d['instructors'][0]['pname'], 'Test Penner') #testing we don't get errors
+
+
 if __name__ == '__main__':
     unittest.main()

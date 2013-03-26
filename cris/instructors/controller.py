@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, flash
+from flask import Blueprint, jsonify, render_template, request, flash, abort
 from cris import db
 from model import Instructor
 
@@ -6,7 +6,6 @@ mod = Blueprint('instructors', __name__, url_prefix='/instructors')
 
 @mod.route("/")
 def index():
-	print "Instructors route worked"
 	return render_template('instructors/instructors.html')
 
 @mod.route('/<string:instructor>')

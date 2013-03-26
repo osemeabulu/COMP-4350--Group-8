@@ -15,6 +15,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    curr_user = @"N/A";
+
     // Override point for customization after application launch.
     LoginSession *session = [LoginSession sharedInstance];
     baseURL = @"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/";

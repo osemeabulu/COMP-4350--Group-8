@@ -39,7 +39,7 @@ asyncTest("getAll", 1,
 	function()
 	{	
 		var cid = "";
-		var num = 7;
+		var num = 11;
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/courses/_query",
 					cid,
@@ -55,7 +55,7 @@ asyncTest("getFall", 1,
 	function()
 	{	
 		var cid = "";
-		var num = 4;
+		var num = 6;
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/courses/_semester/Fall",
 					cid,
@@ -71,7 +71,7 @@ asyncTest("getWinter", 1,
 	function()
 	{	
 		var cid = "";
-		var num = 3;
+		var num = 5;
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/courses/_semester/Winter",
 					cid,
@@ -87,7 +87,7 @@ asyncTest("getTop", 1,
 	function()
 	{	
 		var cid = "";
-		var num = 7;
+		var num = 11;
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/courses/_top_query",
 					cid,

@@ -20,14 +20,14 @@ asyncTest("getComp3030", 1,
 	function()
 	{	
 		var cid = "Comp3030";
-		var num = 0;
+		var num = 1;
 		
 		//I don't know why the url_for doesn't work here
 		getObjects(	$SCRIPT_ROOT + "/reviews/_query_by_course",
 					cid,
 					function(data)
 					{
-						equal(data.reviews.length, num, "Have successfully haven't received any course for Comp3030");
+						equal(data.reviews.length, num, "Successfully haven't received Comp3030");
 						start();
 					});
 	}

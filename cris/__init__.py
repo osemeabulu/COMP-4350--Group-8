@@ -156,14 +156,37 @@ def reload_db():
 	'will be selected from requirements gathering, design methodologies, prototyping,' +
 	'software verification and validation. Prerequisite: COMP 3350.', 'Science', 'Winter')
 	
+	h1 = Course('Hist1200', 'An Introduction to the History of Western Civilization', 'Calendar Description: An introductory survey of the cultural' +
+	' history of the Western world from the ancient Greeks to the present. Students may not hold credit for HIST 1200 and any of: HIST 1201 or HIST 1350', 'Arts', 'Fall')
+	
+	h2 = Course('Hist2080', 'The Byzantine Empire and the Slavic World', 'A study of the rise and fall of the "later Roman Empire" and of its relations with Russia, Bulgaria, Serbia and the west (i.e., in the crusades), 800-1261 A.D. ',
+	'Arts', 'Fall')
+	
+	e1 = Course('Engl2090', 'Literature of the Seventeenth Century', 'A survey of poetry, prose and drama by major and minor writers in historical context. Students may not hold credit for both ENGL 2090 and ENGL 2091 ' +
+	'. Prerequisite: [a grade of "C" or better in ENGL 1200 or ENGL 1201 or ENGL 1300 or ENGL 1301] or [a grade of "C" or better in each of ENGL 1310 and ENGL 1340]. ',
+	'Arts', 'Winter')
+	
+	e2 = Course('Eng7010', 'The Engineering Design Process', 'Consideration of the Engineering Design process and the logic upon which it is based. Explores both the history and possible future directions of the process from technical, social and environmental points of view.',
+	'Graduate', 'Winter')
+	
 	review1 = Review('Comp4350', 4, 'This was a hard course that required a lot of background research and work.', 0.75, 3, 4)
 	review2 = Review('Comp2150', 4, 'I learned alot from this course and I can now make a simple program.', 0.50, 2, 4)
+	review3 = Review('Comp4350', 3, 'Take this course if you do not want to sleep for like a week at the end of March', 0.50, 2, 4)
+	review4 = Review('Comp3430', 5, 'Threads are fun!', 0.75, 3, 4)
+	review5 = Review('Comp3030', 5, 'Finite state machines are pretty easy', 1.0, 1, 0);
 
         prof1 = Instructor('John Braico')
         prof2 = Instructor('Mike Zapp')
         prof3 = Instructor('Alan Marshall')
         prof4 = Instructor('Christina Penner')
-        
+        prof5 = Instructor('John Anderson')
+        prof6 = Instructor('Pourang Irani')
+        prof7 = Instructor('James Young')
+        prof8 = Instructor('John McDonald')
+        prof9 = Instructor('Franz Ferdinand')
+        prof10 = Instructor('Jean-Luc Picard')
+        prof11 = Instructor('Dilbert')
+    
 	admin = User('admin', 'default', True)
 	test_user = User('test', 'password')	
 	james = User('james', 'j123')
@@ -181,14 +204,24 @@ def reload_db():
 	db.session.add(se1)
 	db.session.add(os1)
 	db.session.add(se2)
+	db.session.add(h1)
+	db.session.add(h2)
+	db.session.add(e1)
+	db.session.add(e2)
 
 	db.session.add(review1)
 	db.session.add(review2)
+	db.session.add(review3)
+	db.session.add(review4)
+	db.session.add(review5)
 	
 	db.session.add(prof1)
 	db.session.add(prof2)
 	db.session.add(prof3)
 	db.session.add(prof4)
+	db.session.add(prof5)
+	db.session.add(prof6)
+	db.session.add(prof7)
 
 	db.session.add(admin)
 	db.session.add(test_user)
@@ -204,11 +237,15 @@ def reload_db():
 
  	prof1.teach(oo)
 	prof1.teach(aut)
-	prof2.teach(aa)
+	prof2.teach(se2)
 	prof2.teach(ai)
 	prof3.teach(se1)
 	prof3.teach(os1)
-	prof4.teach(se2)
+	prof4.teach(aa)
+	prof8.teach(h1)
+	prof9.teach(h2)
+	prof10.teach(e1)
+	prof11.teach(e2)
 	
 	sam.follow(james)
 	chris.follow(sam)

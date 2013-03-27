@@ -38,7 +38,7 @@
 			user.name = $('input[id="username"]').val()
 			user.pass = $('input[id="password"]').val()
 			
-			sendObjects( $SCRIPT_ROOT + "{{ url_for('users.user_logged_in') }}",
+			sendObjects( $SCRIPT_ROOT + "{{ url_for('users.check_session') }}",
 						 user,
 						 loginSuccess);
 						 

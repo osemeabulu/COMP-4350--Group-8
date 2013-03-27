@@ -104,18 +104,26 @@
     NSError *myError = nil;
     NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
     BOOL result = [[res objectForKey:@"posted"] boolValue];
-    
     UIAlertView *fail = [[UIAlertView alloc] initWithTitle:@"Post Failure" message:@"Post Failed. Try again" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     
+    UIAlertView *loginfail = [[UIAlertView alloc] initWithTitle:@"Login Required" message:@"Post Failed. Please Login" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    
     UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Post Success" message:@"Post was successfully created" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        
+    
     if(result){
         [success show];
         self.navController = self.navigationController;
         //[[self retain] autorelease];
         [navController popViewControllerAnimated:YES];
     } else {
-        [fail show];
+        AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+        if ([appDel.curr_user isEqualToString:@"N/A"]) {
+            [loginfail show];
+        }
+        else {
+            [fail show];
+        }
+        
     }
 }
 

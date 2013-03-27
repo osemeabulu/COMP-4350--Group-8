@@ -30,4 +30,12 @@
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
+   <SymbolicBreakpoints>
+      <AddressBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         symbolName = "*0x978197cd">
+      </AddressBreakpoint>
+   </SymbolicBreakpoints>
 </Bucket>

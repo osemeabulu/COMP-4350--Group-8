@@ -59,6 +59,52 @@ asyncTest("sendReview", 5,
 	}
 );
 
+asyncTest("updateReview", 6,
+	function()
+	{
+		//editing review with id 0
+		var editedReview = new Object();
+			
+		editedReview.id = 0;
+		editedReview.rscr = 5;
+		editedReview.rdesc = 'Edited.';
+		editedreview.rvote = 0;
+		editedreview.upvote = 0;
+		editedreview.downvote = 0;
+		
+		sendObjects( $SCRIPT_ROOT + "/reviews/_update_review",
+					 review,
+					 function(data)
+					 {
+						 equal(data.id, editedReview.rdesc, "Succesfully got our id back.");
+						 equal(data.rdesc, editedReview.rdesc, "Succesfully changed our description.");
+						 equal(data.rscr, editedReview.rscr, "Successfully changed our score.");
+						 equal(data.rvote, review.rvote, "Successfully cleared ratio score.");
+						 equal(data.upvote, review.upvote, "Successfully cleared likes scores.");
+						 equal(data.downvote, review.downvote, "Successfully cleared dislike scores.");
+						 start();
+					 });
+	}
+);
+
+asyncTest("deleteReview", 1,
+	function()
+	{
+		//deleting review with id 0
+		var deletedReview = new Object();
+			
+		editedReview.id = 0;
+		
+		sendObjects( $SCRIPT_ROOT + "/reviews/_delete_review",
+					 review,
+					 function(data)
+					 {
+						 equal(data.success, 'true', "Succesfully deleted review.");
+						 start();
+					 });
+	}
+);
+
 
 asyncTest("CalculateVotes", 3,
 	function()

@@ -42,9 +42,9 @@ def delete_review():
                         db.session.delete(target)
                         db.session.commit()
                         flash('Review was deleted successfully', 'success')
-                        return jsonify(key = key)
+                        return jsonify(success = 'true')
                 else:
-                        return "Delete failed"
+                        return jsonify(success = 'false')
 
 @mod.route('/_update_review', methods=['POST'])
 def update_review():
@@ -62,7 +62,7 @@ def update_review():
                         target.downvote = request.json['downvote']
                         db.session.commit()
                         
-                        return jsonify(rID = rID)
+                        return jsonify(id = rID, rdesc = target.rdesc, rscr = target.rscr, rvote=target.rvote, upvote = target.upvote, downvote = target.downvote)
                 else:
                         return "Update Failed"
         

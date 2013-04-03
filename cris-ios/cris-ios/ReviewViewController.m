@@ -267,7 +267,8 @@
             [success show];
             [followButton setHidden: YES];
             [followButton setEnabled:NO];
-            
+            [unfollowButton setHidden:NO];
+            [unfollowButton setEnabled:YES];
         }
         else{
             [fail show];
@@ -289,7 +290,8 @@
             [success show];
             [unfollowButton setHidden: YES];
             [unfollowButton setEnabled:NO];
-            
+            [followButton setHidden:NO];
+            [followButton setEnabled:YES];
         }
         else{
             [fail show];

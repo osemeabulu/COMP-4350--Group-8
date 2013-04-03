@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    self.topRatedCourses = [NSMutableArray array];
+    /*self.topRatedCourses = [NSMutableArray array];
     self.responseData = [NSMutableData data];
     AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
     NSString *urlString = [NSString stringWithFormat:@"%@courses/_top_query", appDel.baseURL];
@@ -50,7 +50,18 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;*/
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    self.topRatedCourses = [NSMutableArray array];
+    self.responseData = [NSMutableData data];
+    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+    NSString *urlString = [NSString stringWithFormat:@"%@courses/_top_query", appDel.baseURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:urlString]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"http://dev-umhofers-env-nmsgwpcvru.elasticbeanstalk.com/courses/_top_query?key="]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 - (void)didReceiveMemoryWarning

@@ -230,6 +230,8 @@
     }
     else if (self.loginConn == YES && ![appDel.curr_user isEqualToString:@"N/A"]) {
         appDel.curr_user = @"N/A";
+        self.passwordField.text = @"";
+        self.userField.text = @"";
         [self viewDidAppear:YES];
     }
     else {
